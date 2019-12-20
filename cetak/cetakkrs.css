@@ -1,0 +1,103 @@
+body {
+	font: 12pt "Times New Roman";
+	background-color: white;
+}
+#navigasi{
+	font-family: Tahoma, Verdana;
+	border: 1px solid #A8A8A8;
+	padding: 10px;
+	width: 140mm;
+	text-align: center;
+	background-color: #f5f5f5;
+}
+#navigasi #klik{
+	border: 1px solid ButtonText;
+	color: ButtonText;
+	font-weight: bold;
+	background-color: #EEEEEE;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#navigasi input.tombol{
+	border: 1px solid ButtonText;
+	color: ButtonText;
+}
+.paperA4{
+	width: 175mm;
+	height: 247mm;
+	border: 1px dashed #66ff66;
+	padding: 1px;
+	font-family: "Trebuchet MS", Arial, Tahoma, Verdana;
+}
+.papersetengahA4{
+	width: 140mm;
+	height: 185mm;
+	border: 1px dashed #66ff66;
+	padding: 1px;
+	font-family: "Trebuchet MS", Arial, Tahoma, Verdana;
+	background-color: White;
+}
+.header1{
+	font-size: 16px; font-family:Arial, Helvetica, sans-serif; font-weight:bold;
+}
+.header2{
+	font-size: 24px; font-family:Georgia, 'Times New Roman', Times, serif;
+	font-weight:bold;
+}
+.alamat{
+	font-size: 11px; font-family:Arial, Helvetica, sans-serif;
+}
+.garis{ border-bottom: 4px double Black; }
+.judulKHS{ font-family: Arial, Helvetica, sans-serif;  font-size: 18px;  font-weight: bold;   }
+.identitas{	font-family: Arial, Tahoma; font-size: 11px;}
+.tabelkhs{
+	/*font-family: Arial, Tahoma, Verdana;*/
+	font-family: Arial, Tahoma;
+	font-size: 9px;
+	border: 1px solid #000000;
+	border-right: 2px solid #000000;
+}
+.tabelkhs .thl, .thc{
+	border-left: 1px solid #000000;
+	border-top: 1px solid #000000;
+	border-bottom: 2px solid #000000;
+}
+.tabelkhs .thr{
+	border-left: 1px solid #000000;
+	border-right: 0px solid #000000;
+	border-top: 1px solid #000000;
+	border-bottom: 2px solid #000000;
+}
+.tabelkhs .thct{
+	border-left: 1px solid #000000;
+	border-top: 1px solid #000000;
+	border-bottom: 0px solid #000000;
+}
+.tabelkhs .thcb{
+	border-left: 1px solid #000000;
+	border-top: 1px solid #000000;
+	border-bottom: 2px solid #000000;
+}
+.tabelkhs .tdl, .tdc{
+	border-left: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+.tabelkhs .tdr{
+	border-left: 1px solid #000000;
+	border-right: 0px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+.tabelIndek{
+	font-family: Arial, Tahoma; 
+	font-size: 10px;
+}
+.tabelIndek .ttd{
+	font-size: 12px;
+	text-align: center;
+}
+.tabelIndek .rumuskhs{
+	font-size: 10px;
+}
+.catatan{
+	font-size: 10px;
+}
