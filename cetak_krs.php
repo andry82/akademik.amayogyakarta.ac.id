@@ -430,14 +430,41 @@ $nim=$_GET['nim'];
                                                                                     <td>Prodi</td><td width="1%">:</td><td width="250"><strong>D3 - <? print($nama_prodi); ?></strong></td>
                                                                                     <td width="16%">Kelas - Semester</td><td width="1%">:</td><td width="200">
                                                                                         <?
-                                                                                        $pieces = explode("-", $kelas);
+                                                                                        $kelas_splite = explode("-", $kelas);
+                                                                                        $pieces = explode("/", $kelas_splite[0]);
+                                                                                        if($R=='I'){
+                                                                                        $klsjw = "1";
+                                                                                        }elseif($R=='II'){
+                                                                                        $klsjw = "2";
+                                                                                        }elseif($R=='III'){
+                                                                                        $klsjw = "3";
+                                                                                        }elseif($R=='IV'){
+                                                                                        $klsjw = "4";
+                                                                                        }elseif($R=='V'){
+                                                                                        $klsjw = "5";
+                                                                                        }elseif($R=='VI'){
+                                                                                        $klsjw = "6";
+                                                                                        }elseif($R=='VII'){
+                                                                                        $klsjw = "7";
+                                                                                        }elseif($R=='VIII'){
+                                                                                        $klsjw = "8";
+                                                                                        }elseif($R=='IX'){
+                                                                                        $klsjw = "9";
+                                                                                        }elseif($R=='X'){
+                                                                                        $klsjw = "10";
+                                                                                        }elseif($R=='XI'){
+                                                                                        $klsjw = "11";
+                                                                                        }elseif($R=='XII'){
+                                                                                        $klsjw = "12";
+                                                                                        }
                                                                                         if($status == "1"){
                                                                                         $viewsmt = 0;
                                                                                         }else{
-                                                                                        $viewsmt = $R;
+                                                                                        $viewsmt = $klsjw;
                                                                                         }
+                                                                                        $kelassmt = $pieces[0].$viewsmt;
                                                                                         ?>
-                                                                                        <strong><? print $pieces[0]; ?>-<? print($viewsmt); ?></strong></td>
+                                                                                        <strong><? print $pieces[0]; ?><? print($viewsmt); ?></strong></td>
                                                                                 </tr>
                                                                                 <tr valign="top">
                                                                                     <?
@@ -490,6 +517,7 @@ $nim=$_GET['nim'];
                                                                 $datamk2 = mysql_fetch_array($hasilmk2);
                                                                 $sks2= $datamk2["SKSMKTBKMK"];
                                                                 $namamk= $datamk2["NAKMKTBKMK"];
+                                                                $model_mk= $datamk2["MDLTBKMK"];
                                                                 $nodos= $datamk2["NODOSTBKMK"];
 
                                                                 $SEMESTBKMK= $datamk2["SEMESTBKMK"];
@@ -512,6 +540,27 @@ $nim=$_GET['nim'];
                                                                 $hasilnmdos = mysql_query($nmdos);
                                                                 $datanm = mysql_fetch_array($hasilnmdos);
                                                                 $namadosen = $datanm["NMDOSMSDOS"];
+                                                                
+                                                                if ($model_mk != 'KELOMPOK'){
+                                                                $nmpengajar = "SELECT md.NMDOSMSDOS, md.GELARMSDOS FROM dosen_pengajar d, msdos md WHERE d.NODOS=md.NODOSMSDOS AND d.KDMK='$KDKMKTRNLM' AND d.KLSMHS='$kelas_splite[0]' AND d.THSMS='$ta'";
+                                                                $hasil = mysql_query($nmpengajar);
+                                                                $datapengajar = mysql_fetch_array($hasil);
+                                                                $nama_pengajar = $datapengajar["NMDOSMSDOS"];
+                                                                $gelar_pengajar = $datapengajar["GELARMSDOS"];
+                                                                }else{
+                                                                $kelommpok_komputer = "SELECT dosen_kelompok_id FROM kelompok_komputer WHERE nims = '$nim' AND thsms='$ta'";
+                                                                $hasil_kelompok_id = mysql_query($kelommpok_komputer);
+                                                                $datapengajar_id = mysql_fetch_array($hasil_kelompok_id);
+                                                                $kelompok_komputer_id = $datapengajar_id['dosen_kelompok_id'];
+
+                                                                $dosen_kelompok = "SELECT dk.KLPKMHS, dk.NODOS, md.NMDOSMSDOS, md.GELARMSDOS FROM dosen_kelompok dk, msdos md WHERE dk.NODOS=md.NODOSMSDOS AND id='$kelompok_komputer_id' AND dk.THSMS='$ta'";
+                                                                $hasil_dosen_kelompok = mysql_query($dosen_kelompok);
+                                                                $data_dosen_kelompok = mysql_fetch_array($hasil_dosen_kelompok);
+                                                                $kelompok_komputer = $data_dosen_kelompok['KLPKMHS'];
+                                                                $nodos_komputer = $data_dosen_kelompok['NODOS'];
+                                                                $nama_pengajar = $data_dosen_kelompok["NMDOSMSDOS"];
+                                                                $gelar_pengajar = $data_dosen_kelompok["GELARMSDOS"];
+                                                                }
 
                                                                 ?>
                                                                 <tr bgcolor="#ffffff">
@@ -521,22 +570,11 @@ $nim=$_GET['nim'];
                                                                     <td class="tdc"><? print($namamk); ?></td>
 
                                                                     <td class="tdc">
-                                                                        <?
-                                                                        if($namamk == "Pendidikan Agama")
-                                                                        {
-                                                                        ?>
-                                                                        <? if($agama == "I"){?>
-                                                                        TEAM
-                                                                        <?}else{?>
-                                                                        TEAM
-                                                                        <?}?>
-                                                                        <?
-                                                                        }else
-                                                                        {?>
-                                                                        <? print($namadosen); ?>
-                                                                        <?
-                                                                        }
-                                                                        ?>
+                                                                        <?if ($model_mk == 'KELOMPOK'){ ?>
+                                                                         <? print($nama_pengajar); ?>, <? print($gelar_pengajar); ?>
+                                                                        <? }else{ ?>
+                                                                        <? print($nama_pengajar); ?>, <? print($gelar_pengajar); ?>
+                                                                        <? }?>
                                                                     </td>
 
                                                                     <td class="tdr" align="center"><? print($sks2); ?></td>
