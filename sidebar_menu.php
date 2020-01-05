@@ -103,6 +103,9 @@ $ta = substr($tahunajar, 0, 4);
             <li>
                 <a href="data_bimbingan_akademik.php"><i class="fa fa-list fa-fw"></i> DATA BIMBINGAN AKADEMIK</a>
             </li>    
+            <li>
+                <a href="cetak_berkas.php"><i class="fa fa-print fa-fw"></i> CETAK BERKAS</a>
+            </li>    
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

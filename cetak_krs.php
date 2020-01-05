@@ -402,12 +402,12 @@ $nim=$_GET['nim'];
                                                                                                                     border: #000000 solid 1px;
                                                                                                                     text-align: center;
                                                                                                                     vertical-align:  baseline;"><!--<div style="margin-top: 26px;text-align: center;">Pas Foto<br />2 x 3</div>-->
-                                                                            <? $filename ="foto_mhs/$nim.JPG";
+                                                                            <? $filename ="images/foto_mhs/$nim.JPG";
 
                                                                             if (file_exists($filename)) {
 
                                                                             ?>		        
-                                                                            <img src="foto_mhs/<? print($nim); ?>.JPG" alt="" style="height: 91px; width: 75px; border-width: 0px;"></div>
+                                                                            <img src="images/foto_mhs/<? print($nim); ?>.JPG" alt="" style="height: 91px; width: 75px; border-width: 0px;"></div>
                                                                         <?
                                                                         }else{ ?>
                                                                         <img src="images/no_photo.jpg" alt="" style="height: 91px; width: 75px; border-width: 0px;" >
@@ -567,7 +567,7 @@ $nim=$_GET['nim'];
                                                                     <td class="tdl" align="center"><? print("$no"); ?></td>
                                                                     <td class="tdc" align="center"><? print("$KDKMKTRNLM"); ?></td>
 
-                                                                    <td class="tdc"><? print($namamk); ?></td>
+                                                                    <td class="tdc"><? print(strtoupper($namamk)); ?></td>
 
                                                                     <td class="tdc">
                                                                         <?if ($model_mk == 'KELOMPOK'){ ?>

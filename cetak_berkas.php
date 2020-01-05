@@ -8,9 +8,9 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>DAFTAR MAHASISWA | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
+        <title>CETAK BERKAS | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
 
-       <!-- Bootstrap Core CSS -->
+        <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
         <link href="stylesheet/sb-admin-2.css" rel="stylesheet">
@@ -58,25 +58,19 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h4 class="page-header"><i class="fa fa-list fa-fw"></i> DAFTAR MAHASISWA</h4>
+                        <h4 class="page-header"><i class="fa fa-print fa-fw"></i> DAFTAR CETAK BERKAS</h4>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <div class="row">                    
                     <div class="col-lg-12">
-                        <a href="export_data_mahasiswa.php" class="btn btn-primary btn-xs"><i class="fa fa-download fa-fw"></i> DOWNLOAD NIMAN EXCEL</a>&nbsp;
-                        <a href="export_data_kartu_mahasiswa.php" class="btn btn-primary btn-xs"><i class="fa fa-download fa-fw"></i> DOWNLOAD KARTU MAHASISWA EXCEL</a>&nbsp;
-                        <a href="export_data_revisi.php" class="btn btn-warning btn-xs"><i class="fa fa-download fa-fw"></i> DOWNLOAD DATA REVISI</a>
-                        <br /> 
-                        <br /> 
+                        
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
                                     <th>NIM</th>
                                     <th>NAMA LENGKAP</th>
-                                    <th>TEMPAT TANGGAL LAHIR</th>
-                                    <th>KELAS</th>
-                                    <th>DATA</th>
+                                    <th>KONSENTRASI</th>
                                     <th>NAVIGASI</th>
                                 </tr>
                             </thead>
@@ -94,24 +88,13 @@
                                     ?>
                                     <tr>
                                         <td><?php echo $nim ?></td>
-                                        <td><?php echo $data['NMMHSMSMHS']; ?></td>
-                                        <td><?php echo $data['TPLHRMSMHS']; ?>, <?php echo $data['TGLHRMSMHS']; ?></td>
-                                        <td style="text-align: center"><?php echo $kelas[0]; ?><?php echo (($ta - $thmskmhs) * 2) + $smtgg; ?></td>
-                                        <td>
-                                            <?php if ($status_data && ($stat_data == '3')) { ?>
-                                                <span class="label label-success">TELAH TERVERIFIKASI</span>
-                                            <?php } else if ($status_data == "" && ($stat_data == '0')) { ?>
-                                                <span class="label label-default">BELUM TERVERIFIKASI</span>
-                                            <?php } else if ($status_data == "" && ($stat_data == '1')) { ?>
-                                                <span class="label label-primary">PENGAJUAN DATA</span>
-                                            <?php } else if ($status_data == "" && ($stat_data == '2')) { ?>
-                                                <span class="label label-warning">REVISI DATA</span>
-                                            <?php } ?>
-                                        </td>
+                                        <td><?php echo $data['NMMHSMSMHS']; ?></td>                                        
+                                        <td><?php echo $data['kdkonsen']; ?></td>                                        
                                         <td style="text-align: center">
-                                            <a href="reset_password.php?nim=<?php echo $nim ?>" class="btn btn-default btn-xs"><i class="fa fa-key fa-fw"></i></a>
-                                            <a href="edit_mahasiswa.php?nim=<?php echo $nim ?>" class="btn btn-success btn-xs"><i class="fa fa-edit fa-fw"></i></a>
-                                            <a href="detail_mahasiswa.php?nim=<?php echo $nim ?>" class="btn btn-primary btn-xs"><i class="fa fa-eye fa-fw"></i></a>
+                                            <a href="cetak_krs.php?ta=<?php echo $ta_lengkap?>&nim=<?php echo $nim ?>" class="btn btn-default btn-xs"><i class="fa fa-print fa-fw"></i> KRS</a>
+                                            <a href="cetak_khs.php?ta=<?php echo $ta_lengkap?>&nim=<?php echo $nim ?>" class="btn btn-default btn-xs"><i class="fa fa-print fa-fw"></i> KHS</a>
+                                            <a href="cetak_transkrip_sementara.php?nim=<?php echo $nim ?>" class="btn btn-default btn-xs"><i class="fa fa-print fa-fw"></i> TRANSKRIP SEMENTARA</a>
+                                            <a href="cetak_transkrip_sementara.php?nim=<?php echo $nim ?>" class="btn btn-success btn-xs"><i class="fa fa-edit fa-fw"></i> PENILAIAN</a>
                                         </td>
                                     </tr>
                                     <?php
