@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>EDIT MAHASISWA | Administrator Verifikasi Data Mahasiswa - AMA YPK Yogyakarta</title>
+        <title>EDIT MAHASISWA | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -58,7 +58,7 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h4 class="page-header"><i class="fa fa-eye fa-fw"></i> EDIT MAHASISWA</h4>
+                        <h4 class="page-header"><i class="fa fa-edit fa-fw"></i> EDIT MAHASISWA</h4>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

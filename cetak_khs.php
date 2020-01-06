@@ -319,6 +319,7 @@ $status = $_GET['sp'];
                         <!--<input class="tombol" value="Penilaian" onclick="window.location.href = 'index.php?route=nilai_nim&ta=<? print($ta); ?>&nim=<? print($nim); ?>&prodi=E~61401'" type="button">
                         <input class="tombol" value="KRS" onclick="window.location.href = 'cetak_krs_ok.php?&ta=<? print($ta); ?>&nim=<? print($nim); ?>&sp=<? print($status); ?>'" type="button">-->
                         <input class="tombol" id="btncetakkhs" value="Cetak KHS" onclick="printOut();" type="button">
+                        <input class="tombol" id="btnpenilaiankhs" value="Penilaian KHS" onclick="window.location.href='penilaian_khs.php?ta=<? print($ta); ?>&nim=<? print($nim); ?>'" type="button">
                         <input class="tombol" value="Generate IPK" onclick="window.location.href = 'generate_khs_ipk.php?&ta=<? print($ta); ?>&nim=<? print($nim); ?>&kelas=<? print($kelas); ?>'" type="button">
                     </div>
                     <?}else{?>
@@ -327,6 +328,7 @@ $status = $_GET['sp'];
                         <!--<input class="tombol" value="Penilaian" onclick="window.location.href = 'index.php?route=nilai_nim&ta=<? print($ta); ?>&nim=<? print($nim); ?>&prodi=E~61401'" type="button">
                         <input class="tombol" value="KRS" onclick="window.location.href = 'cetak_krs_ok.php?&ta=<? print($ta); ?>&nim=<? print($nim); ?>'" type="button">-->
                         <input class="tombol" id="btncetakkhs" value="Cetak KHS" onclick="printOut();" type="button">
+                        <input class="tombol" id="btnpenilaiankhs" value="Penilaian KHS" onclick="window.location.href='penilaian_khs.php?ta=<? print($ta); ?>&nim=<? print($nim); ?>'" type="button">
                         <input class="tombol" value="Generate IPK" onclick="window.location.href = 'generate_khs_ipk.php?&ta=<? print($ta); ?>&nim=<? print($nim); ?>&kelas=<? print($kelas); ?>'" type="button">
                     </div>
                     <?}?></div>
@@ -365,7 +367,7 @@ $status = $_GET['sp'];
                             setPrint.document.write('<head>');
                             setPrint.document.write('<meta http-equiv="pragma" content="no-cache">');
                             setPrint.document.write("<title>KHS - <? print($nim); ?></title>");
-                            setPrint.document.write('<link href="../stylesheet/cetakkhs.css" rel="stylesheet" type="text/css">');
+                            setPrint.document.write('<link href="cetak/cetakkhs.css" rel="stylesheet" type="text/css">');
                             setPrint.document.write('</head>');
                             setPrint.document.write('<body onLoad="self.print()">');
                             setPrint.document.write(getDisplay);

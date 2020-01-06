@@ -312,6 +312,7 @@ $nim=$_GET['nim'];
                     <div id="pesanSimpanIframe" align="left"></div>-->
                     </font>
                     <div style="text-align: left;">
+                        <input class="tombol" value="Kembali" onclick="location.href = 'cetak_berkas.php'" type="button">
                         <input class="tombol" id="btncetakkhs" value="Cetak KRS" onclick="printOut();" type="button">
                     </div></div>
                     <script language="javascript" type="text/javascript">

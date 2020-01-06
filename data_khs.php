@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>DATA KHS | SISTEM INFORMASI DOSEN - AMA YPK Yogyakarta</title>
+        <title>DATA KHS | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -73,6 +73,7 @@
                         }
                         $kelas_splite = explode("-", $nama_kelas);
                         $knons = explode("/", $nama_kelas);
+                        $kelas = explode("/", $nama_kelas);
                         $konsentrasi = $knons[1];
                         $semester = (($ta - $thmskmhs) * 2) + $smtgg;
                         if($smtgg == '2'){
@@ -86,7 +87,7 @@
                         <table class="table table-striped table-bordered">
                             <tr><th>NIM</th><td><?php echo $nim; ?></td></tr>
                             <tr><th>NAMA MAHASISWA</th><td><?php echo $nama_mahasiswa; ?></td></tr>
-                            <tr><th>KELAS</th><td><?php echo $kelas_splite[0]; ?> - <?php echo $semester ?></td></tr>
+                            <tr><th>KELAS</th><td><?php echo $kelas[0]; ?><?php echo $semester ?></td></tr>
                             <tr><th>KONSENTRASI</th><td><?php if ($konsentrasi == 'MRS') { ?>
                                         MANAJEMEN RUMAH SAKIT
                                     <?php } elseif ($konsentrasi == 'MTU') { ?>
@@ -95,7 +96,7 @@
                                         MANAJEMEN OBAT DAN FARMASI
                                     <?php } ?></td></tr>
                         </table>
-                        <a href="data_bimbingan_krs.php?nim=<?php echo $nim; ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-eye fa-fw"></i> KEMBALI</a>
+                        <a href="data_bimbingan_krs.php?nim=<?php echo $nim; ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-arrow-left fa-fw"></i> KEMBALI</a>
                         <br/><br/>             
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
