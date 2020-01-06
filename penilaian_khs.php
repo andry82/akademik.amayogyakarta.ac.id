@@ -80,41 +80,42 @@
                         <form name="form" method="post" action="update_nilai_khs.php">
                             <input type="hidden" name="nim" value="<?php echo $nim ?>" >
                             <input type="hidden" name="ta" value="<?php echo $ta ?>" >
-                                    
+
                             <div class="form-group">
                                 <a href="cetak_khs.php?ta=<?php echo $ta; ?>&nim=<?php echo $nim; ?>" class="btn btn-success btn-sm" role="button" aria-pressed="true"><i class="fa fa-backward fa-fw"></i> KEMBALI</a>
                                 <input type="submit" name="update" value="SIMPAN PENILAIAN " class="btn btn-success btn-sm">
                             </div>
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                            <thead>
-                                <tr>
-                                    <th style="text-align: center" width="5%">NO</th>
-                                    <th style="text-align: center" width="10%">KODE MK</th>
-                                    <th style="text-align: center" width="75%">NAMA MK</th>
-                                    <th style="text-align: center" width="5%">NILAI</th>
-                                    <th style="text-align: center" width="5%">HURUF</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                $trnlm = mysqli_query($mysqli, "SELECT * FROM trnlm trn, tbkmk tbk WHERE trn.KDKMKTRNLM=tbk.KDKMKTBKMK AND trn.THSMSTRNLM=tbk.THSMSTBKMK AND trn.NIMHSTRNLM='$nim' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='MRS')AND trn.THSMSTRNLM='$ta'");
-                                while ($datakhs = mysqli_fetch_array($trnlm)) {                                    
-                                    ?>
-                                    <input type="hidden" name="kodemk[]" value="<?php echo $datakhs['KDKMKTRNLM']; ?>" >
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center" width="5%">NO</th>
+                                        <th style="text-align: center" width="10%">KODE MK</th>
+                                        <th style="text-align: center" width="75%">NAMA MK</th>
+                                        <th style="text-align: center" width="5%">NILAI</th>
+                                        <th style="text-align: center" width="5%">HURUF</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    $trnlm = mysqli_query($mysqli, "SELECT * FROM trnlm trn, tbkmk tbk WHERE trn.KDKMKTRNLM=tbk.KDKMKTBKMK AND trn.THSMSTRNLM=tbk.THSMSTBKMK AND trn.NIMHSTRNLM='$nim' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='MRS')AND trn.THSMSTRNLM='$ta'");
+                                    while ($datakhs = mysqli_fetch_array($trnlm)) {
+                                        $kdmk = trim($datakhs['KDKMKTRNLM']);
+                                        ?>
+                                    <input type="hidden" name="kodemk[]" value="<?php echo $kdmk; ?>" >
                                     <tr> 
                                         <td style="text-align: center"><?php echo $no++; ?></td> 
-                                        <td><?php echo $datakhs['KDKMKTRNLM']; ?></td>
+                                        <td><?php echo $kdmk; ?></td>
                                         <td><?php echo strtoupper($datakhs['NAKMKTBKMK']); ?></td>
                                         <td style="text-align: center">
-                                            <input onkeyup="hitungNilai('<?php echo $datakhs['KDKMKTRNLM']; ?>');" maxlength="3" id="nilai_<?php echo $datakhs['KDKMKTRNLM']; ?>" class="form-control col-lg-1" type="text" name="nilai[]" value="<?php echo $datakhs['NLAKHTRNLM']; ?>" >
+                                            <input maxlength="1" class="form-control col-lg-1" type="text" name="nilai[]" value="<?php echo $datakhs['NLAKHTRNLM']; ?>" >
                                         </td>
                                         <td style="text-align: center"><?php echo $datakhs['BOBOTTRNLM']; ?></td>
                                     </tr>
-<?php } ?>
-                            </tbody>
-                        </table>
-                             <div class="form-group">
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                            <div class="form-group">
                                 <a href="cetak_khs.php?ta=<?php echo $ta; ?>&nim=<?php echo $nim; ?>" class="btn btn-success btn-sm" role="button" aria-pressed="true"><i class="fa fa-backward fa-fw"></i> KEMBALI</a>
                                 <input type="submit" name="update" value="SIMPAN PENILAIAN " class="btn btn-success btn-sm">
                             </div>
@@ -126,7 +127,6 @@
 
         </div>
         <!-- /#wrapper -->
-
         <!-- jQuery -->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
