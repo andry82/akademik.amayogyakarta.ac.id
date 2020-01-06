@@ -1,6 +1,6 @@
 <?
 session_start();
-include_once("cetak/config.php");
+include_once("config/config.php");
 $ta=$_GET['ta'];
 $nim=$_GET['nim'];
 ?>
