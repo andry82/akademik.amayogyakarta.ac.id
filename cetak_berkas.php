@@ -24,7 +24,7 @@
     <?php
     session_start();
     include('bar128.php');
-    include '../config.php';
+    include 'config.php';
 
 // cek apakah yang mengakses halaman ini sudah login
     if ($_SESSION['level'] == "") {
