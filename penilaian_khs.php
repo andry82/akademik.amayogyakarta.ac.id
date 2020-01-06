@@ -75,7 +75,10 @@
                         $smtgg = substr($ta_lengkap, 4, 1);
                         ?>
                         NAMA MAHASISWA : <?php echo $data_mhs['NMMHSMSMHS']; ?><br/>
-                        SEMESTER : <?php echo (($tajar - $data_mhs['TAHUNMSMHS']) * 2) + $smtgg; ?> - <?php echo $data_mhs['nmkelas']; ?> <br/>
+                        <?php  
+                        $kelas = explode("/", $data_mhs['nmkelas']);
+                        ?> 
+                        KELAS : <?php echo $kelas['0']; ?><?php echo (($tajar - $data_mhs['TAHUNMSMHS']) * 2) + $smtgg; ?><br/>
                         <br/>
                         <form name="form" method="post" action="update_nilai_khs.php">
                             <input type="hidden" name="nim" value="<?php echo $nim ?>" >
@@ -108,7 +111,7 @@
                                         <td><?php echo $kdmk; ?></td>
                                         <td><?php echo strtoupper($datakhs['NAKMKTBKMK']); ?></td>
                                         <td style="text-align: center">
-                                            <input maxlength="1" class="form-control col-lg-1" type="text" name="nilai[]" value="<?php echo $datakhs['NLAKHTRNLM']; ?>" >
+                                            <input maxlength="1" class="form-control col-lg-1" type="text" name="nilai[]" value="<?php echo $datakhs['NLAKHTRNLM']; ?>" onkeyup="this.value = this.value.toUpperCase()" >
                                         </td>
                                         <td style="text-align: center"><?php echo $datakhs['BOBOTTRNLM']; ?></td>
                                     </tr>
