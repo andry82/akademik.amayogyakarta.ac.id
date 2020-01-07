@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>DATA BIMBINGAN AKADEMIK | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
+        <title>DATA PENILAIAN| SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -57,52 +57,31 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h4 class="page-header"><i class="fa fa-user fa-fw"></i> DATA BIMBINGAN AKADEMIK</h4>
+                        <h4 class="page-header"><i class="fa fa-user fa-fw"></i> DATA PENILAIAN</h4>
                     </div>
                     <div class="col-lg-12">
-                        <?php
-                        $no = 1;
-                        $res = mysqli_query($mysqli, "SELECT * FROM kelasparalel k, kelasparalel_mhs km, msmhs mhs WHERE k.namakelas=km.nmkelas AND km.nimhs=mhs.NIMHSMSMHS  AND mhs.STMHSMSMHS='A' ORDER BY mhs.NIMHSMSMHS ASC");
-                        $jmlbimbingan = mysqli_num_rows($res);
-                        ?>
-                        Jumlah Mahasiswa Bimbingan : <?php echo $jmlbimbingan; ?> Mahasiswa<br/><br/>
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
-                                    <th>NO</th>
-                                    <th>NIM</th>
-                                    <th>NAMA MAHASISWA</th>
-                                    <th>KELAS</th>
-                                    <th></th>
+                                    <th width="5%">NO</th>
+                                    <th width="80%">DOSEN PENGAJAR</th>
+                                    <th width="10%"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
+                                $no = 1;
+                                $res = mysqli_query($mysqli, "SELECT DISTINCT NODOS FROM dosen_pengajar WHERE THSMS='$ta_lengkap'");
                                 while ($data = mysqli_fetch_array($res)) {
-
-                                    $kelas_splite = explode("-", $data['nmkelas']);
-                                    $nim = $data['nimhs'];
-                                    $tmp = mysqli_query($mysqli, "SELECT * FROM tmpkrs WHERE nimhs='$nim' AND thsms='$ta_lengkap'");
-                                    $jmltmp = mysqli_num_rows($tmp);
-                                    $trnlm = mysqli_query($mysqli, "SELECT * FROM  trnlm WHERE NIMHSTRNLM='$nim' AND THSMSTRNLM='$ta_lengkap'");
-                                    $jmltrnlm = mysqli_num_rows($trnlm);
+                                    $nodos = $data['NODOS'];
+                                    $res_dos = mysqli_query($mysqli, "SELECT NMDOSMSDOS,GELARMSDOS FROM msdos WHERE NODOSMSDOS='$nodos'");
+                                    $data_dosen = mysqli_fetch_array($res_dos)
                                     ?>
                                     <tr>
-                                        <td class="col-lg-1"><?php echo $no++; ?></td>
-                                        <td class="col-lg-1"><?php echo $data['nimhs']; ?></td>
-                                        <td class="col-lg-7"><?php echo $data['NMMHSMSMHS']; ?></td>
-                                        <td class="col-lg-1"><?php echo $kelas_splite[0]; ?></td>
-                                        <td class="col-lg-2">
-                                            <?php if ($jmltmp == '0' && $jmltrnlm == '0') { ?>
-                                                <a href="data_bimbingan_krs.php?nim=<?php echo $data['nimhs']; ?>"><span class="label label-default">BELUM KRS</span></a>
-                                            <?php } elseif ($jmltmp > '0' && $jmltrnlm == '0') { ?>
-                                                <a href="data_bimbingan_krs.php?nim=<?php echo $data['nimhs']; ?>"><span class="label label-primary">PENGAJUAN KRS</span></a>
-                                            <?php } elseif ($jmltmp != '0' && $jmltrnlm != '0') { ?>
-                                                <a href="data_bimbingan_krs.php?nim=<?php echo $data['nimhs']; ?>"><span class="label label-success">ACC KRS</span></a>
-                                            <?php } ?>
-                                        </td>
+                                        <td><?php echo $no++; ?></td>
+                                        <td><?php echo $data_dosen['NMDOSMSDOS']; ?>, <?php echo $data_dosen['GELARMSDOS']; ?></td>
+                                        <td><a href="data_mata_kuliah.php?nodos=<?php echo $nodos; ?>"><span class="label label-success">MATA KULIAH</span></a></td>
                                     </tr>
-
                                     <?php
                                 }
                                 ?>
