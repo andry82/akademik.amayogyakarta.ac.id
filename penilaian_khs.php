@@ -67,6 +67,7 @@
                         <?php
                         $nama_mhs = mysqli_query($mysqli, "SELECT * FROM msmhs m, kelasparalel_mhs km WHERE m.NIMHSMSMHS=km.nimhs AND m.NIMHSMSMHS='$nim'");
                         $data_mhs = mysqli_fetch_array($nama_mhs);
+                        $kdkonsen = $data_mhs['kdkonsen']; 
                         $aturan = mysqli_query($mysqli, "select * from config");
                         $dataaturan = mysqli_fetch_array($aturan);
                         $ta_lengkap = $dataaturan['tahun'];
@@ -101,7 +102,7 @@
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    $trnlm = mysqli_query($mysqli, "SELECT * FROM trnlm trn, tbkmk tbk WHERE trn.KDKMKTRNLM=tbk.KDKMKTBKMK AND trn.THSMSTRNLM=tbk.THSMSTBKMK AND trn.NIMHSTRNLM='$nim' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='MRS')AND trn.THSMSTRNLM='$ta'");
+                                    $trnlm = mysqli_query($mysqli, "SELECT * FROM trnlm trn, tbkmk tbk WHERE trn.KDKMKTRNLM=tbk.KDKMKTBKMK AND trn.THSMSTRNLM=tbk.THSMSTBKMK AND trn.NIMHSTRNLM='$nim' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='$kdkonsen')AND trn.THSMSTRNLM='$ta'");
                                     while ($datakhs = mysqli_fetch_array($trnlm)) {
                                         $kdmk = trim($datakhs['KDKMKTRNLM']);
                                         ?>
