@@ -62,14 +62,9 @@
 
                         <?php
                         $nim = $_GET['nim'];
-                        
                         if (isset($_POST['tahun_ajaran'])) {
-                            
                             $jml_cek = count($_POST['kodemk']);
-                            $tgl=date("d-m-Y, H:i:s");
-                            mysqli_query($mysqli, "UPDATE statusmhs SET tglkrs='".$tgl."' where nim = '".$nim."' and tahun='".$ta_lengkap."' and status='A'");
-		            mysqli_query($mysqli, "delete from tmpkrs where nimhs = '".$nim."' and thsms = '".$ta_lengkap."'");
-                            $tgl_tmpkrs=date("d-m-Y, H:i:s");
+                            mysqli_query($mysqli, "delete from tmpkrs where nimhs = '".$nim."' and thsms = '".$ta_lengkap."'");
                             $waktu =date("d-m-Y, H:i:s");
                             foreach ($_POST['kodemk'] as $kodemk) {
                                 if ($kodemk) {
@@ -77,13 +72,22 @@
                                     $kodemk = $parse[0];
                                     $sksmk = $parse[1];
                                     $ulang = $parse[2];                                   
-                                    mysqli_query($mysqli, "INSERT INTO tmpkrs (nimhs,thsms,kdjen,kdpst,kdkmk,tglinput,sksmk,ulang) VALUES ('".$nim."','$ta_lengkap','E','61401','$kodemk','$tgl_tmpkrs','$sksmk','$ulang')");
+                                    mysqli_query($mysqli, "INSERT INTO tmpkrs (nimhs,thsms,kdjen,kdpst,kdkmk,tglinput,sksmk,ulang) VALUES ('".$nim."','$ta_lengkap','E','61401','$kodemk','$waktu','$sksmk','$ulang')");
                                     //echo "INSERT INTO tmpkrs (nimhs,thsms,kdjen,kdpst,kdkmk,tglinput,sksmk,ulang) VALUES ('".$nim."','$ta_lengkap','E','61401','$kodemk','$tgl_tmpkrs','$sksmk','$ulang')";
                                 }
                             }
-                            $statusmhs = "INSERT INTO `statusmhs` (`tahun`, `nim`, `status`, `tglaktifasi`, `tglkrs`, `tglacc`, `tglrekap`, `tglmid`, `tgluas`, `terlambat`) VALUES
-('$ta_lengkap', '$nim', 'A', '$waktu', '$waktu', '', '', '$waktu', '$waktu', 'T')";
-        mysqli_query($mysqli, $statusmhs);
+                            $jumlah_status = mysqli_query($mysqli, "SELECT * FROM statusmhs WHERE nim='$nim' and tahun='$ta_lengkap'");
+                            $data_jumlah = mysqli_fetch_array($jumlah_status);
+                            $count = mysqli_num_rows($data_jumlah);
+                            echo $jml_cek;
+                            if($count== '0'){
+                              $statusmhs = "INSERT INTO `statusmhs` (`tahun`, `nim`, `status`, `tglaktifasi`, `tglkrs`, `tglacc`, `tglrekap`, `tglmid`, `tgluas`, `terlambat`) VALUES ('$ta_lengkap', '$nim', 'A', '$waktu', '$waktu', '', '', '$waktu', '$waktu', 'T')";
+                              mysqli_query($mysqli, $statusmhs);
+                            }elseif ($count != '0' && $jml_cek == '0'){
+                              mysqli_query($mysqli, "UPDATE statusmhs SET tglkrs='' where nim = '".$nim."' and tahun='".$ta_lengkap."' and status='A'");
+                            }else{
+                              mysqli_query($mysqli, "UPDATE statusmhs SET tglkrs='$waktu' where nim = '".$nim."' and tahun='".$ta_lengkap."' and status='A'");
+                            }  
                         }
                         ?>
                         <?php
