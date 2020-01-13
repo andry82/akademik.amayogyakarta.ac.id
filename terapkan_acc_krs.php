@@ -26,7 +26,7 @@ if ($trnlmcount > 0) {
             $pembimbing_2 = trim($datapembimbing['pembimbing_2']);
             $pembimbing_aktif = trim($datapembimbing['pembimbing_aktif']);
             $tanggal = date('Y-m-d H:i:s');
-            $result = mysqli_query($mysqli, "INSERT INTO pendaftaran_ta(nim,tahun,tanggal,pembimbing_1,pembimbing_2,pembimbing_active) VALUES('$nim','$ta_lengkap','$tanggal','$pembimbing_1','$pembimbing_2','$pembimbing_aktif')");
+            $result = mysqli_query($mysqli, "INSERT INTO pendaftaran_ta(nim,tahun,tanggal,pembimbing_1,pembimbing_2,pembimbing_active) VALUES('$nim','$ta','$tanggal','$pembimbing_1','$pembimbing_2','$pembimbing_aktif')");
         }
         $no++;
     }

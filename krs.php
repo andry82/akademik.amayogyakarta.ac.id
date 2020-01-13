@@ -77,11 +77,9 @@
                                 }
                             }
                             $jumlah_status = mysqli_query($mysqli, "SELECT * FROM statusmhs WHERE nim='$nim' and tahun='$ta_lengkap'");
-                            $data_jumlah = mysqli_fetch_array($jumlah_status);
-                            $count = mysqli_num_rows($data_jumlah);
-                            echo $jml_cek;
+                            $count = mysqli_num_rows($jumlah_status);
                             if($count== '0'){
-                              $statusmhs = "INSERT INTO `statusmhs` (`tahun`, `nim`, `status`, `tglaktifasi`, `tglkrs`, `tglacc`, `tglrekap`, `tglmid`, `tgluas`, `terlambat`) VALUES ('$ta_lengkap', '$nim', 'A', '$waktu', '$waktu', '', '', '$waktu', '$waktu', 'T')";
+                              $statusmhs = "INSERT INTO `statusmhs` (`tahun`, `nim`, `status`, `tglaktifasi`, `tglkrs`, `tglacc`, `tglrekap`, `tglmid`, `tgluas`, `terlambat`) VALUES ('$ta_lengkap', '$nim', 'A', '$waktu', '$waktu', '', '', '', '', 'T')";
                               mysqli_query($mysqli, $statusmhs);
                             }elseif ($count != '0' && $jml_cek == '0'){
                               mysqli_query($mysqli, "UPDATE statusmhs SET tglkrs='' where nim = '".$nim."' and tahun='".$ta_lengkap."' and status='A'");
