@@ -19,9 +19,14 @@ if ($trnlmcount > 0) {
         $kodemk = $datatmpkrs['kdkmk'];
         $sql = "INSERT INTO trnlm (THSMSTRNLM, KDPTITRNLM, KDJENTRNLM, KDPSTTRNLM, NIMHSTRNLM, KDKMKTRNLM, MID, UAS, NLAKHTRNLM, BOBOTTRNLM, acc, ulang, MKASAL) VALUES ('$ta_lengkap', '054039', 'E', '61401', '$nim', '$kodemk', '', '', '', 0.00, '0', 0, 0)";
         mysqli_query($mysqli, $sql);
+        $pembimbing = mysqli_query($mysqli, "SELECT pembimbing_1,pembimbing_2,pembimbing_aktif FROM  ploting_pembimbing_ta WHERE nim='$nim'");
+        $datapembimbing = mysqli_fetch_array($pembimbing);
         if ($kodemk == MKB373) {
+            $pembimbing_1 = trim($datapembimbing['pembimbing_1']);
+            $pembimbing_2 = trim($datapembimbing['pembimbing_2']);
+            $pembimbing_aktif = trim($datapembimbing['pembimbing_aktif']);
             $tanggal = date('Y-m-d H:i:s');
-            $result = mysqli_query($mysqli, "INSERT INTO pendaftaran_ta(nim,tahun,tanggal) VALUES('$nim','$ta_lengkap','$tanggal')");
+            $result = mysqli_query($mysqli, "INSERT INTO pendaftaran_ta(nim,tahun,tanggal,pembimbing_1,pembimbing_2,pembimbing_active) VALUES('$nim','$ta_lengkap','$tanggal','$pembimbing_1','$pembimbing_2','$pembimbing_aktif')");
         }
         $no++;
     }

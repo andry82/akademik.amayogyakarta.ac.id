@@ -82,7 +82,7 @@
                                 }
                             }
                             $statusmhs = "INSERT INTO `statusmhs` (`tahun`, `nim`, `status`, `tglaktifasi`, `tglkrs`, `tglacc`, `tglrekap`, `tglmid`, `tgluas`, `terlambat`) VALUES
-('$ta_lengkap', '$nim', 'A', '$waktu', '$waktu', '$waktu', '$waktu', '$waktu', '$waktu', 'T')";
+('$ta_lengkap', '$nim', 'A', '$waktu', '$waktu', '', '', '$waktu', '$waktu', 'T')";
         mysqli_query($mysqli, $statusmhs);
                         }
                         ?>
