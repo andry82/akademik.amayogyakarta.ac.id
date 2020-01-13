@@ -8,7 +8,7 @@ $trnlmcount = mysqli_num_rows($trnlm);
 if ($trnlmcount > 0) {
     $dateletrnlm = mysqli_query($mysqli, "DELETE FROM trnlm where NIMHSTRNLM='$nim' and THSMSTRNLM='$ta_lengkap'");
     $dateletrakm = mysqli_query($mysqli, "DELETE FROM trakm where THSMSTRAKM='$ta_lengkap' and NIMHSTRAKM='$nim'");
-    $dateleta = mysqli_query($mysqli, "DELETE FROM pendaftaran_ta where tahun='$ta_lengkap' AND nim='$nim'");
+    $dateleta = mysqli_query($mysqli, "DELETE FROM pendaftaran_ta where tahun='$ta' AND nim='$nim'");
     
 } elseif ($trnlmcount == 0) {
     $no = 0;
