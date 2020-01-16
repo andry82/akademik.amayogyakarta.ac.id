@@ -10,7 +10,7 @@
 
         <title>DETAIL MAHASISWA | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
 
-       <!-- Bootstrap Core CSS -->
+        <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
         <link href="stylesheet/sb-admin-2.css" rel="stylesheet">
@@ -123,7 +123,7 @@
                             $telp_wali = $data['TELPWALI'];
                             $alamat_wali = $data['ALAMATWALI'];
                             $hobi = $data['HOBI'];
-                            $prestasi = $data['PRESTASI'];
+                            $keahlian = $data['KEAHLIAN'];
                             $ktp = $data['ktpkk'];
                             $ijazah = $data['ijazah_sma'];
                             $akte_kelahiran = $data['akte_kelahiran'];
@@ -432,8 +432,8 @@
                                     <td><?php echo $hobi; ?></td>
                                 </tr>
                                 <tr>
-                                    <th>PRESTASI YANG PERNAH DIRAIH</th>
-                                    <td><?php echo $prestasi; ?></td>
+                                    <th>KEAHLIAN</th>
+                                    <td><?php echo $keahlian; ?></td>
                                 </tr>
                                 <tr>
                                     <th>KTP / KK SCAN</th>
@@ -453,21 +453,155 @@
                                             <br/>
                                             <a href="http://simaster.amayogyakarta.ac.id/document/ijazah/<?php echo $ijazah; ?>" target="_blank"><span class="label label-primary">TAMPILKAN IJAZAH</span></a>
                                             <br/>
-<?php } ?>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>IJAZAH AKTA KELAHIRAN</th>
                                     <td><?php
-if ($akte_kelahiran) {
-    ?>
+                                        if ($akte_kelahiran) {
+                                            ?>
                                             <img id="zoom_akte" src="../document/akte/<?php echo $akte_kelahiran; ?>" data-zoom-image="../document/akte/<?php echo $akte_kelahiran; ?>" width="200">
                                             <br/>
                                             <a href="http://simaster.amayogyakarta.ac.id/document/akte/<?php echo $akte_kelahiran; ?>" target="_blank"><span class="label label-primary">TAMPILKAN AKTE</span></a>
                                             <br/>
-<?php } ?>
+                                        <?php } ?>
                                     </td>
                                 </tr>
+                            </tbody>
+                        </table>
+                        <center><label>DATA PRESTASI</label></center>
+                        <br/>
+                        <table width="100%" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>NAMA KEJUARAAN</th>
+                                    <th>CAPAIAN PRESTASI</th>
+                                    <th>TINGKAT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $data = mysqli_query($mysqli, "select * from data_prestasi WHERE nim=$nim");
+                                $no = 1;
+                                while ($d = mysqli_fetch_array($data)) {
+                                    $id = $d['id'];
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $no++; ?></td>
+                                        <td><?php echo $d['NAMA_KEJUARAAN']; ?></td>
+                                        <td><?php echo $d['CAPAIAN_PRESTASI']; ?></td>
+                                        <td><?php echo $d['TINGKAT']; ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                        <center><label>DATA ORGANISASI</label></center>
+                        <br/>
+                        <table width="100%" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>JENIS KEGIATAN</th>
+                                    <th>NAMA UKM / ORGANISASI</th>
+                                    <th>JABATAN</th>
+                                    <th>TAHUN</th>
+                                    <th>STATUS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $data = mysqli_query($mysqli, "select * from data_organisasi WHERE nim=$nim");
+                                $no = 1;
+                                while ($d = mysqli_fetch_array($data)) {
+                                    $id = $d['id'];
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $no++; ?></td>
+                                        <td>
+                                            <?php if ($d['jenis_kegiatan'] == '1') { ?>
+                                                Kegiatan Dalam Kampus
+                                            <?php } else { ?>
+                                                Kegiatan Luar Kampus
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($d['jenis_kegiatan'] == '1') { ?>
+                                                <?php $id_ukm = $d['nama_ukm'];
+                                                $data_ukm = mysqli_query($mysqli, "select * from data_ukm WHERE id='$id_ukm'");
+                                                $dukm = mysqli_fetch_array($data_ukm);
+                                                echo $dukm['nama_ukm'];
+                                                ?>
+                                            <?php } else { ?>
+                                                <?php echo $d['nama_organisasi']; ?>
+                                            <?php } ?>
+                                        </td>
+                                        <td><?php echo $d['jabatan']; ?></td>
+                                        <td><?php echo $d['tahun']; ?></td>
+                                        <td>
+                                            <?php if ($d['status'] == '1') { ?>
+                                                <a href="proses_aktivasi_organisasi.php?id=<?php echo $id; ?>" class='btn btn-success btn-xs'>AKTIF</a>                                          
+                                            <?php } else { ?>
+                                                <a href="proses_aktivasi_organisasi.php?id=<?php echo $id; ?>" class='btn btn-danger btn-xs'>TIDAK AKTIF</a>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                        <center><label>DATA PELATIHAN</label></center>
+                        <br/>
+                        <table width="100%" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>NAMA / BIDANG PELATIHAN</th>
+                                    <th>TAHUN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $data = mysqli_query($mysqli, "select * from data_pelatihan WHERE nim=$nim");
+                                $no = 1;
+                                while ($d = mysqli_fetch_array($data)) {
+                                    $id = $d['id'];
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $no++; ?></td>
+                                        <td><?php echo $d['bidang_pelatihan']; ?></td>
+                                        <td><?php echo $d['tahun']; ?></td>
+                                    </tr>
+<?php } ?>
+                            </tbody>
+                        </table>
+                        <center><label>DATA KEWIRAUSAHAAN</label></center>
+                        <br/>
+                        <table width="100%" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>JENIS USAHA</th>
+                                    <th>PRODUK USAHA</th>
+                                    <th>CARA PEMASARAN</th>
+                                    <th>TANGGAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $data = mysqli_query($mysqli, "select * from data_kewirausahaan WHERE nim=$nim");
+                                $no = 1;
+                                while ($d = mysqli_fetch_array($data)) {
+                                    $id = $d['id'];
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $no++; ?></td>
+                                        <td><?php echo $d['jenis_usaha']; ?></td>
+                                        <td><?php echo $d['produk_usaha']; ?></td>
+                                        <td><?php echo $d['cara_pemasaran']; ?></td>
+                                        <td><?php echo $d['tanggal_usaha']; ?></td>
+                                    </tr>
+<?php } ?>
                             </tbody>
                         </table>
                         <center><label>BIODATA AYAH</label></center>
