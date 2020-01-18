@@ -73,12 +73,12 @@
                         }
                         $kelas_splite = explode("/", $nama_kelas);
                         $semester = (($ta - $thmskmhs) * 2) + $smtgg;
-                        if($smtgg == '2'){
+                        if ($smtgg == '2') {
                             $smt = 1;
-                            $semester_lalu = ($ta.$smt);
-                        }else{
+                            $semester_lalu = ($ta . $smt);
+                        } else {
                             $smt = 2;
-                            $semester_lalu = (($ta-1).$smt);
+                            $semester_lalu = (($ta - 1) . $smt);
                         }
                         ?>
                         N.I.M : <?php echo $nim; ?><br/>
@@ -97,20 +97,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                 <?php $nilai = mysqli_query($mysqli, "SELECT * FROM  trakm WHERE NIMHSTRAKM='$nim' ORDER BY THSMSTRAKM ASC");
+                                <?php
+                                $nilai = mysqli_query($mysqli, "SELECT * FROM  trakm WHERE NIMHSTRAKM='$nim' ORDER BY THSMSTRAKM ASC");
                                 $nomor = 1;
                                 $semester = '01';
-                                while ($data = mysqli_fetch_array($nilai)) { ?>                   
-                                <tr>
-                                    <td><?php echo $data['THSMSTRAKM']; ?></td>
-                                    <td><?php echo $data['SKSEMTRAKM']; ?></td>
-                                    <td><?php echo $data['SKSTTTRAKM']; ?></td>
-                                    <td><?php echo $data['NLIPSTRAKM']; ?></td>
-                                    <td><?php echo $data['NLIPKTRAKM']; ?></td>
-                                    <td><a href="data_khs.php?nim=<?php echo $nim ?>&tahun=<?php echo $data['THSMSTRAKM']; ?>" class="btn btn-success btn-xs" role="button" aria-pressed="true"><i class="fa fa-eye fa-fw"></i> LIHAT KHS</a>
-                        </td>
-                                </tr>
-                                <?php } ?>
+                                while ($data = mysqli_fetch_array($nilai)) {
+                                    ?>                   
+                                    <tr>
+                                        <td><?php echo $data['THSMSTRAKM']; ?></td>
+                                        <td><?php echo $data['SKSEMTRAKM']; ?></td>
+                                        <td><?php echo $data['SKSTTTRAKM']; ?></td>
+                                        <td><?php echo $data['NLIPSTRAKM']; ?></td>
+                                        <td><?php echo $data['NLIPKTRAKM']; ?></td>
+                                        <td><a href="data_khs.php?nim=<?php echo $nim ?>&tahun=<?php echo $data['THSMSTRAKM']; ?>" class="btn btn-success btn-xs" role="button" aria-pressed="true"><i class="fa fa-eye fa-fw"></i> LIHAT KHS</a>
+                                        </td>
+                                    </tr>
+<?php } ?>
                             </tbody>
                         </table>
                         <a href="generate_ipk.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> GENERATE IPK</a>
@@ -125,17 +127,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $nilai = mysqli_query($mysqli, "SELECT * FROM  trnlm trn, tbkmk tbk WHERE trn.KDKMKTRNLM=tbk.KDKMKTBKMK AND trn.THSMSTRNLM=tbk.THSMSTBKMK AND trn.THSMSTRNLM='$semester_lalu' AND trn.NIMHSTRNLM='$nim' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='$jurusan') ORDER BY tbk.SEMESTBKMK, trn.KDKMKTRNLM ASC");
+                                <?php
+                                $nilai = mysqli_query($mysqli, "SELECT * FROM  trnlm trn, tbkmk tbk WHERE trn.KDKMKTRNLM=tbk.KDKMKTBKMK AND trn.THSMSTRNLM=tbk.THSMSTBKMK AND trn.THSMSTRNLM='$semester_lalu' AND trn.NIMHSTRNLM='$nim' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='$jurusan') ORDER BY tbk.SEMESTBKMK, trn.KDKMKTRNLM ASC");
                                 $nomor = 1;
                                 $semester = '01';
-                                while ($data = mysqli_fetch_array($nilai)) {?>
-                                <tr>
-                                    <td style="text-align: center"><?php echo $data['SEMESTBKMK']; ?></td>
-                                    <td><?php echo $data['KDKMKTRNLM']; ?> - <?php echo $data['NAKMKTBKMK']; ?></td>
-                                    <td style="text-align: center"><?php echo $data['SKSMKTBKMK']; ?></td>
-                                    <td style="text-align: center"><?php echo $data['NLAKHTRNLM']; ?></td>
-                                </tr>  
-                                <?php $total_sks += $data['SKSMKTBKMK']; }?>
+                                while ($data = mysqli_fetch_array($nilai)) {
+                                    ?>
+                                    <tr>
+                                        <td style="text-align: center"><?php echo $data['SEMESTBKMK']; ?></td>
+                                        <td><?php echo $data['KDKMKTRNLM']; ?> - <?php echo $data['NAKMKTBKMK']; ?></td>
+                                        <td style="text-align: center"><?php echo $data['SKSMKTBKMK']; ?></td>
+                                        <td style="text-align: center"><?php echo $data['NLAKHTRNLM']; ?></td>
+                                    </tr>  
+    <?php $total_sks += $data['SKSMKTBKMK'];
+} ?>
                                 <tr>
                                     <th style="text-align: center" colspan="2"> TOTAL SKS DIAMBIL SEMESTER LALU</th>
                                     <th style="text-align: center"><?php echo $total_sks; ?></th>
@@ -146,18 +151,34 @@
                         <?php
                         $tpmkrs = mysqli_query($mysqli, "SELECT * FROM  tmpkrs WHERE thsms='$ta_lengkap' AND nimhs='$nim'");
                         $trnlm = mysqli_query($mysqli, "SELECT * FROM  trnlm WHERE THSMSTRNLM='$ta_lengkap' AND NIMHSTRNLM='$nim'");
+                        $trnlm_lta = mysqli_query($mysqli, "SELECT * FROM  trnlm WHERE KDKMKTRNLM='MKB373' AND THSMSTRNLM='$ta_lengkap' AND NIMHSTRNLM='$nim'");
                         $trnlmcount = mysqli_num_rows($trnlm);
+                        $trnlm_lta_count = mysqli_num_rows($trnlm_lta);
                         $tpmkrscount = mysqli_num_rows($tpmkrs);
-                        if ($tpmkrscount > 0){
-                        if ($trnlmcount > 0) {?>
-                        <a href="terapkan_acc_krs.php?nim=<?php echo $nim ?>" class="btn btn-danger" role="button" aria-pressed="true"><i class="fa fa-remove fa-fw"></i> BATALKAN ACC KRS</a>
-                        <a href="cetak_krs.php?ta=<?php echo $ta_lengkap ?>&nim=<?php echo $nim ?>" target="_blank" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-print fa-fw"></i> CETAK KRS</a>
-                        <?}else{?>
-                        <a href="terapkan_acc_krs.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-check fa-fw"></i> TERAPKAN ACC KRS</a>&nbsp;
-                        <a href="krs.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-check fa-fw"></i> INPUT KRS</a>
-                        <?php }}else{ ?>
-                        <a href="krs.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-check fa-fw"></i> INPUT KRS</a>
-                        <?php } ?>
+                        if ($tpmkrscount > 0) {
+                            if ($trnlmcount > 0) {
+                                ?>
+                                <a href="terapkan_acc_krs.php?nim=<?php echo $nim ?>" class="btn btn-danger" role="button" aria-pressed="true"><i class="fa fa-remove fa-fw"></i> BATALKAN ACC KRS</a>
+                                <?php if ($trnlm_lta_count == 1) { ?>
+                                    <?php
+                                    $pendaftar_ta = mysqli_query($mysqli, "select * from pendaftaran_ta WHERE nim=$nim AND tahun=$ta");
+                                    $count_ta = mysqli_num_rows($pendaftar_ta);
+                                    $pendaftar_bimbingan = mysqli_query($mysqli, "select * from pendaftaran_ta WHERE nim=$nim AND tahun=$ta AND bimbingan='1'");
+                                    $count_bimbingan = mysqli_num_rows($pendaftar_bimbingan);
+                                    if ($count_bimbingan){?>
+                                       <a href="proses_batal_bimbingan.php?nim=<?php echo $nim ?>" class="btn btn-danger"><i class="fa fa-remove fa-fw"></i> BATALKAN BIMBINGAN TA</a>
+                                    <?php }else{ ?>
+                                       <a href="proses_daftar_bimbingan.php?nim=<?php echo $nim ?>" class="btn btn-primary"><i class="fa fa-folder fa-fw"></i> DAFTAR BIMBINGAN TA</a>
+                                    <?php } ?>
+                                <?php } ?>
+                                <a href="cetak_krs.php?ta=<?php echo $ta_lengkap ?>&nim=<?php echo $nim ?>" target="_blank" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-print fa-fw"></i> CETAK KRS</a>
+    <?php } else { ?>
+                                <a href="terapkan_acc_krs.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-check fa-fw"></i> TERAPKAN ACC KRS</a>&nbsp;
+                                <a href="krs.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-check fa-fw"></i> INPUT KRS</a>
+    <?php }
+} else { ?>
+                            <a href="krs.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-check fa-fw"></i> INPUT KRS</a>
+<?php } ?>
                         <br/><br/>
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
@@ -174,7 +195,7 @@
                                 $no = 1;
                                 $res = mysqli_query($mysqli, "SELECT * FROM  tmpkrs tmp, tbkmk tbk WHERE tmp.kdkmk=tbk.KDKMKTBKMK AND tmp.thsms=tbk.THSMSTBKMK AND tmp.thsms='$ta_lengkap' AND tmp.nimhs='$nim' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='$jurusan')");
                                 while ($data = mysqli_fetch_array($res)) {
-                                    $kodemk = $data['kdkmk']; 
+                                    $kodemk = $data['kdkmk'];
                                     $totulang = mysqli_query($mysqli, "SELECT * from tmpkrs where nimhs='$nim' and thsms<='$ta_lengkap' and kdkmk='$kodemk'");
                                     $ulang = mysqli_num_rows($totulang);
                                     $totalsks += $data['SKSMKTBKMK'];
@@ -185,17 +206,17 @@
                                         <td style="text-align: center"><?php echo $data['SEMESTBKMK']; ?></td>
                                         <td style="text-align: center"><?php echo $data['SKSMKTBKMK']; ?></td>
                                         <td style="text-align: center">
-                                            <?php if ($ulang == "1"){ ?>
-                                            Baru
-                                            <?php }elseif ($ulang == "2") { ?>
-                                            Mengulang
-                                            <?php }?>
+                                    <?php if ($ulang == "1") { ?>
+                                                Baru
+                                    <?php } elseif ($ulang == "2") { ?>
+                                                Mengulang
+    <?php } ?>
                                         </td>
                                     </tr>
 
-                                    <?php
-                                }
-                                ?>
+    <?php
+}
+?>
                                 <tr>
                                     <th></th>
                                     <th colspan="2">TOTAL SKS YANG DIAMBIL </th>

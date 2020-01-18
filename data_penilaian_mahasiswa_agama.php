@@ -244,17 +244,17 @@
                 document.getElementById('angka_agama_' + nim).value = Math.round(angka_agama);
                 document.getElementById('angka_' + nim).value = Math.round(angka);
                 document.getElementById('angka_view_agama_' + nim).value = Math.round(angka_agama);
-
-                if (angka_agama >= '85') {
+                pembulatan_agama = Math.round(angka_agama);
+                if (pembulatan_agama >= '85') {
                     huruf_agama = "A";
                     bobot_agama = "4.00";
-                } else if (angka_agama >= '70') {
+                } else if (pembulatan_agama >= '70') {
                     huruf_agama = "B";
                     bobot_agama = "3.00";
-                } else if (angka_agama >= '55') {
+                } else if (pembulatan_agama >= '55') {
                     huruf_agama = "C";
                     bobot_agama = "2.00";
-                } else if (angka_agama >= '40') {
+                } else if (pembulatan_agama >= '40') {
                     huruf_agama = "D";
                     bobot_agama = "1.00";
                 } else {

@@ -244,16 +244,17 @@
                 angka = hasil_presensi + hasil_tugas + hasil_keaktifan + hasil_mid + hasil_uas;
                 document.getElementById('angka_' + nim).value = Math.round(angka);
                 document.getElementById('angka_view_' + nim).value = Math.round(angka);
-                if (angka >= '85') {
+                pembulatan = Math.round(angka);
+                if (pembulatan >= '85') {
                     huruf = "A";
                     bobot = "4.00";
-                } else if (angka >= '70') {
+                } else if (pembulatan >= '70') {
                     huruf = "B";
                     bobot = "3.00";
-                } else if (angka >= '55') {
+                } else if (pembulatan >= '55') {
                     huruf = "C";
                     bobot = "2.00";
-                } else if (angka >= '40') {
+                } else if (pembulatan >= '40') {
                     huruf = "D";
                     bobot = "1.00";
                 } else {
