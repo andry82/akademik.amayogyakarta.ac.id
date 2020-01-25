@@ -16,7 +16,8 @@ if ($trnlmcount > 0) {
     while ($datatmpkrs = mysqli_fetch_array($tmpkrs)) {
         $urut_nim = $no + 1;
         $nimhs = $datatmpkrs['nimhs'];
-        $kodemk = $datatmpkrs['kdkmk'];
+        $kodemk = $datatmpkrs['kdkmk'];        
+        $jumlah_sks += $datatmpkrs['sksmk'];
         $sql = "INSERT INTO trnlm (THSMSTRNLM, KDPTITRNLM, KDJENTRNLM, KDPSTTRNLM, NIMHSTRNLM, KDKMKTRNLM, MID, UAS, NLAKHTRNLM, BOBOTTRNLM, acc, ulang, MKASAL) VALUES ('$ta_lengkap', '054039', 'E', '61401', '$nim', '$kodemk', '', '', '', 0.00, '0', 0, 0)";
         mysqli_query($mysqli, $sql);
         $pembimbing = mysqli_query($mysqli, "SELECT pembimbing_1,pembimbing_2,pembimbing_aktif FROM  ploting_pembimbing_ta WHERE nim='$nim'");
@@ -36,7 +37,7 @@ if ($trnlmcount > 0) {
     $waktu = date("d-m-Y H:i:s");
     mysqli_query($mysqli, "UPDATE statusmhs SET  tglacc='$waktu', tglrekap='$waktu' where nim='$nim' and tahun='$ta_lengkap'");
     $trakm = "INSERT INTO `trakm` (`THSMSTRAKM`, `KDPTITRAKM`, `KDJENTRAKM`, `KDPSTTRAKM`, `NIMHSTRAKM`, `NLIPSTRAKM`, `SKSEMTRAKM`, `NLIPKTRAKM`, `SKSTTTRAKM`, `nodos`, `sksmaks`, `bobottotal`) VALUES
-('$ta_lengkap', '054039', 'E', '', '$nim', 0.00, 0, 0.00, 0, '', NULL, 0.00)";
+('$ta_lengkap', '054039', 'E', '', '$nim', 0.00, '$jumlah_sks', 0.00, 0, '', NULL, 0.00)";
     mysqli_query($mysqli, $trakm);
     
     }
