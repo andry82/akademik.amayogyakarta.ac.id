@@ -5,7 +5,7 @@ if($ipkaktif=="open")
 $totip2 = "SELECT distinct(KDKMKTRNLM) from trnlm  where NIMHSTRNLM='$id_mhs' order by KDKMKTRNLM,NLAKHTRNLM ASC";
 }else
 {
-$totip2 = "SELECT distinct(tr.KDKMKTRNLM) from trnlm tr, tbkmk tbk where tr.KDKMKTRNLM=tbk.KDKMKTBKMK AND tr.THSMSTRNLM!='$tahunajaran' and tr.NIMHSTRNLM='$id_mhs' order by tbk.SEMESTBKMK ASC";
+$totip2 = "SELECT distinct(tr.KDKMKTRNLM) from trnlm tr, tbkmk tbk where tr.KDKMKTRNLM=tbk.KDKMKTBKMK AND tr.THSMSTRNLM<'$tahunajaran' and tr.NIMHSTRNLM='$id_mhs' order by tbk.SEMESTBKMK ASC";
 } 
 
 $hasilip2 = mysql_query($totip2);

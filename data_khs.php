@@ -76,12 +76,12 @@
                         $kelas = explode("/", $nama_kelas);
                         $konsentrasi = $knons[1];
                         $semester = (($ta - $thmskmhs) * 2) + $smtgg;
-                        if($smtgg == '2'){
+                        if ($smtgg == '2') {
                             $smt = 1;
-                            $semester_lalu = ($ta.$smt);
-                        }else{
+                            $semester_lalu = ($ta . $smt);
+                        } else {
                             $smt = 2;
-                            $semester_lalu = (($ta-1).$smt);
+                            $semester_lalu = (($ta - 1) . $smt);
                         }
                         ?>
                         <table class="table table-striped table-bordered">
@@ -97,6 +97,17 @@
                                     <?php } ?></td></tr>
                         </table>
                         <a href="data_bimbingan_krs.php?nim=<?php echo $nim; ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-arrow-left fa-fw"></i> KEMBALI</a>
+                        <?php
+                        $count_sia = mysqli_query($sia, "SELECT * FROM trnlm WHERE NIMHSTRNLM='$nim' AND THSMSTRNLM='$tahun'");
+                        $jumlah_sia = mysqli_num_rows($count_sia);
+                        if ($jumlah_sia > 0){?>
+                        <a href="import_nilai_sia.php?nim=<?php echo $nim; ?>&tahun=<?php echo $tahun ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-download fa-fw"></i> NILAI SIA</a>
+                        <?php }
+                        $count_simakpro = mysqli_query($simakpro, "SELECT * FROM rtrnlm WHERE nimhstrnlm='$nim' AND thsmstrnlm='$tahun'");
+                        $jumlah_simakpro = mysqli_num_rows($count_simakpro);
+                        if ($jumlah_simakpro > 0){?>
+                        <a href="import_nilai_simakpro.php?nim=<?php echo $nim; ?>&tahun=<?php echo $tahun ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-download fa-fw"></i> NILAI SIMAKPRO</a>
+                        <?php } ?>
                         <br/><br/>             
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
@@ -108,17 +119,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $nilai = mysqli_query($mysqli, "SELECT * FROM  trnlm trn, tbkmk tbk WHERE trn.KDKMKTRNLM=tbk.KDKMKTBKMK AND trn.THSMSTRNLM=tbk.THSMSTBKMK AND trn.THSMSTRNLM='$tahun' AND trn.NIMHSTRNLM='$nim' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='$konsentrasi') ORDER BY tbk.SEMESTBKMK, trn.KDKMKTRNLM ASC");
+                                <?php
+                                $nilai = mysqli_query($mysqli, "SELECT * FROM  trnlm trn, tbkmk tbk WHERE trn.KDKMKTRNLM=tbk.KDKMKTBKMK AND trn.THSMSTRNLM=tbk.THSMSTBKMK AND trn.THSMSTRNLM='$tahun' AND trn.NIMHSTRNLM='$nim' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='$konsentrasi') ORDER BY tbk.SEMESTBKMK, trn.KDKMKTRNLM ASC");
                                 $nomor = 1;
                                 $semester = '01';
-                                while ($data = mysqli_fetch_array($nilai)) {?>
-                                <tr>
-                                    <td style="text-align: center"><?php echo $data['SEMESTBKMK']; ?></td>
-                                    <td><?php echo $data['KDKMKTRNLM']; ?> - <?php echo $data['NAKMKTBKMK']; ?></td>
-                                    <td style="text-align: center"><?php echo $data['SKSMKTBKMK']; ?></td>
-                                    <td style="text-align: center"><?php echo $data['NLAKHTRNLM']; ?></td>
-                                </tr>  
-                                <?php $total_sks += $data['SKSMKTBKMK']; }?>
+                                while ($data = mysqli_fetch_array($nilai)) {
+                                    ?>
+                                    <tr>
+                                        <td style="text-align: center"><?php echo $data['SEMESTBKMK']; ?></td>
+                                        <td><?php echo $data['KDKMKTRNLM']; ?> - <?php echo $data['NAKMKTBKMK']; ?></td>
+                                        <td style="text-align: center"><?php echo $data['SKSMKTBKMK']; ?></td>
+                                        <td style="text-align: center"><?php echo $data['NLAKHTRNLM']; ?></td>
+                                    </tr>  
+    <?php $total_sks += $data['SKSMKTBKMK'];
+} ?>
                                 <tr>
                                     <th style="text-align: center" colspan="2"> TOTAL SKS DIAMBIL</th>
                                     <th style="text-align: center"><?php echo $total_sks; ?></th>
