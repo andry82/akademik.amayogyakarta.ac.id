@@ -184,7 +184,7 @@
                                 </tbody>
                             </table>
                             <div class="form-group">
-                                <a href="data_mata_kuliah.php" class="btn btn-success btn-sm" role="button" aria-pressed="true"><i class="fa fa-backward fa-fw"></i> KEMBALI</a>
+                                <a href="data_mata_kuliah.php?nodos=<?php echo $nodos; ?>" class="btn btn-success btn-sm" role="button" aria-pressed="true"><i class="fa fa-backward fa-fw"></i> KEMBALI</a>
                                 <input type="submit" name="update" value="SIMPAN PENILAIAN " class="btn btn-success btn-sm">
                             </div>
                         </form>

@@ -71,7 +71,7 @@
                             <tbody>
                                 <?php
                                 $no = 1;
-                                $res = mysqli_query($mysqli, "SELECT DISTINCT NODOS FROM dosen_pengajar WHERE THSMS='$ta_lengkap'");
+                                $res = mysqli_query($mysqli, "SELECT DISTINCT NODOS FROM dosen_pengajar WHERE THSMS='$ta_lengkap' ORDER BY NODOS ASC");
                                 while ($data = mysqli_fetch_array($res)) {
                                     $nodos = $data['NODOS'];
                                     $res_dos = mysqli_query($mysqli, "SELECT NMDOSMSDOS,GELARMSDOS FROM msdos WHERE NODOSMSDOS='$nodos'");
