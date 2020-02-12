@@ -208,6 +208,7 @@
                 keaktifan = document.getElementById('keaktifan_' + nim).value;
                 mid = document.getElementById('mid_' + nim).value;
                 uas = document.getElementById('uas_' + nim).value;
+                var validasiAngka = /^[0-9]+$/;
 
                 if (presensi < 0 || presensi > 100) {
                     alert("Nilai Hanya dari 0 - 100");

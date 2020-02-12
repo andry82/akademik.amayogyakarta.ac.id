@@ -8,9 +8,9 @@ $kodemk = $_GET['kodemk'];
 $kelompok = $_GET['kelompok'];
 $kelas = $_GET['kelas'];
 $ta = $_GET['ta'];
-$nomor_dosen = $_SESSION['nomor_dosen'];
+$nodos = $_GET['nodos'];
 
-$data_dk = mysqli_query($mysqli, "SELECT * FROM dosen_kelompok WHERE KDMK='$kodemk' AND KLSMHS='$kelas' AND KLPKMHS='$kelompok' AND NODOS='$nomor_dosen' AND THSMS='$ta_lengkap' AND id='$id_dk'");
+$data_dk = mysqli_query($mysqli, "SELECT * FROM dosen_kelompok WHERE KDMK='$kodemk' AND KLSMHS='$kelas' AND KLPKMHS='$kelompok' AND NODOS='$nodos' AND THSMS='$ta_lengkap' AND id='$id_dk'");
 $dt_kelompok = mysqli_fetch_array($data_dk);
 $id_kelompok = $dt_kelompok['id'];
 
@@ -28,5 +28,5 @@ mysqli_query($mysqli, "UPDATE dosen_kelompok SET PUBUTS='1' WHERE id='$id_kelomp
  * and open the template in the editor.
  */
 
-header("Location: data_kelompok.php?kodemk=$kodemk&kelas=$kelas&ta=$ta");
+header("Location: data_kelompok.php?kodemk=$kodemk&kelas=$kelas&ta=$ta&nodos=$nodos");
 
