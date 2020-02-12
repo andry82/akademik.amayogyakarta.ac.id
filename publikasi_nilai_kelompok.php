@@ -16,10 +16,13 @@ $id_kelompok = $dt_kelompok['id'];
 
 $data_kk = mysqli_query($mysqli, "SELECT * FROM kelompok_komputer kk, trnlm tr WHERE tr.NIMHSTRNLM=kk.nims AND kk.dosen_kelompok_id ='$id_kelompok' AND tr.KDKMKTRNLM ='$kodemk'");
 while ($data = mysqli_fetch_array($data_kk)) {
+    $id = $data['id'];
     $nim = $data['NIMHSTRNLM'];
     $nilai = $data['NILAI'];
-    $bobot = $data['BOBOT'];
-    mysqli_query($mysqli, "UPDATE  trnlm SET NLAKHTRNLM='$nilai', BOBOTTRNLM='$bobot' WHERE NIMHSTRNLM='$nim' AND KDKMKTRNLM='$kodemk'");
+    $bobot = $data['BOBOT'];?>
+        <?php echo $id; ?><br/>
+        <?php
+    mysqli_query($mysqli, "UPDATE  trnlm SET NLAKHTRNLM='$nilai', BOBOTTRNLM='$bobot' WHERE NIMHSTRNLM='$nim' AND KDKMKTRNLM='$kodemk' AND id='$id'");
 }
 mysqli_query($mysqli, "UPDATE dosen_kelompok SET PUBNILAI='1' WHERE id='$id_kelompok'");
 

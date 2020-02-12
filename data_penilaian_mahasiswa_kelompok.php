@@ -73,9 +73,9 @@
 
                         $mkkuliah = mysqli_query($mysqli, "SELECT * FROM tbkmk WHERE KDKMKTBKMK='$kdmk' AND THSMSTBKMK='$ta_lengkap'");
                         $datamkk = mysqli_fetch_array($mkkuliah);
-                        $data_uts = mysqli_query($mysqli, "SELECT * FROM dosen_kelompok WHERE KDMK='$kdmk' AND KLSMHS like '$kelas%' AND PUBUTS='1' AND THSMS='$ta_lengkap'");
+                        $data_uts = mysqli_query($mysqli, "SELECT * FROM dosen_kelompok WHERE KDMK='$kdmk' AND KLSMHS like '$kelas%' AND KLPKMHS='$kelompok' AND PUBUTS='1' AND THSMS='$ta_lengkap'");
                         $countuts = mysqli_num_rows($data_uts);
-                        $data_uas = mysqli_query($mysqli, "SELECT * FROM dosen_kelompok WHERE KDMK='$kdmk' AND KLSMHS like '$kelas%' AND PUBNILAI='1' AND THSMS='$ta_lengkap'");
+                        $data_uas = mysqli_query($mysqli, "SELECT * FROM dosen_kelompok WHERE KDMK='$kdmk' AND KLSMHS like '$kelas%' AND KLPKMHS='$kelompok' AND PUBNILAI='1' AND THSMS='$ta_lengkap'");
                         $countuas = mysqli_num_rows($data_uas);
                         ?>
                         MATA KULIAH : <?php echo $datamkk['NAKMKTBKMK']; ?><br/>
@@ -155,6 +155,7 @@
                                             <?php } ?>
                                         </td>
                                         <td class="col-lg-1"><input onkeyup="hitungNilai('<?php echo $nim ?>');" maxlength="3" id="presensi_<?php echo $nim ?>" class="form-control col-lg-1" type="text" name="presensi[]" value="<?php echo round(($jumlahabsen / 14) * 100) ?>" disabled></td>
+                                        <input type="hidden" name="presensi[]" id="presensi_<?php echo $nim ?>" value="<?php echo round(($jumlahabsen / 14) * 100) ?>" ></td>
                                         <?php if ($countuas != 0) {?>
                                         <td class="col-lg-1"><input onkeyup="hitungNilai('<?php echo $nim ?>');" maxlength="3" id="tugas_<?php echo $nim ?>" class="form-control col-lg-1" type="text" name="tugas[]" value="<?php echo $data['TUGAS']; ?>" disabled></td>
                                         <input type="hidden" name="tugas[]" id="tugas_<?php echo $nim ?>" value="<?php echo $data['TUGAS']; ?>" ></td>

@@ -118,14 +118,14 @@
                                                 <td>
                                                     <a href="data_penilaian_mahasiswa_agama.php?kodemk=<?php echo $data['KDMK']; ?>&kelas=<?php echo $kelas_huruf; ?>&ta=<?php echo $kelas_tahun; ?>&nodos=<?php echo $nomor_dosen; ?>"><span class="label label-success">PENILAIAN</span></a>&nbsp;
                                                     <?php if ($data['PUBUTS'] == "0") { ?>                                                            
-                                                        <a href="publikasi_nilai_uts.php?kodemk=<?php echo $data['KDMK']; ?>&nodos=<?php echo $nomor_dosen; ?>&kelas=<?php echo $kelas_huruf; ?>"><span class="label label-danger">NILAI UTS</span></a>
+                                                    <a href="publikasi_nilai_uts_agama.php?kodemk=<?php echo $data['KDMK']; ?>&nodos=<?php echo $nomor_dosen; ?>&kelas=<?php echo $kelas_huruf; ?>"><span class="label label-danger">NILAI UTS</span></a>
                                                     <?php } elseif ($data['PUBUTS'] == "1") { ?>
-                                                        <a href="batal_publikasi_nilai_uts.php?kodemk=<?php echo $data['KDMK']; ?>&nodos=<?php echo $nomor_dosen; ?>&kelas=<?php echo $kelas_huruf; ?>"><span class="label label-success">NILAI UTS</span></a>
+                                                        <a href="batal_publikasi_nilai_uts_agama.php?kodemk=<?php echo $data['KDMK']; ?>&nodos=<?php echo $nomor_dosen; ?>&kelas=<?php echo $kelas_huruf; ?>"><span class="label label-success">NILAI UTS</span></a>
                                                     <?php } ?>
                                                     <?php if ($data['PUBNILAI'] == "0") { ?>                                                            
-                                                        <a href="publikasi_nilai.php?kodemk=<?php echo $data['KDMK']; ?>&nodos=<?php echo $nomor_dosen; ?>&kelas=<?php echo $kelas_huruf; ?>"><span class="label label-danger">NILAI KHS</span></a>
+                                                        <a href="publikasi_nilai_agama.php?kodemk=<?php echo $data['KDMK']; ?>&nodos=<?php echo $nomor_dosen; ?>&kelas=<?php echo $kelas_huruf; ?>"><span class="label label-danger">NILAI KHS</span></a>
                                                     <?php } elseif ($data['PUBNILAI'] == "1") { ?>
-                                                        <a href="batal_publikasi_nilai.php?kodemk=<?php echo $data['KDMK']; ?>&nodos=<?php echo $nomor_dosen; ?>&kelas=<?php echo $kelas_huruf; ?>"><span class="label label-success">NILAI KHS</span></a>
+                                                        <a href="batal_publikasi_nilai_agama.php?kodemk=<?php echo $data['KDMK']; ?>&nodos=<?php echo $nomor_dosen; ?>&kelas=<?php echo $kelas_huruf; ?>"><span class="label label-success">NILAI KHS</span></a>
                                                     <?php } ?>
                                                 </td>
                                             </tr>

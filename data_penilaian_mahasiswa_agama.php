@@ -120,7 +120,7 @@
                                     }
                                     $data_uts = mysqli_query($mysqli, "SELECT * FROM dosen_pengajar WHERE KDMK='$kdmk' AND KLSMHS like '$kelas%' AND PUBUTS='1' AND THSMS='$ta_lengkap'");
                                     $countuts = mysqli_num_rows($data_uts);
-                                    $data_uas = mysqli_query($mysqli, "SELECT * FROM dosen_pengajar WHERE KDMK='$kdmk' AND KLSMHS like '$kelas%' AND PUBUTS='1' AND THSMS='$ta_lengkap'");
+                                    $data_uas = mysqli_query($mysqli, "SELECT * FROM dosen_pengajar WHERE KDMK='$kdmk' AND KLSMHS like '$kelas%' AND PUBNILAI='1' AND THSMS='$ta_lengkap'");
                                     $countuas = mysqli_num_rows($data_uas);
                                     while ($data = mysqli_fetch_array($res)) {
                                         $nim = $data['NIMHSTRNLM'];
@@ -158,12 +158,18 @@
                                         <td class="col-lg-1"><input onkeyup="hitungNilai('<?php echo $nim ?>');" maxlength="3" id="tugas_<?php echo $nim ?>" class="form-control col-lg-1" type="text" name="tugas[]" value="<?php echo $data['TUGAS']; ?>" ></td>
                                         <td class="col-lg-1"><input onkeyup="hitungNilai('<?php echo $nim ?>');" maxlength="3"id="keaktifan_<?php echo $nim ?>" class="form-control col-lg-1" type="text" name="keaktifan[]" value="<?php echo $data['KEAKTIFAN']; ?>" ></td>
                                         <?php if ($countuts != 0) { ?>
-                                            <td class="col-lg-1"><input onkeyup="hitungNilai('<?php echo $nim ?>');" maxlength="3" id="mid_<?php echo $nim ?>" class="form-control col-lg-1" type="text" name="mid[]" value="<?php echo $data['MID']; ?>" disabled></td>
-                                        <input type="hidden" name="mid[]" id="mid_<?php echo $nim ?>" value="<?php echo $data['MID']; ?>" ></td>
-                                    <?php } else { ?>
-                                        <td class="col-lg-1"><input onkeyup="hitungNilai('<?php echo $nim ?>');" maxlength="3" id="mid_<?php echo $nim ?>" class="form-control col-lg-1" type="text" name="mid[]" value="<?php echo $data['MID']; ?>" ></td>
-                                    <?php } ?>
-                                    <td class="col-lg-1"><input onkeyup="hitungNilai('<?php echo $nim ?>');" maxlength="3" id="uas_<?php echo $nim ?>" class="form-control col-lg-1" type="text" name="uas[]" value="<?php echo $data['UAS']; ?>" ></td>
+                                          <td class="col-lg-1"><input onkeyup="hitungNilai('<?php echo $nim ?>');" maxlength="3" id="mid_<?php echo $nim ?>" class="form-control col-lg-1" type="text" name="mid[]" value="<?php echo $data['MID']; ?>" disabled></td>
+                                          <input type="hidden" name="mid[]" id="mid_<?php echo $nim ?>" value="<?php echo $data['MID']; ?>" ></td>
+                                        <?php } else { ?>
+                                          <td class="col-lg-1"><input onkeyup="hitungNilai('<?php echo $nim ?>');" maxlength="3" id="mid_<?php echo $nim ?>" class="form-control col-lg-1" type="text" name="mid[]" value="<?php echo $data['MID']; ?>" ></td>
+                                        <?php } ?>
+                                        <?php if ($countuas != 0) { ?>
+                                          <td class="col-lg-1"><input onkeyup="hitungNilai('<?php echo $nim ?>');" maxlength="3" id="uas_<?php echo $nim ?>" class="form-control col-lg-1" type="text" name="uas[]" value="<?php echo $data['UAS']; ?>" disabled></td>
+                                          <input type="hidden" name="uas[]" id="uas_<?php echo $nim ?>" value="<?php echo $data['UAS']; ?>" ></td>
+                                        <?php } else { ?>
+                                         <td class="col-lg-1"><input onkeyup="hitungNilai('<?php echo $nim ?>');" maxlength="3" id="uas_<?php echo $nim ?>" class="form-control col-lg-1" type="text" name="uas[]" value="<?php echo $data['UAS']; ?>" ></td>
+                                        <?php } ?>
+                                    
                                     <td class="col-lg-1"><input id="angka_view_agama_<?php echo $nim ?>" class="form-control col-lg-1" type="text" value="<?php echo $data['TOTAL_AGAMA']; ?>" disabled></td>
                                     <td class="col-lg-1"><input id="huruf_view_agama_<?php echo $nim ?>" class="form-control col-lg-1" type="text" value="<?php echo $data['NILAI_AGAMA']; ?>" disabled></td>
 
