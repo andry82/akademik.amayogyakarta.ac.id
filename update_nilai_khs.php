@@ -17,6 +17,6 @@ for ($i = 0; $i < $jml_cek; $i++) {
     }elseif ($akhir[$i]=="E") {
         $bobot[$i]="0.00";
     }
-    mysqli_query($mysqli, "UPDATE  trnlm SET NLAKHTRNLM='$akhir[$i]',BOBOTTRNLM='$bobot[$i]' WHERE KDKMKTRNLM='$kodemk[$i]'");   
+    mysqli_query($mysqli, "UPDATE  trnlm SET NLAKHTRNLM='$akhir[$i]',BOBOTTRNLM='$bobot[$i]' WHERE KDKMKTRNLM='$kodemk[$i]' AND NIMHSTRNLM='$nim' AND THSMSTRNLM='$ta'");   
 }
 header("Location: cetak_khs.php?ta=$ta&nim=$nim");
