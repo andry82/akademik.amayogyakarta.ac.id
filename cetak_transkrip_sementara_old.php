@@ -1,8 +1,8 @@
 <?php
 session_start();
 include_once("config/config.php");
-$id_mhs = $_GET['nim'];
-$nim = $_GET['nim'];
+$id_mhs=$_GET['nim'];
+$nim=$_GET['nim'];
 ?>
 <html><head><title>Cetak Transkrip Akademik Sementara</title>
 
@@ -265,21 +265,19 @@ $nim = $_GET['nim'];
             $SP="1";
             $LALU="$LALUX$SP";
             }
-            $hasil3 = mysql_query("select NLIPSTRAKM,NLIPKTRAKM,SKSEMTRAKM from trakm where NIMHSTRAKM = '$id_mhs' and THSMSTRAKM='$LALU'");
+            $hasil3 = mysql_query("select NLIPSTRAKM,SKSEMTRAKM from trakm where NIMHSTRAKM = '$id_mhs' and THSMSTRAKM='$LALU'");
             $data3 = mysql_fetch_array($hasil3);
             $adalalu = mysql_num_rows($hasil3);
             if($adalalu<=0)
             {
-            $hasillalu = mysql_query("select THSMSTRAKM,NLIPSTRAKM,NLIPKTRAKM,SKSEMTRAKM from trakm where NIMHSTRAKM = '$id_mhs' order by THSMSTRAKM DESC limit 0,1");
+            $hasillalu = mysql_query("select THSMSTRAKM,NLIPSTRAKM,SKSEMTRAKM from trakm where NIMHSTRAKM = '$id_mhs' order by THSMSTRAKM DESC limit 0,1");
             $datalalu = mysql_fetch_array($hasillalu);
             $NLIPSTRAKM=$datalalu['NLIPSTRAKM'];
-            $NLIPKTRAKM=$datalalu['NLIPKTRAKM'];
             $SKSEMTRAKM=$datalalu['SKSEMTRAKM'];
             $THSMSTRAKMlalu=$datalalu['THSMSTRAKM'];
             }else
             {
             $NLIPSTRAKM=$data3['NLIPSTRAKM'];
-            $NLIPKTRAKM=$data3['NLIPKTRAKM'];
             $SKSEMTRAKM=$data3['SKSEMTRAKM'];
 
             }
@@ -390,9 +388,9 @@ $nim = $_GET['nim'];
                                                     <tr height="0">
                                                         <td colspan="4" align="center"><div style="font-family: Arial, Helvetica, sans-serif;
                                                                                             font-size: 21px;
-                                                                                            font-weight: bold;">DAFTAR NILAI SEMENTARA</div>
-                                                            <!--<div style="font-style: italic; font-family: Arial, Helvetica, sans-serif;
-                                                            font-size: 10px;"><i>List Of Grades</i></div>--><br/></td>
+                                                                                            font-weight: bold;">DAFTAR NILAI</div>
+                                                            <div style="font-style: italic; font-family: Arial, Helvetica, sans-serif;
+                                                                 font-size: 10px;"><i>List Of Grades</i></div></td>
                                                     </tr>
                                                     <!-- end : header -->
                                                     <?php
@@ -426,24 +424,24 @@ $nim = $_GET['nim'];
                                                     ?>
                                                     <tr>                                                        <td colspan="4">                                  
                                                             <?php
-                                                            include('identitas_transkrip_sementara.php');
+                                                            include('identitas_transkrip.php');
                                                             ?>			
                                                             <!-- end : tabel khs -->
                                                             <table style="margin-top: 5px; font-size: 10px;" class="tabelkhs" bgcolor="#000000" border="0" cellpadding="3" cellspacing="0" width="100%">
                                                                 <tbody><tr bgcolor="#ffffff" valign="middle">
                                                                         <th class="thl" width="2%">No.</th>
                                                                         <th class="thc" style="text-align: left;" width="23%">Nama Mata Kuliah</th>
-                                                                        <!--<th class="thk" style="border-top: 1px solid #000000;
-                border-bottom: 2px solid #000000; text-align: right;" width="23%">Subject</th>-->
+                                                                        <th class="thk" style="border-top: 1px solid #000000;
+                border-bottom: 2px solid #000000; text-align: right;" width="23%">Subject</th>
                                                                         <th class="thcb" width="5%">SKS/Credit</th>                                                                      
                                                                         <th class="thcb" width="5%">Nilai/Grades</th>
                                                                         <th class="thr" width="5%">Bobot/Weight</th>
                                                                     </tr>
                                                                     <? $color1 = "#fff" ?>
                                                                     <? $color2 = "#fff" ?>
-                                                                    <?php include('mktranskrip_sementara.php'); ?>
+                                                                    <?php include('mktranskrip.php'); ?>
                                                                     <tr bgcolor="#ffffff" valign="middle" style="border: 1px solid #000000; font-size: 11px;">
-                                                                        <td class="tdl" colspan="2" align="center" style="border-top: 2px solid;"><strong> 
+                                                                        <td class="tdl" colspan="3" align="center" style="border-top: 2px solid;"><strong> 
                                                                                 <?
                                                                                 //print($kdkonsen);
                                                                                 ?>
@@ -454,43 +452,21 @@ $nim = $_GET['nim'];
                                                                         <td class="tdr" align="center" style="border-top: 2px solid;"><strong><? print($totnasksipk2); ?></strong></td>
                                                                     </tr>                                                                    
                                                                 </tbody></table>
+                                                            <table border="0" style="font-size: 11px; width: 100%;">
+                                                                <tr><td width="30%"></td><td><br/><br/><b>Pengasahan</b> (ttd & stample) :<br/><i>Certification for this page</i></td><td></td></tr>
+                                                                <tr><td width="30%"></td><td></td><td><br/><b>Suliantoro, S.E., M.M.</b><br/><i>Head Of Study Program</i></td></tr>
+                                                            </table>
+                                                            <!-- end : tabel khs -->
+<br/>
+<br/>
+
                                                         </td>
                                                     </tr>
                                                 </tbody></table>
                                     </tr>
+                                    
+                                </tbody></table>			
 
-                                </tbody></table>
-                            <table border="0" style="font-size: 12px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
-                                <?php
-                                 if($NLIPKTRAKM >= '2.00' && $NLIPKTRAKM <= '2.75') {
-                                     $predikat = "Memuaskan";
-                                 }else if($NLIPKTRAKM >= 2.76 && $NLIPKTRAKM <= 3.50) {
-                                     $predikat = "Sangat Memuaskan";
-                                 }else if($NLIPKTRAKM >= 3.51 && $NLIPKTRAKM <= 4.00) {
-                                     $predikat = "Cum Loude";
-                                 }?>
-                                <tbody>        
-                                    <tr valign="top" style="font-weight: bold"><td width="10%">IPK</td><td width="1%">:</td><td width="890%"><?php echo $NLIPKTRAKM; ?></td></tr>
-                                    <tr valign="top" style="font-weight: bold"><td width="10%">Predikat</td><td width="1%">:</td><td width="89%"><?php  echo $predikat; ?></td></tr>
-                                </tbody>
-                            </table>
-                            <table border="0" style="font-size: 12px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
-                                <tbody>        
-                                    <tr valign="top"><td width="70%"></td>
-                                        <td width="30%">
-                                            Yogyakarta, <?php echo tanggal_indo(date('Y-m-d')); ?><br/>
-                                            Wakil Direktur I
-                                            <br/>
-                                            <br/>
-                                            <br/>
-                                            <br/>
-                                            Wahyudiono S.E., M.M
-                                            <br/>
-                                            <br/>
-                                            <br/>
-                                        </td></tr>
-                                </tbody>
-                            </table>
                         </div></td>
                 </tr></tbody></table>
 
