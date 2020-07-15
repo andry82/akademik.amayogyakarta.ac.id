@@ -467,7 +467,7 @@ $nim = $_GET['nim'];
                                  }else if($NLIPKTRAKM >= 2.76 && $NLIPKTRAKM <= 3.50) {
                                      $predikat = "Sangat Memuaskan";
                                  }else if($NLIPKTRAKM >= 3.51 && $NLIPKTRAKM <= 4.00) {
-                                     $predikat = "Cum Loude";
+                                     $predikat = "Cum Laude";
                                  }?>
                                 <tbody>        
                                     <tr valign="top" style="font-weight: bold"><td width="10%">IPK</td><td width="1%">:</td><td width="890%"><?php echo $NLIPKTRAKM; ?></td></tr>
@@ -484,7 +484,7 @@ $nim = $_GET['nim'];
                                             <br/>
                                             <br/>
                                             <br/>
-                                            Wahyudiono S.E., M.M
+                                            Wahyudiyono, S.E., M.M.
                                             <br/>
                                             <br/>
                                             <br/>
