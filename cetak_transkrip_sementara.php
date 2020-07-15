@@ -358,7 +358,7 @@ $nim = $_GET['nim'];
                 setPrint.document.write('<head>');
                 setPrint.document.write('<meta http-equiv="pragma" content="no-cache">');
                 setPrint.document.write("<title>TRANSKRIP AKADEMIK - <? print($nim); ?></title>");
-                setPrint.document.write('<link href="../stylesheet/cetak_transkrip_sementara.css" rel="stylesheet" type="text/css">');
+                setPrint.document.write('<link href="stylesheet/cetak_transkrip_sementara.css" rel="stylesheet" type="text/css">');
                 setPrint.document.write('</head>');
                 setPrint.document.write('<body onLoad="self.print()">');
                 setPrint.document.write(getDisplay);
