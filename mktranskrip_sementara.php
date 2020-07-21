@@ -99,7 +99,7 @@ $ipk2=number_format($ipk2,2);
     <? } ?>                                 
 </tr>
 <? $nomor2 = $no + 1; ?>
-<?php if ($nomor2 =='44'){ ?>
+<?php if ($nomor2 =='35'){ ?>
 </table>
 <table border="0" style="font-size: 12px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
     <tbody>        

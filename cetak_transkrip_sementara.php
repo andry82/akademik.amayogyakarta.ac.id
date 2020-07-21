@@ -483,7 +483,6 @@ $nim = $_GET['nim'];
                                             <br/>
                                             <br/>
                                             <br/>
-                                            <br/>
                                             Wahyudiyono, S.E., M.M.
                                             <br/>
                                             <br/>
