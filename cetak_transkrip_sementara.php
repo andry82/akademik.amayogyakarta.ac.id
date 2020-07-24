@@ -96,12 +96,12 @@ $nim = $_GET['nim'];
             .tabelkhs .tdl, .tdc{
                 border-left: 1px solid #000000;
                 background: none repeat scroll 0 0 white;
-                padding: 5px;
+                padding: 0px;
                 border-bottom: 1px solid black;
             }
             .tabelkhs .tdk{
                 background: none repeat scroll 0 0 white;
-                padding: 5px;
+                padding: 0px;
                 border-bottom: 1px solid black;
             }
             .tabelkhs .tdr{
@@ -389,7 +389,7 @@ $nim = $_GET['nim'];
                                                 <tbody>
                                                     <tr height="0">
                                                         <td colspan="4" align="center"><div style="font-family: Arial, Helvetica, sans-serif;
-                                                                                            font-size: 21px;
+                                                                                            font-size: 17px;
                                                                                             font-weight: bold;">DAFTAR NILAI SEMENTARA</div>
                                                             <!--<div style="font-style: italic; font-family: Arial, Helvetica, sans-serif;
                                                             font-size: 10px;"><i>List Of Grades</i></div>--><br/></td>

@@ -49,7 +49,7 @@ $ipk2=$totnasksipk2/$totsksipk2;
 $ipk2=number_format($ipk2,2); 
 }?>
 <tr style="background-color: <?= ($warna) ?>;"><td class="tdl" style="background: none repeat scroll 0 0 white;
-    padding: 5px;
+    padding: 3px;
     border-bottom: 1px solid black;" align="center"><? print($no + 1); ?></td>
 
     <?
@@ -57,12 +57,12 @@ $ipk2=number_format($ipk2,2);
     {
     ?>
     <td class="tdc" style="background: none repeat scroll 0 0 white;
-    padding: 5px;
+    padding: 3px;
     border-bottom: 1px solid black; text-align: left;"><i><? 
         $nama_mk = strtolower($namamk);
         print(ucwords($nama_mk)); ?></i> - <b><i>*) Ulang</i></b></td>
     <!--<td class="tdk" style="background: none repeat scroll 0 0 white;
-    padding: 5px;
+    padding: 3px;
     border-bottom: 1px solid black; font-style: italic; text-align: right;">
         <? 
         $nama_mk_en = strtolower($namamk_en);
@@ -72,29 +72,29 @@ $ipk2=number_format($ipk2,2);
     {
     ?>
     <td class="tdc" style="background: none repeat scroll 0 0 white;
-    padding: 5px;
+    padding: 3px;
     border-bottom: 1px solid black; text-align: left;">
         <? print($namamk); ?></td>
     <!--<td class="tdk" style="background: none repeat scroll 0 0 white;
-    padding: 5px;
+    padding: 3px;
     border-bottom: 1px solid black; font-style: italic; text-align: right;">
         <? print($namamk_en); ?></td>-->
     <?
     }
     ?>                                     
     <td class="tdc" style="background: none repeat scroll 0 0 white;
-    padding: 5px;
+    padding: 3px;
     border-bottom: 1px solid black;" align="center"><? print($sks2); ?></td>
     <td class="tdc" style="background: none repeat scroll 0 0 white;
-    padding: 5px;
+    padding: 3px;
     border-bottom: 1px solid black;" align="center"><? print($nilai2); ?></td>
     <? if($nasks2 == 0){ ?>
     <td class="tdc" style="background: none repeat scroll 0 0 white;
-    padding: 5px;
+    padding: 3px;
     border-bottom: 1px solid black;" align="center">&nbsp;-</td>
     <? }else{ ?>
     <td class="tdc" style="background: none repeat scroll 0 0 white;
-    padding: 5px;
+    padding: 3px;
     border-bottom: 1px solid black;" align="center"><? print($nasks2); ?></td>
     <? } ?>                                 
 </tr>
