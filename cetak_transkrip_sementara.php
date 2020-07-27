@@ -265,7 +265,7 @@ $nim = $_GET['nim'];
             $SP="1";
             $LALU="$LALUX$SP";
             }
-            $hasil3 = mysql_query("select NLIPSTRAKM,NLIPKTRAKM,SKSEMTRAKM from trakm where NIMHSTRAKM = '$id_mhs' and THSMSTRAKM='$LALU'");
+            $hasil3 = mysql_query("select NLIPSTRAKM,NLIPKTRAKM,SKSEMTRAKM from trakm where NIMHSTRAKM = '$id_mhs' and THSMSTRAKM='$tahunajaran'");
             $data3 = mysql_fetch_array($hasil3);
             $adalalu = mysql_num_rows($hasil3);
             if($adalalu<=0)
