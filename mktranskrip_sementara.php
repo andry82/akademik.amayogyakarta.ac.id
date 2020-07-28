@@ -101,6 +101,7 @@ $ipk2=number_format($ipk2,2);
 <? $nomor2 = $no + 1; ?>
 <?php if ($nomor2 =='35'){ ?>
 </table>
+<br/>
 <table border="0" style="font-size: 12px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
     <tbody>        
         <tr valign="top" style="font-weight: bold"><td width="18%">Nama Mahasiswa</td><td width="1%">:</td><td width="30%"><? print($nama_mahasiswa); ?></td><td width="20%">Nomor Induk Mahasiswa</td><td width="1%">:</td><td width="15%"><? print(strtoupper($nomor_induk_mahasiswa)); ?></td></tr>

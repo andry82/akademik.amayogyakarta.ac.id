@@ -136,6 +136,13 @@ $nim = $_GET['nim'];
 
             $hasilall = mysql_query($qall);
             $data = mysql_fetch_array($hasilall);
+            $nomor_induk_mahasiswa = strtoupper($data['NIMHSMSMHS']);
+            $nama_mahasiswa = strtoupper($data['NMMHSMSMHS']);
+            $tptlhr_mahasiswa = strtoupper($data['TPLHRMSMHS']);
+            $tgllhr_mahasiswa = strtoupper($data['TGLHRMSMHS']);
+            $transkrip = "SELECT * from transkrip where nim='$nomor_induk_mahasiswa'";
+            $transkrip2 = mysql_query($transkrip);
+            $transkrip3 = mysql_fetch_array($transkrip2);
 
 
             $hasilv = mysql_query("select k.nmkonsen,k.kdkonsen from msmhs m,konsentrasi k where m.NIMHSMSMHS = '$id_mhs' and k.kdkonsen=m.kdkonsen");
@@ -462,16 +469,17 @@ $nim = $_GET['nim'];
                                 </tbody></table>
                             <table border="0" style="font-size: 12px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
                                 <?php
-                                 if($NLIPKTRAKM >= '2.00' && $NLIPKTRAKM <= '2.75') {
-                                     $predikat = "Memuaskan";
-                                 }else if($NLIPKTRAKM >= 2.76 && $NLIPKTRAKM <= 3.50) {
-                                     $predikat = "Sangat Memuaskan";
-                                 }else if($NLIPKTRAKM >= 3.51 && $NLIPKTRAKM <= 4.00) {
-                                     $predikat = "Cum Laude";
-                                 }?>
+                                if ($NLIPKTRAKM >= '2.00' && $NLIPKTRAKM <= '2.75') {
+                                    $predikat = "Memuaskan";
+                                } else if ($NLIPKTRAKM >= 2.76 && $NLIPKTRAKM <= 3.50) {
+                                    $predikat = "Sangat Memuaskan";
+                                } else if ($NLIPKTRAKM >= 3.51 && $NLIPKTRAKM <= 4.00) {
+                                    $predikat = "Cum Laude";
+                                }
+                                ?>
                                 <tbody>        
                                     <tr valign="top" style="font-weight: bold"><td width="10%">IPK</td><td width="1%">:</td><td width="890%"><?php echo $NLIPKTRAKM; ?></td></tr>
-                                    <tr valign="top" style="font-weight: bold"><td width="10%">Predikat</td><td width="1%">:</td><td width="89%"><?php  echo $predikat; ?></td></tr>
+                                    <tr valign="top" style="font-weight: bold"><td width="10%">Predikat</td><td width="1%">:</td><td width="89%"><?php echo $predikat; ?></td></tr>
                                 </tbody>
                             </table>
                             <table border="0" style="font-size: 12px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
