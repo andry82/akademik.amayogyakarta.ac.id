@@ -319,7 +319,7 @@ $status = $_GET['sp'];
                         <!--<input class="tombol" value="Penilaian" onclick="window.location.href = 'index.php?route=nilai_nim&ta=<? print($ta); ?>&nim=<? print($nim); ?>&prodi=E~61401'" type="button">
                         <input class="tombol" value="KRS" onclick="window.location.href = 'cetak_krs_ok.php?&ta=<? print($ta); ?>&nim=<? print($nim); ?>&sp=<? print($status); ?>'" type="button">-->
                         <input class="tombol" id="btncetakkhs" value="Cetak KHS" onclick="printOut();" type="button">
-                        <input class="tombol" id="btnpenilaiankhs" value="Penilaian KHS" onclick="window.location.href='penilaian_khs.php?ta=<? print($ta); ?>&nim=<? print($nim); ?>'" type="button">
+                        <input class="tombol" id="btnpenilaiankhs" value="Penilaian KHS" onclick="window.location.href = 'penilaian_khs.php?ta=<? print($ta); ?>&nim=<? print($nim); ?>'" type="button">
                         <input class="tombol" value="Generate IPK" onclick="window.location.href = 'generate_khs_ipk.php?&ta=<? print($ta); ?>&nim=<? print($nim); ?>&kelas=<? print($kelas); ?>'" type="button">
                     </div>
                     <?}else{?>
@@ -328,7 +328,7 @@ $status = $_GET['sp'];
                         <!--<input class="tombol" value="Penilaian" onclick="window.location.href = 'index.php?route=nilai_nim&ta=<? print($ta); ?>&nim=<? print($nim); ?>&prodi=E~61401'" type="button">
                         <input class="tombol" value="KRS" onclick="window.location.href = 'cetak_krs_ok.php?&ta=<? print($ta); ?>&nim=<? print($nim); ?>'" type="button">-->
                         <input class="tombol" id="btncetakkhs" value="Cetak KHS" onclick="printOut();" type="button">
-                        <input class="tombol" id="btnpenilaiankhs" value="Penilaian KHS" onclick="window.location.href='penilaian_khs.php?ta=<? print($ta); ?>&nim=<? print($nim); ?>'" type="button">
+                        <input class="tombol" id="btnpenilaiankhs" value="Penilaian KHS" onclick="window.location.href = 'penilaian_khs.php?ta=<? print($ta); ?>&nim=<? print($nim); ?>'" type="button">
                         <input class="tombol" value="Generate IPK" onclick="window.location.href = 'generate_khs_ipk.php?&ta=<? print($ta); ?>&nim=<? print($nim); ?>&kelas=<? print($kelas); ?>'" type="button">
                     </div>
                     <?}?></div>
@@ -525,12 +525,13 @@ $status = $_GET['sp'];
                                                                 $NLAKHTRNLM=$datat['NLAKHTRNLM'];
                                                                 $bobot= $datat["BOBOTTRNLM"];
                                                                 $ulang=$datat['ulang'];
-                                                                $totmk2= "SELECT m.SKSMKTBKMK,m.NAKMKTBKMK,m.SEMESTBKMK from tbkmk m where m.KDKMKTBKMK='$KDKMKTRNLM' and m.THSMSTBKMK='$THSMSTRNLM' and m.KDPSTTBKMK='$JUR' and (kdkonsen='u' or kdkonsen='$kdkonsen')";
+                                                                $totmk2= "SELECT m.SKSMKTBKMK,m.NAKMKTBKMK,m.SEMESTBKMK,m.NILAIDTBKMK from tbkmk m where m.KDKMKTBKMK='$KDKMKTRNLM' and m.THSMSTBKMK='$THSMSTRNLM' and m.KDPSTTBKMK='$JUR' and (kdkonsen='u' or kdkonsen='$kdkonsen')";
                                                                 $hasilmk2 = mysql_query($totmk2);
 
                                                                 $datamk2 = mysql_fetch_array($hasilmk2);
                                                                 $sks2= $datamk2["SKSMKTBKMK"];
-                                                                $namamk= $datamk2["NAKMKTBKMK"];
+                                                                $namamk= $datamk2["NAKMKTBKMK"];                                                                
+                                                                $nilaid= $datamk2["NILAIDTBKMK"];
 
                                                                 $SEMESTBKMK= $datamk2["SEMESTBKMK"];
                                                                 $totalambil=$totalambil+$sks2;
@@ -551,27 +552,43 @@ $status = $_GET['sp'];
 
                                                                 ?>
                                                                 <tr bgcolor="#ffffff">
-                                                                    <? if($NLAKHTRNLM=="D" or $NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <? if($NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <td class="tdl" align="center"><span style="color: red;"><? print("$no"); ?></span></td>
+                                                                    <? }elseif ($NLAKHTRNLM=="D" AND $nilaid=="1") { ?>
                                                                     <td class="tdl" align="center"><span style="color: red;"><? print("$no"); ?></span></td>
                                                                     <? }else{ ?>
                                                                     <td class="tdl" align="center"><? print("$no"); ?></td>
                                                                     <? } ?>
-                                                                    <? if($NLAKHTRNLM=="D" or $NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <? if($NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <td class="tdc" align="center"><span style="color: red;"><? print("$KDKMKTRNLM"); ?></span></td>
+                                                                    <? }elseif ($NLAKHTRNLM=="D" AND $nilaid=="1") { ?>
                                                                     <td class="tdc" align="center"><span style="color: red;"><? print("$KDKMKTRNLM"); ?></span></td>
                                                                     <? }else{ ?>
                                                                     <td class="tdc" align="center"><? print("$KDKMKTRNLM"); ?></td>
                                                                     <? } ?>
-                                                                    <? if($NLAKHTRNLM=="D" or $NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <? if($NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <td class="tdc"><span style="color: red;"><i><? print(strtoupper($namamk)); ?></i> - <b><i>*) Ulang</i></b></span></td>
+                                                                    <? }elseif ($NLAKHTRNLM=="D" AND $nilaid=="1") { ?>
                                                                     <td class="tdc"><span style="color: red;"><i><? print(strtoupper($namamk)); ?></i> - <b><i>*) Ulang</i></b></span></td>
                                                                     <? }else{ ?>
                                                                     <td class="tdc"><? print(strtoupper($namamk)); ?></td>
                                                                     <? } ?>
-                                                                    <? if($NLAKHTRNLM=="D" or $NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <? if($NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <td class="tdc" align="center"><span style="color: red;"><? print($sks2); ?></span></td>
+                                                                    <? }elseif ($NLAKHTRNLM=="D" AND $nilaid=="1") { ?>
                                                                     <td class="tdc" align="center"><span style="color: red;"><? print($sks2); ?></span></td>
                                                                     <? }else{ ?>
                                                                     <td class="tdc" align="center"><? print($sks2); ?></td>	
                                                                     <? } ?>
-                                                                    <? if($NLAKHTRNLM=="D" or $NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <? if($NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <td class="tdc" align="center">
+                                                                        <? if($NLAKHTRNLM==""){ ?>
+                                                                        <span style="color: red;">0</span>
+                                                                        <? } else {?>
+                                                                        <span style="color: red;"><? print($NLAKHTRNLM); ?></span>
+                                                                        <?}?>
+                                                                    </td>
+                                                                    <? }elseif ($NLAKHTRNLM=="D" AND $nilaid=="1") { ?>
                                                                     <td class="tdc" align="center">
                                                                         <? if($NLAKHTRNLM==""){ ?>
                                                                         <span style="color: red;">0</span>
@@ -588,12 +605,16 @@ $status = $_GET['sp'];
                                                                         <?}?>
                                                                     </td>	
                                                                     <? } ?>
-                                                                    <? if($NLAKHTRNLM=="D" or $NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <? if($NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <td class="tdc" align="center"><span style="color: red;"><? print($bobot); ?></span></td>
+                                                                    <? }elseif ($NLAKHTRNLM=="D" AND $nilaid=="1") { ?>
                                                                     <td class="tdc" align="center"><span style="color: red;"><? print($bobot); ?></span></td>
                                                                     <? }else{ ?>
                                                                     <td class="tdc" align="center"><? print($bobot); ?></td>	
                                                                     <? } ?>
-                                                                    <? if($NLAKHTRNLM=="D" or $NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <? if($NLAKHTRNLM=="T" or $NLAKHTRNLM=="E" or $NLAKHTRNLM=="0" or $NLAKHTRNLM=="") { ?>
+                                                                    <td class="tdr" align="right"><span style="color: red;"><? print($nasks); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+                                                                    <? }elseif ($NLAKHTRNLM=="D" AND $nilaid=="1") { ?>
                                                                     <td class="tdr" align="right"><span style="color: red;"><? print($nasks); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
                                                                     <? }else{ ?>
                                                                     <td class="tdr" align="right"><? print($nasks); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>	
