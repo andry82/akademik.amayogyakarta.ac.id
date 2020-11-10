@@ -107,6 +107,9 @@ $ta = substr($tahunajar, 0, 4);
                 <a href="data_nilai_tahun.php"><i class="fa fa-list fa-fw"></i> DATA NILAI TAHUN</a>
             </li>    
             <li>
+                <a href="data_ips.php"><i class="fa fa-list fa-fw"></i> DATA IPS TERTINGGI</a>
+            </li>    
+            <li>
                 <a href="data_penilaian.php"><i class="fa fa-list fa-fw"></i> DATA PENILAIAN</a>
             </li>    
             <li>
