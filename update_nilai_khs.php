@@ -5,7 +5,8 @@ $ta = $_POST['ta'];
 $jml_cek = count($_POST['kodemk']);
 for ($i = 0; $i < $jml_cek; $i++) { 
     $kodemk[$i] = $_POST['kodemk'][$i];
-    $akhir[$i] = $_POST['nilai'][$i];
+    $total[$i] = $_POST['total'][$i];
+    $akhir[$i] = $_POST['huruf'][$i];
     if ($akhir[$i]=="A"){
         $bobot[$i]="4.00";
     }elseif ($akhir[$i]=="B") {
@@ -17,6 +18,6 @@ for ($i = 0; $i < $jml_cek; $i++) {
     }elseif ($akhir[$i]=="E") {
         $bobot[$i]="0.00";
     }
-    mysqli_query($mysqli, "UPDATE  trnlm SET NLAKHTRNLM='$akhir[$i]',BOBOTTRNLM='$bobot[$i]' WHERE KDKMKTRNLM='$kodemk[$i]' AND NIMHSTRNLM='$nim' AND THSMSTRNLM='$ta'");   
+    mysqli_query($mysqli, "UPDATE  trnlm SET TOTAL='$total[$i]',NLAKHTRNLM='$akhir[$i]',BOBOTTRNLM='$bobot[$i]' WHERE KDKMKTRNLM='$kodemk[$i]' AND NIMHSTRNLM='$nim' AND THSMSTRNLM='$ta'");
 }
 header("Location: cetak_khs.php?ta=$ta&nim=$nim");

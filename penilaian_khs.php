@@ -94,9 +94,10 @@
                                     <tr>
                                         <th style="text-align: center" width="5%">NO</th>
                                         <th style="text-align: center" width="10%">KODE MK</th>
-                                        <th style="text-align: center" width="75%">NAMA MK</th>
-                                        <th style="text-align: center" width="5%">NILAI</th>
+                                        <th style="text-align: center" width="65%">NAMA MK</th>
+                                        <th style="text-align: center" width="10%">NILAI</th>
                                         <th style="text-align: center" width="5%">HURUF</th>
+                                        <th style="text-align: center" width="5%">BOBOT</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -112,9 +113,13 @@
                                         <td><?php echo $kdmk; ?></td>
                                         <td><?php echo strtoupper($datakhs['NAKMKTBKMK']); ?></td>
                                         <td style="text-align: center">
-                                            <input maxlength="1" class="form-control col-lg-1" type="text" name="nilai[]" value="<?php echo $datakhs['NLAKHTRNLM']; ?>" onkeyup="this.value = this.value.toUpperCase()" >
+                                            <input onkeyup="hitungNilai('<?php echo $kdmk ?>');" maxlength="3" id="nilai_<?php echo $kdmk ?>" class="form-control col-lg-1" type="text" name="total[]" value="<?php echo $datakhs['TOTAL']; ?>" onkeyup="this.value = this.value.toUpperCase()" >
                                         </td>
-                                        <td style="text-align: center"><?php echo $datakhs['BOBOTTRNLM']; ?></td>
+                                    <input id="huruf_<?php echo $kdmk ?>" type="hidden" name="huruf[]" value="<?php echo $datakhs['NLAKHTRNLM']; ?>">
+                                    <input id="bobot_<?php echo $kdmk ?>" type="hidden" name="bobot[]" value="<?php echo $datakhs['BOBOTTRNLM']; ?>">
+
+                                    <td style="text-align: center"><input id="huruf_view_<?php echo $kdmk ?>" class="form-control col-lg-1" type="text" value="<?php echo $datakhs['NLAKHTRNLM']; ?>" disabled></td>
+                                    <td style="text-align: center"><input id="bobot_view<?php echo $kdmk ?>" class="form-control col-lg-1" type="text" value="<?php echo $datakhs['BOBOTTRNLM']; ?>" disabled></td>
                                     </tr>
                                 <?php } ?>
                                 </tbody>
@@ -130,6 +135,37 @@
             <!-- /#page-wrapper -->
 
         </div>
+        <script type="text/javascript">
+            function hitungNilai(kode_mk) {
+                nilai = document.getElementById('nilai_' + kode_mk).value;
+                if (nilai < 0 || nilai > 100) {
+                    alert("Nilai Hanya dari 0 - 100");
+                    document.getElementById('nilai_' + kode_mk).value = "";
+                    nilai = '0';
+                }
+                pembulatan = Math.round(nilai);
+                if (pembulatan >= '85') {
+                    huruf = "A";
+                    bobot = "4.00";
+                } else if (pembulatan >= '70') {
+                    huruf = "B";
+                    bobot = "3.00";
+                } else if (pembulatan >= '55') {
+                    huruf = "C";
+                    bobot = "2.00";
+                } else if (pembulatan >= '40') {
+                    huruf = "D";
+                    bobot = "1.00";
+                } else {
+                    huruf = "E";
+                    bobot = "0.00";
+                }
+                document.getElementById('huruf_view_' + kode_mk).value = huruf;
+                document.getElementById('huruf_' + kode_mk).value = huruf;
+                document.getElementById('bobot_view' + kode_mk).value = bobot;
+                document.getElementById('bobot_' + kode_mk).value = bobot;
+            }
+        </script>
         <!-- /#wrapper -->
         <!-- jQuery -->
         <script src="vendor/jquery/jquery.min.js"></script>
