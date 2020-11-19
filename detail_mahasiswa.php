@@ -68,7 +68,7 @@
 //getting id from url
                         $nim = $_GET['nim'];
 //selecting data associated with this particular id
-                        $res = mysqli_query($mysqli, "SELECT * FROM msmhs m, kelasparalel_mhs km, kelasparalel k, msdos md WHERE m.NIMHSMSMHS=km.nimhs AND km.nmkelas=k.namakelas AND k.nodos=md.NODOSMSDOS AND m.NIMHSMSMHS='$nim'");
+                        $res = mysqli_query($mysqli, "SELECT * FROM msmhs m, kelasparalel_mhs km, kelasparalel k, msdos md, konsentrasi ks WHERE m.NIMHSMSMHS=km.nimhs AND km.nmkelas=k.namakelas AND k.nodos=md.NODOSMSDOS AND m.kdkonsen=ks.kdkonsen AND m.NIMHSMSMHS='$nim'");
                         while ($data = mysqli_fetch_array($res)) {
                             $ketarangan_revisi = $data['KET_REV'];
                             $nik = $data['NIKMSMHS'];
@@ -128,7 +128,7 @@
                             $ijazah = $data['ijazah_sma'];
                             $akte_kelahiran = $data['akte_kelahiran'];
                             $status_data = $data['tgl_update'];
-                            $konsentrasi = $data['kdkonsen'];
+                            $konsentrasi = $data['nmkonsen'];
                             $thmskmhs = $data['TAHUNMSMHS'];
                             $statusmhs = $data['STMHSMSMHS'];
                             $stat_data = $data['STATUSDATA'];
@@ -181,15 +181,9 @@
                                 <td><?php echo $nim; ?></td>
                             </tr>
                             <tr>
-                                <th class="col-lg-3">KONSENTRASI</th>
+                                <th class="col-lg-3">PRODI / KONSENTRASI</th>
                                 <td>
-                                    <?php if ($konsentrasi == 'MRS') { ?>
-                                        D3 - MANAJEMEN ADMINISTRASI RUMAH SAKIT
-                                    <?php } elseif ($konsentrasi == 'MOF') { ?>
-                                        D3 - MANAJEMEN ADMINISTRASI OBAT DAN FARMASI
-                                    <?php } elseif ($konsentrasi == 'MTU') { ?>
-                                        D3 - MANAJEMEN ADMINISTRASI TRANSPOTASI UDARA
-                                    <?php } ?>
+                                    D3 - <span style="text-transform: uppercase"><?php echo 'MANAJEMEN' ?> / <?php echo $konsentrasi; ?></span>
                                 </td>
                             </tr>
                             <tr>

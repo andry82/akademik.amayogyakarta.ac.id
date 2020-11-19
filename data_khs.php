@@ -65,16 +65,16 @@
                     </div>
                     <div class="col-lg-12">
                         <?php
-                        $mhs = mysqli_query($mysqli, "SELECT * FROM  msmhs m, kelasparalel_mhs kpm WHERE m.NIMHSMSMHS=kpm.nimhs AND m.NIMHSMSMHS=$nim");
+                        $mhs = mysqli_query($mysqli, "SELECT * FROM  msmhs m, kelasparalel_mhs kpm, konsentrasi k WHERE m.NIMHSMSMHS=kpm.nimhs AND m.kdkonsen=k.kdkonsen AND m.NIMHSMSMHS=$nim");
                         while ($datamhs = mysqli_fetch_array($mhs)) {
                             $nama_mahasiswa = $datamhs['NMMHSMSMHS'];
                             $thmskmhs = $datamhs['TAHUNMSMHS'];
                             $nama_kelas = $datamhs['nmkelas'];
+                            $konsentrasi = $datamhs['nmkonsen'];
                         }
                         $kelas_splite = explode("-", $nama_kelas);
                         $knons = explode("/", $nama_kelas);
                         $kelas = explode("/", $nama_kelas);
-                        $konsentrasi = $knons[1];
                         $semester = (($ta - $thmskmhs) * 2) + $smtgg;
                         if ($smtgg == '2') {
                             $smt = 1;
@@ -88,13 +88,7 @@
                             <tr><th>NIM</th><td><?php echo $nim; ?></td></tr>
                             <tr><th>NAMA MAHASISWA</th><td><?php echo $nama_mahasiswa; ?></td></tr>
                             <tr><th>KELAS</th><td><?php echo $kelas[0]; ?><?php echo $semester ?></td></tr>
-                            <tr><th>KONSENTRASI</th><td><?php if ($konsentrasi == 'MRS') { ?>
-                                        MANAJEMEN RUMAH SAKIT
-                                    <?php } elseif ($konsentrasi == 'MTU') { ?>
-                                        MANAJEMEN TRANSPORTASI UDARA
-                                    <?php } elseif ($konsentrasi == 'MOF') { ?>
-                                        MANAJEMEN OBAT DAN FARMASI
-                                    <?php } ?></td></tr>
+                            <tr><th>KONSENTRASI</th><td style="text-transform: uppercase"><?php echo $konsentrasi; ?></td></tr>
                         </table>
                         <a href="data_bimbingan_krs.php?nim=<?php echo $nim; ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-arrow-left fa-fw"></i> KEMBALI</a>
                         <?php
