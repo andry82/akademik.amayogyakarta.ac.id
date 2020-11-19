@@ -174,7 +174,7 @@
                         <table width="100%" class="table table-bordered">                                                     
                             <tr>
                                 <th class="col-lg-3">FOTO MAHASISWA</th>
-                                <td><img src="../images/foto_mhs/<?php echo $nim ?>.JPG" width="200px"></td>
+                                <td><img src="http://simaster.amayogyakarta.ac.id/images/foto_mhs/<?php echo $nim ?>.JPG" width="200px"></td>
                             </tr>
                             <tr>
                                 <th class="col-lg-3">NOMOR INDUK</th>
