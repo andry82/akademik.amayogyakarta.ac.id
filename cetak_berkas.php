@@ -93,7 +93,7 @@
                                         <td style="text-align: center">
                                             <a href="cetak_krs.php?ta=<?php echo $ta_lengkap?>&nim=<?php echo $nim ?>" class="btn btn-default btn-xs"><i class="fa fa-print fa-fw"></i> KRS</a>
                                             <a href="cetak_khs.php?ta=<?php echo $ta_lengkap?>&nim=<?php echo $nim ?>" class="btn btn-default btn-xs"><i class="fa fa-print fa-fw"></i> KHS</a>
-                                            <a href="cetak_transkrip_sementara.php?nim=<?php echo $nim ?>" class="btn btn-default btn-xs"><i class="fa fa-print fa-fw"></i> TRANSKRIP SEMENTARA</a>
+                                            <a href="cetak_transkrip_sementara.php?ta=<?php echo $ta_lengkap?>&nim=<?php echo $nim ?>" class="btn btn-default btn-xs"><i class="fa fa-print fa-fw"></i> TRANSKRIP SEMENTARA</a>
                                         </td>
                                     </tr>
                                     <?php

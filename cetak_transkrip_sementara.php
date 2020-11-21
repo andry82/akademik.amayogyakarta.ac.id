@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once("config/config.php");
+$tahunajaran = $_GET['ta'];
 $id_mhs = $_GET['nim'];
 $nim = $_GET['nim'];
 ?>
@@ -129,7 +130,6 @@ $nim = $_GET['nim'];
         <div id="navigasi">
             <? $aturan = mysql_query("select statuskrs,tahun,prodi,ipkaktif from config");
             $dataaturan = mysql_fetch_array($aturan);
-            $tahunajaran=$dataaturan['tahun'];
             $ipkaktif=$dataaturan['ipkaktif'];	
 
             $qall = "SELECT *,DATE_FORMAT(m.TGLHRMSMHS,'%d-%m-%Y') AS tgl_lahir FROM msmhs m,kelasparalel_mhs k where k.nimhs=m.NIMHSMSMHS and m.NIMHSMSMHS='$nim'";		
@@ -143,8 +143,35 @@ $nim = $_GET['nim'];
             $transkrip = "SELECT * from transkrip where nim='$nomor_induk_mahasiswa'";
             $transkrip2 = mysql_query($transkrip);
             $transkrip3 = mysql_fetch_array($transkrip2);
+            
+            $CEKXX=substr($ta,0,4);
+            $CEKXX2=substr($ta,4,1);
+            $CEKXXX=$CEKXX+1;
+            $P=substr($ta,4,1);
+            if(($P%2)==1)
+            {
+            $SS="GANJIL";
+            $LALUX=($CEKXX-1);
+            $SP="2";
+            $LALU="$LALUX$SP";
+            $ASLI="GENAP";
 
+            $NEXTX=$CEKXX;
+            $SPX="2";
+            $NEXT="$NEXTX$SPX";
+            }else
+            {
+            $SS="GENAP";
+            $LALUX=$CEKXX;
+            $SP="1";
+            $LALU="$LALUX$SP";
+            $ASLI="GANJIL";
 
+            $NEXTX=($CEKXX+1);
+            $SPX="1";
+            $NEXT="$NEXTX$SPX";
+            }
+            
             $hasilv = mysql_query("select k.nmkonsen,k.kdkonsen from msmhs m,konsentrasi k where m.NIMHSMSMHS = '$id_mhs' and k.kdkonsen=m.kdkonsen");
             $datav = mysql_fetch_array($hasilv);
             $hasil2 = mysql_query("select nmkelas from kelasparalel_mhs where nimhs = '$id_mhs'");
@@ -309,200 +336,200 @@ $nim = $_GET['nim'];
             }
             ?>
             <form name="posN" method="post">
-                <!-- BEGIN : navigasi NIM -->
-                <font face="Lucida Sans">
-                <a href="cetak_transkrip_sementara.php?nim=<? print($nim-1); ?>" id="klik" style="text-decoration: none;"><? print($nim-1); ?> <font size="5">&#8592;</font></a>&nbsp;&nbsp;&nbsp;
-                <input id="currPos" name="currPos" value="<? print($nim); ?>" size="10" maxlength="10" style="text-align: center; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px;" type="text">
-                &nbsp;&nbsp;&nbsp;
-                <a href="cetak_transkrip_sementara.php?nim=<? print($nim+1); ?>" id="klik" style="text-decoration: none;"><font size="5">&#8594;</font> <? print($nim+1); ?></a>
-                <input name="go" value="GO" style="display: none;" onclick="return executeNewNim();" type="submit">
+                    <!-- BEGIN : navigasi NIM -->
+                    <font face="Lucida Sans">
+                    <a href="cetak_transkrip_sementara.php?nim=<? print($nim-1); ?>" id="klik" style="text-decoration: none;"><? print($nim-1); ?> <font size="5">&#8592;</font></a>&nbsp;&nbsp;&nbsp;
+                    <input id="currPos" name="currPos" value="<? print($nim); ?>" size="10" maxlength="10" style="text-align: center; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px;" type="text">
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="cetak_transkrip_sementara.php?nim=<? print($nim+1); ?>" id="klik" style="text-decoration: none;"><font size="5">&#8594;</font> <? print($nim+1); ?></a>
+                    <input name="go" value="GO" style="display: none;" onclick="return executeNewNim();" type="submit">
 
-                <!-- END : navigasi NIM -->
+                    <!-- END : navigasi NIM -->
 
 
-                <div id="alertMsg" align="left"></div>
-                <hr noshade="noshade">
-                <!--<iframe name="simpankhs" id="iframesimpankhs" frameborder="0" height="0" scrolling="no" width="500"></iframe>
-                <div id="pesanSimpanIframe" align="left"></div>-->
-                </font>
-                <div style="text-align: left;">
-                    <input class="tombol" value="Kembali" onclick="window.location.href = 'cetak_berkas.php'" type="button">
-                    <input class="tombol" id="btncetakkhs" value="Cetak Transkrip Sementara" onclick="printOut();" type="button">
-                    <!--<input class="tombol" value="Surat Keterangan Lulus" onclick="window.location.href = 'cetak_surat_keterangan_lulus.php?nim=<? print($nim); ?>&nodosmsdos=<? print($nodosmsdos)?>&nippdakademik=<? print($nippdakademik); ?>&pdakademik=<? print($pdakademik);?>'" type="button">-->
+                    <div id="alertMsg" align="left"></div>
+                    <hr noshade="noshade">
+                    <!--<iframe name="simpankhs" id="iframesimpankhs" frameborder="0" height="0" scrolling="no" width="500"></iframe>
+                    <div id="pesanSimpanIframe" align="left"></div>-->
+                    </font>
+                    <div style="text-align: left;">
+                        <input class="tombol" value="Kembali" onclick="window.location.href = 'cetak_berkas.php'" type="button">
+                        <input class="tombol" id="btncetakkhs" value="Cetak Transkrip Sementara" onclick="printOut();" type="button">
+                        <!--<input class="tombol" value="Surat Keterangan Lulus" onclick="window.location.href = 'cetak_surat_keterangan_lulus.php?nim=<? print($nim); ?>&nodosmsdos=<? print($nodosmsdos)?>&nippdakademik=<? print($nippdakademik); ?>&pdakademik=<? print($pdakademik);?>'" type="button">-->
 
-                </div></div>
-        <script language="javascript" type="text/javascript">
+                    </div></div>
+                    <script language="javascript" type="text/javascript">
 
-            //window.open('','simpankhs');
+                        //window.open('','simpankhs');
 
-            function executeNewNim() {
-                var newNim = document.getElementById('currPos');
-                var alertMsg = document.getElementById('alertMsg');
-                if (newNim.value != "<? print($nim); ?>") {
-                    document.posN.action = '?ta=<? print($ta); ?>&nim=' + newNim.value;
-                } else {
-                    alertMsg.innerHTML = '<br>Masukkan NIM yang berbeda. Kemudian tekan ENTER!<br>';
-                    return false;
-                }
-            }
+                        function executeNewNim() {
+                            var newNim = document.getElementById('currPos');
+                            var alertMsg = document.getElementById('alertMsg');
+                            if (newNim.value != "<? print($nim); ?>") {
+                                document.posN.action = '?ta=<? print($ta); ?>&nim=' + newNim.value;
+                            } else {
+                                alertMsg.innerHTML = '<br>Masukkan NIM yang berbeda. Kemudian tekan ENTER!<br>';
+                                return false;
+                            }
+                        }
 
-            function executeNewThsms() {
-                var newThsms = document.getElementById('currPosTHSMS');
-                var alertMsg = document.getElementById('alertMsg');
-                if (newThsms.value != "<? print($ta); ?>") {
-                    document.posT.action = '?ta=' + newThsms.value + '&nim=<? print($nim); ?>';
-                } else {
-                    alertMsg.innerHTML = '<br>Masukkan Tahun Ajaran yang berbeda. Kemudian tekan ENTER!<br>';
-                    return false;
-                }
-            }
+                        function executeNewThsms() {
+                            var newThsms = document.getElementById('currPosTHSMS');
+                            var alertMsg = document.getElementById('alertMsg');
+                            if (newThsms.value != "<? print($ta); ?>") {
+                                document.posT.action = '?ta=' + newThsms.value + '&nim=<? print($nim); ?>';
+                            } else {
+                                alertMsg.innerHTML = '<br>Masukkan Tahun Ajaran yang berbeda. Kemudian tekan ENTER!<br>';
+                                return false;
+                            }
+                        }
 
-            function printOut() {
-                var getDisplay = document.getElementById("printarea").innerHTML;
-                var setPrint = window.open("", "printed", "width=700,height=570,menubar=0,scrollbars=1,statusbar=0");
-                setPrint.document.open();
-                setPrint.document.write('<html>');
-                setPrint.document.write('<head>');
-                setPrint.document.write('<meta http-equiv="pragma" content="no-cache">');
-                setPrint.document.write("<title>TRANSKRIP AKADEMIK - <? print($nim); ?></title>");
-                setPrint.document.write('<link href="stylesheet/cetak_transkrip_sementara.css" rel="stylesheet" type="text/css">');
-                setPrint.document.write('</head>');
-                setPrint.document.write('<body onLoad="self.print()">');
-                setPrint.document.write(getDisplay);
-                setPrint.document.write('</body></html>');
-                setPrint.document.close();
-                window.close("", "printed");
-            }
+                        function printOut() {
+                            var getDisplay = document.getElementById("printarea").innerHTML;
+                            var setPrint = window.open("", "printed", "width=700,height=570,menubar=0,scrollbars=1,statusbar=0");
+                            setPrint.document.open();
+                            setPrint.document.write('<html>');
+                            setPrint.document.write('<head>');
+                            setPrint.document.write('<meta http-equiv="pragma" content="no-cache">');
+                            setPrint.document.write("<title>TRANSKRIP AKADEMIK - <? print($nim); ?></title>");
+                            setPrint.document.write('<link href="stylesheet/cetak_transkrip_sementara.css" rel="stylesheet" type="text/css">');
+                            setPrint.document.write('</head>');
+                            setPrint.document.write('<body onLoad="self.print()">');
+                            setPrint.document.write(getDisplay);
+                            setPrint.document.write('</body></html>');
+                            setPrint.document.close();
+                            window.close("", "printed");
+                        }
 
-            function numeralsOnly(evt) {
-                evt = (evt) ? evt : event;
-                var charCode = (evt.charCode) ? evt.charCode : ((evt.keyCode) ? evt.keyCode :
-                        ((evt.which) ? evt.which : 0));
-                if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                    return false;
-                }
-                return true;
-            }
+                        function numeralsOnly(evt) {
+                            evt = (evt) ? evt : event;
+                            var charCode = (evt.charCode) ? evt.charCode : ((evt.keyCode) ? evt.keyCode :
+                                    ((evt.which) ? evt.which : 0));
+                            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                                return false;
+                            }
+                            return true;
+                        }
 
-        </script>
-        <table id="contentKHS" border="0" bordercolor="#0000cc" cellpadding="0" cellspacing="0">
-            <tbody><tr><td style="padding: 0.5cm;">
-                        <div id="printarea" class="paperA4">
-                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                <tbody><tr valign="top">
-                                        <td height="10%">
-                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                <!-- header -->
-                                                <tbody>
-                                                    <tr height="0">
-                                                        <td colspan="4" align="center"><div style="font-family: Arial, Helvetica, sans-serif;
-                                                                                            font-size: 17px;
-                                                                                            font-weight: bold;">DAFTAR NILAI SEMENTARA</div>
-                                                            <!--<div style="font-style: italic; font-family: Arial, Helvetica, sans-serif;
-                                                            font-size: 10px;"><i>List Of Grades</i></div>--><br/></td>
-                                                    </tr>
-                                                    <!-- end : header -->
-                                                    <?php
-                                                    switch (date('m', strtotime($data['TGLHRMSMHS']))) {
-                                                        case "1" : $bulan = "Januari";
-                                                            break;
-                                                        case "2" : $bulan = "Februari";
-                                                            break;
-                                                        case "3" : $bulan = "Maret";
-                                                            break;
-                                                        case "4" : $bulan = "April";
-                                                            break;
-                                                        case "5" : $bulan = "Mei";
-                                                            break;
-                                                        case "6" : $bulan = "Juni";
-                                                            break;
-                                                        case "7" : $bulan = "Juli";
-                                                            break;
-                                                        case "8" : $bulan = "Agustus";
-                                                            break;
-                                                        case "9" : $bulan = "September";
-                                                            break;
-                                                        case "10" : $bulan = "Oktober";
-                                                            break;
-                                                        case "11" : $bulan = "November";
-                                                            break;
-                                                        case "12" : $bulan = "Desember";
-                                                            break;
-                                                    }
-                                                    $indDate = "" . date("d") . " $bulan" . date(" Y");
-                                                    ?>
-                                                    <tr>                                                        <td colspan="4">                                  
-                                                            <?php
-                                                            include('identitas_transkrip_sementara.php');
-                                                            ?>			
-                                                            <!-- end : tabel khs -->
-                                                            <table style="margin-top: 5px; font-size: 10px;" class="tabelkhs" bgcolor="#000000" border="0" cellpadding="3" cellspacing="0" width="100%">
-                                                                <tbody><tr bgcolor="#ffffff" valign="middle">
-                                                                        <th class="thl" width="2%">No.</th>
-                                                                        <th class="thc" style="text-align: left;" width="23%">Nama Mata Kuliah</th>
-                                                                        <!--<th class="thk" style="border-top: 1px solid #000000;
-                border-bottom: 2px solid #000000; text-align: right;" width="23%">Subject</th>-->
-                                                                        <th class="thcb" width="5%">SKS/Credit</th>                                                                      
-                                                                        <th class="thcb" width="5%">Nilai/Grades</th>
-                                                                        <th class="thr" width="5%">Bobot/Weight</th>
-                                                                    </tr>
-                                                                    <? $color1 = "#fff" ?>
-                                                                    <? $color2 = "#fff" ?>
-                                                                    <?php include('mktranskrip_sementara.php'); ?>
-                                                                    <tr bgcolor="#ffffff" valign="middle" style="border: 1px solid #000000; font-size: 11px;">
-                                                                        <td class="tdl" colspan="2" align="center" style="border-top: 2px solid;"><strong> 
-                                                                                <?
-                                                                                //print($kdkonsen);
-                                                                                ?>
+                    </script>
+                    <table id="contentKHS" border="0" bordercolor="#0000cc" cellpadding="0" cellspacing="0">
+                        <tbody><tr><td style="padding: 0.5cm;">
+                                    <div id="printarea" class="paperA4">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tbody><tr valign="top">
+                                                    <td height="10%">
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                            <!-- header -->
+                                                            <tbody>
+                                                                <tr height="0">
+                                                                    <td colspan="4" align="center"><div style="font-family: Arial, Helvetica, sans-serif;
+                                                                                                        font-size: 17px;
+                                                                                                        font-weight: bold;">DAFTAR NILAI SEMENTARA</div>
+                                                                        <!--<div style="font-style: italic; font-family: Arial, Helvetica, sans-serif;
+                                                                        font-size: 10px;"><i>List Of Grades</i></div>--><br/></td>
+                                                                </tr>
+                                                                <!-- end : header -->
+                                                                <?php
+                                                                switch (date('m', strtotime($data['TGLHRMSMHS']))) {
+                                                                    case "1" : $bulan = "Januari";
+                                                                        break;
+                                                                    case "2" : $bulan = "Februari";
+                                                                        break;
+                                                                    case "3" : $bulan = "Maret";
+                                                                        break;
+                                                                    case "4" : $bulan = "April";
+                                                                        break;
+                                                                    case "5" : $bulan = "Mei";
+                                                                        break;
+                                                                    case "6" : $bulan = "Juni";
+                                                                        break;
+                                                                    case "7" : $bulan = "Juli";
+                                                                        break;
+                                                                    case "8" : $bulan = "Agustus";
+                                                                        break;
+                                                                    case "9" : $bulan = "September";
+                                                                        break;
+                                                                    case "10" : $bulan = "Oktober";
+                                                                        break;
+                                                                    case "11" : $bulan = "November";
+                                                                        break;
+                                                                    case "12" : $bulan = "Desember";
+                                                                        break;
+                                                                }
+                                                                $indDate = "" . date("d") . " $bulan" . date(" Y");
+                                                                ?>
+                                                                <tr>                                                        <td colspan="4">                                  
+                                                                        <?php
+                                                                        include('identitas_transkrip_sementara.php');
+                                                                        ?>			
+                                                                        <!-- end : tabel khs -->
+                                                                        <table style="margin-top: 5px; font-size: 10px;" class="tabelkhs" bgcolor="#000000" border="0" cellpadding="3" cellspacing="0" width="100%">
+                                                                            <tbody><tr bgcolor="#ffffff" valign="middle">
+                                                                                    <th class="thl" width="2%">No.</th>
+                                                                                    <th class="thc" style="text-align: left;" width="23%">Nama Mata Kuliah</th>
+                                                                                    <!--<th class="thk" style="border-top: 1px solid #000000;
+                            border-bottom: 2px solid #000000; text-align: right;" width="23%">Subject</th>-->
+                                                                                    <th class="thcb" width="5%">SKS/Credit</th>                                                                      
+                                                                                    <th class="thcb" width="5%">Nilai/Grades</th>
+                                                                                    <th class="thr" width="5%">Bobot/Weight</th>
+                                                                                </tr>
+                                                                                <? $color1 = "#fff" ?>
+                                                                                <? $color2 = "#fff" ?>
+                                                                                <?php include('mktranskrip_sementara.php'); ?>
+                                                                                <tr bgcolor="#ffffff" valign="middle" style="border: 1px solid #000000; font-size: 11px;">
+                                                                                    <td class="tdl" colspan="2" align="center" style="border-top: 2px solid;"><strong> 
+                                                                                            <?
+                                                                                            //print($kdkonsen);
+                                                                                            ?>
 
-                                                                                J U M L A H</strong></td>                                                                                
-                                                                        <td class="tdc" align="center" style="border-top: 2px solid;"><? print($totsksipk2); ?></td>
-                                                                        <td class="tdc" align="center" style="border-top: 2px solid;"><strong>&nbsp;</strong></td>
-                                                                        <td class="tdr" align="center" style="border-top: 2px solid;"><strong><? print($totnasksipk2); ?></strong></td>
-                                                                    </tr>                                                                    
-                                                                </tbody></table>
-                                                        </td>
-                                                    </tr>
-                                                </tbody></table>
-                                    </tr>
+                                                                                            J U M L A H</strong></td>                                                                                
+                                                                                    <td class="tdc" align="center" style="border-top: 2px solid;"><? print($totsksipk2); ?></td>
+                                                                                    <td class="tdc" align="center" style="border-top: 2px solid;"><strong>&nbsp;</strong></td>
+                                                                                    <td class="tdr" align="center" style="border-top: 2px solid;"><strong><? print($totnasksipk2); ?></strong></td>
+                                                                                </tr>                                                                    
+                                                                            </tbody></table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody></table>
+                                                </tr>
 
-                                </tbody></table>
-                            <table border="0" style="font-size: 12px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
-                                <?php
-                                if ($NLIPKTRAKM >= '2.00' && $NLIPKTRAKM <= '2.75') {
-                                    $predikat = "Memuaskan";
-                                } else if ($NLIPKTRAKM >= 2.76 && $NLIPKTRAKM <= 3.50) {
-                                    $predikat = "Sangat Memuaskan";
-                                } else if ($NLIPKTRAKM >= 3.51 && $NLIPKTRAKM <= 4.00) {
-                                    $predikat = "Cum Laude";
-                                }
-                                ?>
-                                <tbody>        
-                                    <tr valign="top" style="font-weight: bold"><td width="10%">IPK</td><td width="1%">:</td><td width="890%"><?php echo $NLIPKTRAKM; ?></td></tr>
-                                    <tr valign="top" style="font-weight: bold"><td width="10%">Predikat</td><td width="1%">:</td><td width="89%"><?php echo $predikat; ?></td></tr>
-                                </tbody>
-                            </table>
-                            <table border="0" style="font-size: 12px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
-                                <tbody>        
-                                    <tr valign="top"><td width="70%"></td>
-                                        <td width="30%">
-                                            Yogyakarta, <?php echo tanggal_indo(date('Y-m-d')); ?><br/>
-                                            Wakil Direktur I
-                                            <br/>
-                                            <br/>
-                                            <br/>
-                                            Wahyudiyono, S.E., M.M.
-                                            <br/>
-                                            <br/>
-                                            <br/>
-                                        </td></tr>
-                                </tbody>
-                            </table>
-                        </div></td>
-                </tr></tbody></table>
+                                            </tbody></table>
+                                        <table border="0" style="font-size: 12px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
+                                            <?php
+                                            if ($NLIPKTRAKM >= '2.00' && $NLIPKTRAKM <= '2.75') {
+                                                $predikat = "Memuaskan";
+                                            } else if ($NLIPKTRAKM >= 2.76 && $NLIPKTRAKM <= 3.50) {
+                                                $predikat = "Sangat Memuaskan";
+                                            } else if ($NLIPKTRAKM >= 3.51 && $NLIPKTRAKM <= 4.00) {
+                                                $predikat = "Cum Laude";
+                                            }
+                                            ?>
+                                            <tbody>        
+                                                <tr valign="top" style="font-weight: bold"><td width="10%">IPK</td><td width="1%">:</td><td width="890%"><?php echo $NLIPKTRAKM; ?></td></tr>
+                                                <tr valign="top" style="font-weight: bold"><td width="10%">Predikat</td><td width="1%">:</td><td width="89%"><?php echo $predikat; ?></td></tr>
+                                            </tbody>
+                                        </table>
+                                        <table border="0" style="font-size: 12px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
+                                            <tbody>        
+                                                <tr valign="top"><td width="70%"></td>
+                                                    <td width="30%">
+                                                        Yogyakarta, <?php echo tanggal_indo(date('Y-m-d')); ?><br/>
+                                                        Wakil Direktur I
+                                                        <br/>
+                                                        <br/>
+                                                        <br/>
+                                                        Wahyudiyono, S.E., M.M.
+                                                        <br/>
+                                                        <br/>
+                                                        <br/>
+                                                    </td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div></td>
+                            </tr></tbody></table>
 
 
 
         <!--<script>window.open('cetakkhs_simpan.php?ta=20082&kdpti=053030&kdjen=C&kdpst=10104&nim=14081330&nlips=2.63636363636&sksem=22&nlipk=&skstt=&nodos=&sksmaks=','simpankhs');</script>-->
 
-    </body></html>
+                    </body></html>
