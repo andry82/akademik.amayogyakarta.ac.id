@@ -172,7 +172,7 @@ $nim = $_GET['nim'];
             $NEXT="$NEXTX$SPX";
             }
             
-            $hasilv = mysql_query("select k.nmkonsen,k.kdkonsen from msmhs m,konsentrasi k where m.NIMHSMSMHS = '$id_mhs' and k.kdkonsen=m.kdkonsen");
+            $hasilv = mysql_query("select k.nmkonsen,k.kdkonsen, m.STMHSMSMHS from msmhs m,konsentrasi k where m.NIMHSMSMHS = '$id_mhs' and k.kdkonsen=m.kdkonsen");
             $datav = mysql_fetch_array($hasilv);
             $hasil2 = mysql_query("select nmkelas from kelasparalel_mhs where nimhs = '$id_mhs'");
             $data2 = mysql_fetch_array($hasil2);
@@ -180,6 +180,7 @@ $nim = $_GET['nim'];
             $nmkonsen=$datav['nmkonsen'];
             $KELAS=$data2['nmkelas'];
             $kdkonsen=$datav['kdkonsen'];
+            $status_mhs=$datav['STMHSMSMHS'];
             $pecahkelas=explode("/",$KELAS); 
             $kelas1=strtoupper($pecahkelas[0]); // buat huruf besar semua 
             $kelas2=strtoupper($pecahkelas[1]);
