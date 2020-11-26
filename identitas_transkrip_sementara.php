@@ -35,7 +35,7 @@
                 }
                 ?></td>
             <td width="1%">:</td>
-            <td width="15%">
+            <td width="15%" style="text-transform: uppercase">
                 <?php if ($status_mhs=='A'){
                     echo $KONSEN;
                 }elseif ($status_mhs=='L'){
