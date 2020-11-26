@@ -495,7 +495,7 @@ $nim = $_GET['nim'];
                                                 </tr>
 
                                             </tbody></table>
-                                        <table border="0" style="font-size: 12px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
+                                        <table border="0" style="font-size: 10px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
                                             <?php
                                             if ($NLIPKTRAKM >= '2.00' && $NLIPKTRAKM <= '2.75') {
                                                 $predikat = "Memuaskan";

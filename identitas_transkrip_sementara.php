@@ -1,4 +1,4 @@
-<table border="0" style="font-size: 12px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
+<table border="0" style="font-size: 10px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
     <tbody>
         <!-- Huruf Kecil -->
         <?        
