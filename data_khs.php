@@ -95,12 +95,12 @@
                         $count_sia = mysqli_query($sia, "SELECT * FROM trnlm WHERE NIMHSTRNLM='$nim' AND THSMSTRNLM='$tahun'");
                         $jumlah_sia = mysqli_num_rows($count_sia);
                         if ($jumlah_sia > 0){?>
-                        <a href="import_nilai_sia.php?nim=<?php echo $nim; ?>&tahun=<?php echo $tahun ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-download fa-fw"></i> NILAI SIA</a>
+                        <a href="import/import_nilai_sia.php?nim=<?php echo $nim; ?>&tahun=<?php echo $tahun ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-download fa-fw"></i> NILAI SIA</a>
                         <?php }
                         $count_simakpro = mysqli_query($simakpro, "SELECT * FROM rtrnlm WHERE nimhstrnlm='$nim' AND thsmstrnlm='$tahun'");
                         $jumlah_simakpro = mysqli_num_rows($count_simakpro);
                         if ($jumlah_simakpro > 0){?>
-                        <a href="import_nilai_simakpro.php?nim=<?php echo $nim; ?>&tahun=<?php echo $tahun ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-download fa-fw"></i> NILAI SIMAKPRO</a>
+                        <a href="import/import_nilai_simakpro.php?nim=<?php echo $nim; ?>&tahun=<?php echo $tahun ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-download fa-fw"></i> NILAI SIMAKPRO</a>
                         <?php } ?>
                         <br/><br/>             
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">

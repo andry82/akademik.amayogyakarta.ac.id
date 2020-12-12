@@ -116,6 +116,7 @@
                             </tbody>
                         </table>
                         <a href="generate_ipk.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> GENERATE IPK</a>
+                        <a href="import/generate_trakm.php?nim=<?php echo $nim ?>" class="btn btn-primary" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> GENERATE TRAKM</a>
                         <br/><br/>
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
