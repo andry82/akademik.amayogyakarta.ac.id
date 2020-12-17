@@ -4,7 +4,7 @@ $result = mysqli_query($mysqli, "SELECT * FROM msmhs WHERE STMHSMSMHS='A' AND NI
 $no = 1;
 while ($data = mysqli_fetch_array($result)) { 
 $nim = $data['NIMHSMSMHS'];
-$result_sp = mysqli_query($mysqli_simakpro, "SELECT * FROM rtrkrs WHERE nimhstrkrs='$nim'");
+$result_sp = mysqli_query($mysqli_simakpro, "SELECT * FROM rtrkrs  WHERE nimhstrkrs='$nim'");
 while ($data_sp = mysqli_fetch_array($result_sp)) {
     $tahun = $data_sp['thsmstrkrs'];
     $kode_mk = $data_sp['kdkmktrkrs'];
