@@ -117,7 +117,7 @@
                                 $bln = 'UnKnown';
                             }break;
                     }
-                   
+
                     $tanggalIndonesia = $tgl . " " . $bln . " " . $thn;
                     return $tanggalIndonesia;
                 }
@@ -131,22 +131,38 @@
                             <thead>
                                 <tr>
                                     <th class="col-lg-1">NIM</th>
-                                    <th class="col-lg-7">NAMA MAHASISWA</th>
-                                    <th class="col-lg-3">KELAS</th>
-                                    <th class="col-lg-1">JUMALAH SKS</th>
+                                    <th class="col-lg-6">NAMA MAHASISWA</th>
+                                    <th class="col-lg-1">KELAS</th>                                    
+                                    <th class="col-lg-1">D</th>
+                                    <th class="col-lg-1">E</th>
+                                    <th class="col-lg-1">TOTAL</th>
+                                    <th class="col-lg-1">SKS</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $res = mysqli_query($mysqli, "SELECT * FROM trakm t, msmhs m, kelasparalel_mhs km WHERE t.NIMHSTRAKM=km.nimhs AND t.NIMHSTRAKM=m.NIMHSMSMHS AND t.SKSTTTRAKM='112' AND t.THSMSTRAKM='$ta_lengkap'");
+                                $res = mysqli_query($mysqli, "SELECT * FROM trakm t, msmhs m, kelasparalel_mhs km WHERE t.NIMHSTRAKM=km.nimhs AND t.NIMHSTRAKM=m.NIMHSMSMHS AND t.SKSTTTRAKM>='91' AND m.STMHSMSMHS='A' AND t.THSMSTRAKM='$ta_lengkap'");
                                 while ($d = mysqli_fetch_array($res)) {
-                                    $thmskmhs = $d['TAHUNMSMHS']; 
+                                    $nim = $d['NIMHSTRAKM'];
+                                    $thmskmhs = $d['TAHUNMSMHS'];
+                                    $pecah_kelas = explode("/", $d['nmkelas']);
                                     ?>
                                     <tr>
                                         <td class="col-lg-1"><?php echo $d['NIMHSTRAKM']; ?></td>
-                                        <td class="col-lg-5"><?php echo $d['NMMHSMSMHS']; ?></td>
-                                        <td class="col-lg-3"><?php echo (($ta - $thmskmhs) * 2) + $smtgg; ?></td>
-                                        <td class="col-lg-3"><?php echo $d['SKSTTTRAKM']; ?></td>
+                                        <td class="col-lg-6"><?php echo $d['NMMHSMSMHS']; ?></td>
+                                        <td class="col-lg-1"><?php echo $pecah_kelas[0]; ?><?php echo (($ta - $thmskmhs) * 2) + $smtgg; ?></td>
+                                        <?php
+                                        $total_mk = mysqli_query($mysqli, "SELECT * FROM trnlm WHERE NIMHSTRNLM='$nim'");
+                                        $count_mk = mysqli_num_rows($total_mk);
+                                        $total_D = mysqli_query($mysqli, "SELECT * FROM trnlm WHERE NIMHSTRNLM='$nim' AND NLAKHTRNLM='D'");
+                                        $count_D = mysqli_num_rows($total_D);
+                                        $total_E = mysqli_query($mysqli, "SELECT * FROM trnlm WHERE NIMHSTRNLM='$nim' AND NLAKHTRNLM='E'");
+                                        $count_E = mysqli_num_rows($total_E);
+                                        ?>
+                                        <td class="col-lg-1"><?php echo $count_D; ?> MK</td>
+                                        <td class="col-lg-1"><?php echo $count_E; ?> MK</td>
+                                        <td class="col-lg-1"><?php echo $count_mk; ?> MK</td>
+                                        <td class="col-lg-1"><?php echo $d['SKSTTTRAKM']; ?> SKS</td>
                                     </tr>
                                     <?php
                                 }
