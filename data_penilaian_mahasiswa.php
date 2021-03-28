@@ -83,9 +83,9 @@
                         <?php
                         $tahun = $_GET['ta'];
                         $tahun_masuk = "20$tahun";
-                        $a = substr($ta_lengkap, 2, 2);
+                       $a = substr($ta_lengkap, 2, 2);
                         $smtgg = substr($ta_lengkap, 4, 1);
-                        echo ($a - $tahun) + $smtgg;
+                        echo (($a - $tahun) * 2) + $smtgg;
                         if ($kelompok != "") {
                             ?><br/>
                             KELOMPOK : <?php echo $kelompok ?>
@@ -118,7 +118,7 @@
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    $res = mysqli_query($mysqli, "SELECT * FROM trnlm t, msmhs m, kelasparalel_mhs k WHERE t.NIMHSTRNLM=m.NIMHSMSMHS AND t.NIMHSTRNLM=k.nimhs AND t.THSMSTRNLM='$ta_lengkap' AND t.KDKMKTRNLM='$kdmk' AND m.TAHUNMSMHS='$tahun_masuk' AND nmkelas like '$kelas%' ORDER BY m.TAHUNMSMHS DESC, m.NMMHSMSMHS ASC");
+                                    $res = mysqli_query($mysqli, "SELECT * FROM trnlm t, msmhs m, kelasparalel_mhs k WHERE t.NIMHSTRNLM=m.NIMHSMSMHS AND t.NIMHSTRNLM=k.nimhs AND t.THSMSTRNLM='$ta_lengkap' AND t.KDKMKTRNLM='$kdmk' AND nmkelas like '$kelas%' ORDER BY  t.NIMHSTRNLM ASC");
                                     while ($data = mysqli_fetch_array($res)) {
                                         $nim = $data['NIMHSTRNLM'];
                                         ?>                                   

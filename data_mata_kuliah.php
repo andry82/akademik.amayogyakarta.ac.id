@@ -144,7 +144,7 @@
                                                     <?php
                                                     $ta = substr($data['THSMS'], 2, 2);
                                                     $smtgg = substr($data['THSMS'], 4, 1);
-                                                    echo ($kelas_tahun - $ta) + $smtgg;
+                                                    echo (($ta - $kelas_tahun) * 2) + $smtgg;
                                                     ?></td>
                                                 <td class="col-lg-2" style="text-align: center;">
                                                     <?php if ($model_pengajaran == 'KELOMPOK') { ?>
