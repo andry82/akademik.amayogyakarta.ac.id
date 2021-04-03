@@ -53,7 +53,7 @@ $ipk2=number_format($ipk2,2);
     border-bottom: 1px solid black;" align="center"><? print($no + 1); ?></td>
 
     <?
-    if($nilai2=="D" or $nilai2=="T" or $nilai2=="E" or $nilai2=="0")
+    if($nilai2=="T" or $nilai2=="E" or $nilai2=="0")
     {
     ?>
     <td class="tdc" style="background: none repeat scroll 0 0 white;
@@ -61,12 +61,6 @@ $ipk2=number_format($ipk2,2);
     border-bottom: 1px solid black; text-align: left;"><i><? 
         $nama_mk = strtolower($namamk);
         print(ucwords($nama_mk)); ?></i> - <b><i>*) Ulang</i></b></td>
-    <!--<td class="tdk" style="background: none repeat scroll 0 0 white;
-    padding: 3px;
-    border-bottom: 1px solid black; font-style: italic; text-align: right;">
-        <? 
-        $nama_mk_en = strtolower($namamk_en);
-        print(ucwords($nama_mk_en)); ?></td>-->
     <?
     }else
     {
@@ -75,10 +69,6 @@ $ipk2=number_format($ipk2,2);
     padding: 3px;
     border-bottom: 1px solid black; text-align: left;">
         <? print($namamk); ?></td>
-    <!--<td class="tdk" style="background: none repeat scroll 0 0 white;
-    padding: 3px;
-    border-bottom: 1px solid black; font-style: italic; text-align: right;">
-        <? print($namamk_en); ?></td>-->
     <?
     }
     ?>                                     
