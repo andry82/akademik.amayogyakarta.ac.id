@@ -111,6 +111,7 @@
                                     <th width="65%">MATA KULIAH</th>
                                     <th width="5%" style="text-align: center">SKS</th>
                                     <th width="10%" style="text-align: center">NILAI</th>
+                                    <th width="10%" style="text-align: center">HURUF</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -124,6 +125,7 @@
                                         <td style="text-align: center"><?php echo $data['SEMESTBKMK']; ?></td>
                                         <td><?php echo $data['KDKMKTRNLM']; ?> - <?php echo $data['NAKMKTBKMK']; ?></td>
                                         <td style="text-align: center"><?php echo $data['SKSMKTBKMK']; ?></td>
+                                        <td style="text-align: center"><?php echo $data['TOTAL']; ?></td>
                                         <td style="text-align: center"><?php echo $data['NLAKHTRNLM']; ?></td>
                                     </tr>  
     <?php $total_sks += $data['SKSMKTBKMK'];
@@ -131,6 +133,7 @@
                                 <tr>
                                     <th style="text-align: center" colspan="2"> TOTAL SKS DIAMBIL</th>
                                     <th style="text-align: center"><?php echo $total_sks; ?></th>
+                                    <th style="text-align: center"></th>
                                     <th style="text-align: center"></th>
                                 </tr>
                             </tbody>

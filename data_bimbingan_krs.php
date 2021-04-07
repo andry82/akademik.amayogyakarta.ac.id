@@ -117,15 +117,17 @@
                         </table>
                         <a href="import/trnlm.php?nim=<?php echo $nim ?>" class="btn btn-primary" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> GENERATE TRLNLM</a>
                         <a href="import/generate_trakm.php?nim=<?php echo $nim ?>" class="btn btn-primary" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> GENERATE TRAKM</a>
+                        <a href="import/import_nilai_simakpro_nim.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> IMPORT NILAI</a>
                         <a href="generate_ipk.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> GENERATE IPK</a>
                         <br/><br/>
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
                                     <th width="5%">SMT</th>
-                                    <th width="65%">MATA KULIAH</th>
+                                    <th width="55%">MATA KULIAH</th>
                                     <th width="5%" style="text-align: center">SKS</th>
                                     <th width="10%" style="text-align: center">NILAI</th>
+                                    <th width="10%" style="text-align: center">HURUD</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -139,6 +141,7 @@
                                         <td style="text-align: center"><?php echo $data['SEMESTBKMK']; ?></td>
                                         <td><?php echo $data['KDKMKTRNLM']; ?> - <?php echo $data['NAKMKTBKMK']; ?></td>
                                         <td style="text-align: center"><?php echo $data['SKSMKTBKMK']; ?></td>
+                                        <td style="text-align: center"><?php echo $data['TOTAL']; ?></td>
                                         <td style="text-align: center"><?php echo $data['NLAKHTRNLM']; ?></td>
                                     </tr>  
     <?php $total_sks += $data['SKSMKTBKMK'];
@@ -146,6 +149,7 @@
                                 <tr>
                                     <th style="text-align: center" colspan="2"> TOTAL SKS DIAMBIL SEMESTER LALU</th>
                                     <th style="text-align: center"><?php echo $total_sks; ?></th>
+                                    <th style="text-align: center"></th>
                                     <th style="text-align: center"></th>
                                 </tr>
                             </tbody>
