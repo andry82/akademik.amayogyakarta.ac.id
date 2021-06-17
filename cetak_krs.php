@@ -514,7 +514,6 @@ $nim=$_GET['nim'];
                                                                 $ulang=$datat['ulang'];
                                                                 $totmk2= "SELECT m.NODOSTBKMK,m.SKSMKTBKMK,m.NAKMKTBKMK,m.SEMESTBKMK from tbkmk m where m.KDKMKTBKMK='$KDKMKTRNLM' and m.THSMSTBKMK='$THSMSTRNLM' and m.KDPSTTBKMK='$JUR' and (kdkonsen='u' or kdkonsen='$kdkonsen')";
                                                                 $hasilmk2 = mysql_query($totmk2);
-
                                                                 $datamk2 = mysql_fetch_array($hasilmk2);
                                                                 $sks2= $datamk2["SKSMKTBKMK"];
                                                                 $namamk= $datamk2["NAKMKTBKMK"];

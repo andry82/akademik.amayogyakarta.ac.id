@@ -116,6 +116,9 @@ $ta = substr($tahunajar, 0, 4);
                 <a href="data_calon_wisuda.php"><i class="fa fa-list fa-fw"></i> DATA CALON WISUDA</a>
             </li>    
             <li>
+                <a href="presensi_yudisium.php"><i class="fa fa-list fa-fw"></i> PRESENSI YUDISIUM</a>
+            </li>    
+            <li>
                 <a href="data_wisuda.php"><i class="fa fa-list fa-fw"></i> DATA WISUDA</a>
             </li>    
             <li>

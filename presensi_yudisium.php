@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>DATA WISUDA | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
+        <title>PRESENSI YUDISIUM | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h4 class="page-header"><i class="fa fa-user fa-fw"></i> DATA WISUDA</h4>
+                        <h4 class="page-header"><i class="fa fa-user fa-fw"></i> PRESENSI YUDISIUM</h4>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -124,48 +124,34 @@
                 ?>
                 <div class="row">
                     <div class="col-lg-12">
-                        <a href="export_data_wisuda.php" class="btn btn-primary btn-xs"><i class="fa fa-download fa-fw"></i> DOWNLOAD DATA WISUDA</a>
-                        <br /> 
-                        <br />
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
-                                    <th>FOTO MAHASISWA</th>
-                                    <th>DETAIL MAHASISWA</th>
+                                    <th>KEGIATAN YUDISIUM</th>
+                                    <th>TANGGAL / JAM / TEMPAT</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $res = mysqli_query($mysqli, "SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta, ut.nama_lokasi_pkl FROM  jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t, upload_ta ut WHERE jup.nim=ms.NIMHSMSMHS AND jup.nim=t.nim AND ut.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND ut.tahun=jup.tahun AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
+                                $res = mysqli_query($mysqli, "SELECT * FROM kegiatan");
                                 while ($d = mysqli_fetch_array($res)) {
-                                    $nim = $d['nim'];
-                                    $urutan = $d['urutan'];
-                                    $nama = $d['NMMHSMSMHS'];
-                                    $tempat_lahir = ucwords(strtolower($d['TPLHRMSMHS']));
-                                    $tanggal_lahir = $d['TGLHRMSMHS'];
-                                    $nama_konsentrasi = $d['nmkonsen'];
-                                    $telp = $d['TELP'];
-                                    $judul_lta = ucwords(strtolower($d['judul_lta']));
-                                    $alamat_lengkap = ucwords(strtolower($d['ALAMATLENGKAP']));
-                                    $keahlian = ucwords(strtolower($d['KEAHLIAN']));
-                                    $nama_orang_tua = ucwords(strtolower($d['NAMAORTUWALI']));
-                                    $nama_lokasi_pkl = ucwords(strtolower($d['nama_lokasi_pkl']));
+                                    $id = $d['id'];
+                                    $nama_kegiatan = $d['nama_kegiatan'];
+                                    $tanggal = $d['tanggal'];
+                                    $waktu = $d['waktu'];
+                                    $ruang = $d['ruang'];
+                                    $status = $d['status'];
                                     ?>
                                     <tr>
-                                        <td class="col-lg-3"></td>
-                                        <td class="col-lg-9">
-                                            <table border="0" width="100%">
-                                                <tr><th width="27%" style="vertical-align:top">NAMA MAHASISWA</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td width="70%"><?php echo $nama; ?></td></tr>
-                                                <tr><th style="vertical-align:top">TEMPAT / TANGGAL LAHIR</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $tempat_lahir; ?>, <?php echo TanggalIndonesia($tanggal_lahir); ?></td></tr>
-                                                <tr><th style="vertical-align:top">NIM</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $nim; ?></td></tr>
-                                                <tr><th style="vertical-align:top">KONSENTRASI</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $nama_konsentrasi; ?></td></tr>
-                                                <tr><th style="vertical-align:top">KEAHLIAN</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $keahlian; ?></td></tr>
-                                                <tr><th style="vertical-align:top">NAMA ORANG TUA</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $nama_orang_tua; ?></td></tr>
-                                                <tr><th style="vertical-align:top">ALAMAT ASAL</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $alamat_lengkap; ?></td></tr>
-                                                <tr><th style="vertical-align:top">NOMOR TELP</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $telp; ?></td></tr>
-                                                <tr><th style="vertical-align:top">LOKASI PKL</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $nama_lokasi_pkl; ?></td></tr>
-                                                <tr><th style="vertical-align:top">JUDUL LTA</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $judul_lta; ?></td></tr>
-                                            </table>
+                                        <td class="col-lg-5"><?php echo $nama_kegiatan; ?></td>
+                                        <td class="col-lg-5"><?php echo TanggalIndonesia($tanggal); ?> / <?php echo $waktu; ?> / <?php echo $ruang; ?></td>
+                                        <td class="col-lg-2">
+                                            <?php if($status==0){ ?>
+                                            <a href="proses_status_yudisium.php?id=<?php echo $id; ?>"><span class="label label-danger">TIDAK AKTIF</span></a>
+                                            <?php }elseif($status==1){ ?>
+                                            <a href="proses_batal_aktif_status_yudisium.php?id=<?php echo $id; ?>"><span class="label label-success">AKTIF</span></a>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <?php
