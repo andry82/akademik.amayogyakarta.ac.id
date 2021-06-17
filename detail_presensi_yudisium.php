@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>PRESENSI YUDISIUM | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
+        <title>DETAIL PRESENSI YUDISIUM | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h4 class="page-header"><i class="fa fa-user fa-fw"></i> PRESENSI YUDISIUM</h4>
+                        <h4 class="page-header"><i class="fa fa-user fa-fw"></i> DETAIL PRESENSI YUDISIUM</h4>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -117,45 +117,68 @@
                                 $bln = 'UnKnown';
                             }break;
                     }
-                   
+
                     $tanggalIndonesia = $tgl . " " . $bln . " " . $thn;
                     return $tanggalIndonesia;
                 }
                 ?>
                 <div class="row">
                     <div class="col-lg-12">
-                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <?php
+                        $id = $_GET['id'];
+                        $yudisium = mysqli_query($mysqli, "SELECT * FROM kegiatan WHERE id=$id");
+                        $data_yudisium = mysqli_fetch_array($yudisium);
+                        ?>
+                        NAMA KEGIATAN : <?php echo $data_yudisium['nama_kegiatan']; ?><br/>
+                        TANGGAL : <?php echo TanggalIndonesia($data_yudisium['tanggal']); ?><br/>
+                        WAKTU : <?php echo $data_yudisium['waktu']; ?> WIB<br/>
+                        TEMPAT : <?php echo $data_yudisium['ruang']; ?><br/><br/>
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
-                                    <th>KEGIATAN YUDISIUM</th>
-                                    <th>TANGGAL / JAM / TEMPAT</th>
-                                    <th></th>
+                                    <th>NIM</th>
+                                    <th>NAMA MAHASISWA</th>
+                                    <th>KELAS</th>
+                                    <th>KEHADIRAN</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $res = mysqli_query($mysqli, "SELECT * FROM kegiatan");
-                                while ($d = mysqli_fetch_array($res)) {
-                                    $id = $d['id'];
-                                    $nama_kegiatan = $d['nama_kegiatan'];
-                                    $tanggal = $d['tanggal'];
-                                    $waktu = $d['waktu'];
-                                    $ruang = $d['ruang'];
-                                    $status = $d['status'];
-                                    ?>
-                                    <tr>
-                                        <td class="col-lg-5"><?php echo $nama_kegiatan; ?></td>
-                                        <td class="col-lg-4"><?php echo TanggalIndonesia($tanggal); ?> / <?php echo $waktu; ?> / <?php echo $ruang; ?></td>
-                                        <td class="col-lg-3">
-                                            <a href="detail_presensi_yudisium.php?id=<?php echo $id; ?>"><span class="label label-primary">DATA PRESENSI</span></a>
-                                            <?php if($status==0){ ?>
-                                            <a href="proses_status_yudisium.php?id=<?php echo $id; ?>"><span class="label label-danger">TIDAK AKTIF</span></a>
-                                            <?php }elseif($status==1){ ?>
-                                            <a href="proses_batal_aktif_status_yudisium.php?id=<?php echo $id; ?>"><span class="label label-success">AKTIF</span></a>
-                                            <?php } ?>
-                                        </td>
-                                    </tr>
-                                    <?php
+                                $pendaftar_yudisium = mysqli_query($mysqli, "SELECT * FROM pendaftaran_yudisium py, msmhs m, upload_ta ut, kelasparalel_mhs km WHERE km.nimhs=m.NIMHSMSMHS AND py.nim=m.NIMHSMSMHS AND ut.nim=m.NIMHSMSMHS AND ut.tahun=py.tahun AND py.tahun=$ta AND py.sesi=$id");
+                                while ($data_pendaftar = mysqli_fetch_array($pendaftar_yudisium)) {
+                                    $nim = $data_pendaftar['nim'];
+                                    $kehadiran = $data_pendaftar['kehadiran'];
+                                    $nama_mahasiswa = $data_pendaftar['NMMHSMSMHS'];
+                                    $thmskmhs = $data_pendaftar['TAHUNMSMHS'];
+                                    $status_ta = $data_pendaftar['status_ta'];
+                                    $kelas = $data_pendaftar['nmkelas'];
+                                    if ($status_ta == 2) {
+                                        ?>
+                                        <tr>
+                                            <td class="col-lg-1"><?php echo $nim; ?></td>
+                                            <td class="col-lg-4"><?php echo $nama_mahasiswa; ?></td>
+                                            <td class="col-lg-4">
+                                                <?php
+                                                $splite = explode("/", $kelas);
+                                                echo $splite[0];
+                                                echo (($ta - $thmskmhs) * 2) + $smtgg; ?>
+                                            </td>
+                                            <td class="col-lg-3"><?php echo $kehadiran; ?></td>
+                                        </tr>
+                                    <?php } else { ?>
+                                        <tr style="color: red">
+                                            <td class="col-lg-1"><?php echo $nim; ?></td>
+                                            <td class="col-lg-4"><?php echo $nama_mahasiswa; ?></td>
+                                            <td class="col-lg-4">
+                                                <?php
+                                                $splite = explode("/", $kelas);
+                                                echo $splite[0];
+                                                echo (($ta - $thmskmhs) * 2) + $smtgg; ?>
+                                            </td>
+                                            <td class="col-lg-3"><?php echo $kehadiran; ?></td>
+                                        </tr>
+                                        <?php
+                                    }
                                 }
                                 ?>
                             </tbody>
