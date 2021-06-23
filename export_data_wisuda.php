@@ -96,10 +96,8 @@ $excel->getActiveSheet()->getRowDimension('2')->setRowHeight(20);
 $excel->getActiveSheet()->getRowDimension('3')->setRowHeight(20);
 
 // Buat query untuk menampilkan semua data siswa
-//$sql = $pdo->prepare("SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta FROM  jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t WHERE jup.nim=ms.NIMHSMSMHS AND jup.nim=t.nim AND t.status='2' AND jup.status=3 AND jup.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
-$sql = $pdo->prepare("SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta, ut.nama_lokasi_pkl, ms.UKURAN_KAOS FROM  jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t, upload_ta ut WHERE jup.nim=ms.NIMHSMSMHS AND jup.nim=t.nim AND ut.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND ut.tahun=jup.tahun AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
-//$res = mysqli_query($mysqli, "SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta, ut.nama_lokasi_pkl FROM  jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t, upload_ta ut WHERE jup.nim=ms.NIMHSMSMHS AND jup.nim=t.nim AND ut.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND ut.tahun=jup.tahun AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
-                                
+$sql = $pdo->prepare("SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta, ms.UKURAN_KAOS FROM jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t WHERE jup.nim=ms.NIMHSMSMHS AND t.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
+
 $sql->execute(); // Eksekusi querynya
 
 $no = 1; // Untuk penomoran tabel, di awal set dengan 1
@@ -113,14 +111,22 @@ while ($d = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $nama_konsentrasi = $d['nmkonsen'];
     $telp = $d['TELP'];
     $ukuran_kaos = $d['UKURAN_KAOS'];
-    $nama_lokasi_pkl = ucwords(strtolower($d['nama_lokasi_pkl']));
+    $data_pkl = mysqli_query($mysqli, "SELECT nama_lokasi_pkl FROM upload_ta WHERE nim='$nim'");
+    $data_lokasi = mysqli_fetch_array($data_pkl);
+    if ($data_lokasi['nama_lokasi_pkl'] == '') {
+        $nama_lokasi_pkl = '-';
+    } else {
+        $nama_lokasi_pkl = ucwords(strtolower($data_lokasi['nama_lokasi_pkl']));
+    }
+    
+
     $judul_lta = ucwords(strtolower($d['judul_lta']));
     $alamat_lengkap = ucwords(strtolower($d['ALAMATLENGKAP']));
     $keahlian = ucwords(strtolower($d['KEAHLIAN']));
     $nama_orang_tua = ucwords(strtolower($d['NAMAORTUWALI']));
 
     $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, trim($nama));
-    $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, trim($tempat_lahir).",".$tanggal_lahir);
+    $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, trim($tempat_lahir) . "," . $tanggal_lahir);
     $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, trim($nim));
     $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, trim($nama_konsentrasi));
     $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, trim($keahlian));
@@ -130,7 +136,7 @@ while ($d = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $nama_lokasi_pkl);
     $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $judul_lta);
     $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $ukuran_kaos);
-    
+
     // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
     $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
     $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);

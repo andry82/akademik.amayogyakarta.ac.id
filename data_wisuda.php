@@ -136,7 +136,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $res = mysqli_query($mysqli, "SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta, ut.nama_lokasi_pkl FROM  jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t, upload_ta ut WHERE jup.nim=ms.NIMHSMSMHS AND jup.nim=t.nim AND ut.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND ut.tahun=jup.tahun AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
+                                $res = mysqli_query($mysqli, "SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta FROM jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t WHERE jup.nim=ms.NIMHSMSMHS AND t.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
                                 while ($d = mysqli_fetch_array($res)) {
                                     $nim = $d['nim'];
                                     $urutan = $d['urutan'];
@@ -149,7 +149,14 @@
                                     $alamat_lengkap = ucwords(strtolower($d['ALAMATLENGKAP']));
                                     $keahlian = ucwords(strtolower($d['KEAHLIAN']));
                                     $nama_orang_tua = ucwords(strtolower($d['NAMAORTUWALI']));
-                                    $nama_lokasi_pkl = ucwords(strtolower($d['nama_lokasi_pkl']));
+                                    $data_pkl = mysqli_query($mysqli, "SELECT nama_lokasi_pkl FROM upload_ta WHERE nim='$nim'");
+                                    $data_lokasi = mysqli_fetch_array($data_pkl);
+                                    $a = $data_lokasi['nama_lokasi_pkl'];
+                                    if($a ==''){
+                                        $nama_lokasi_pkl = '-';
+                                    }else{
+                                         $nama_lokasi_pkl = $data_lokasi['nama_lokasi_pkl'];
+                                    }
                                     ?>
                                     <tr>
                                         <td class="col-lg-3"></td>
