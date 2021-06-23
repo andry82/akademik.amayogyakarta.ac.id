@@ -125,6 +125,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <a href="export_data_wisuda.php" class="btn btn-primary btn-xs"><i class="fa fa-download fa-fw"></i> DOWNLOAD DATA WISUDA</a>
+                        <a href="export_data_ijazah.php" class="btn btn-primary btn-xs"><i class="fa fa-download fa-fw"></i> DOWNLOAD DATA IJAZAH</a>
                         <br /> 
                         <br />
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">

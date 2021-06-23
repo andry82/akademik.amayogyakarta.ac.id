@@ -58,24 +58,20 @@ $style_row = array(
     )
 );
 
-$excel->setActiveSheetIndex(0)->setCellValue('A1', "DATA WISUDA MAHASISWA"); // Set kolom A1 dengan tulisan "DATA SISWA"
-$excel->getActiveSheet()->mergeCells('A1:K1'); // Set Merge Cell pada kolom A1 sampai F1
+$excel->setActiveSheetIndex(0)->setCellValue('A1', "DATA IJAZAH"); // Set kolom A1 dengan tulisan "DATA SISWA"
+$excel->getActiveSheet()->mergeCells('A1:G1'); // Set Merge Cell pada kolom A1 sampai F1
 $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
 $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
 $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
 // Buat header tabel nya pada baris ke 3
 // Buat header tabel nya pada baris ke 3
-$excel->setActiveSheetIndex(0)->setCellValue('A3', "NAMA MAHASISWA"); // Set kolom A3 dengan tulisan "NO"
-$excel->setActiveSheetIndex(0)->setCellValue('B3', "TEMPAT / TANGGAL LAHIR"); // Set kolom A3 dengan tulisan "NO"
-$excel->setActiveSheetIndex(0)->setCellValue('C3', "NIM"); // Set kolom B3 dengan tulisan "NIS"
-$excel->setActiveSheetIndex(0)->setCellValue('D3', "KONSENTRASI"); // Set kolom C3 dengan tulisan "NAMA"
-$excel->setActiveSheetIndex(0)->setCellValue('E3', "KEAHLIAN"); // Set kolom C3 dengan tulisan "NAMA"
-$excel->setActiveSheetIndex(0)->setCellValue('F3', "NAMA ORANG TUA"); // Set kolom C3 dengan tulisan "NAMA"
-$excel->setActiveSheetIndex(0)->setCellValue('G3', "ALAMAT ASAL"); // Set kolom C3 dengan tulisan "NAMA"
-$excel->setActiveSheetIndex(0)->setCellValue('H3', "NOMOR TELP"); // Set kolom C3 dengan tulisan "NAMA"
-$excel->setActiveSheetIndex(0)->setCellValue('I3', "LOKASI PKL"); // Set kolom C3 dengan tulisan "NAMA"
-$excel->setActiveSheetIndex(0)->setCellValue('J3', "JUDUL LTA"); // Set kolom C3 dengan tulisan "NAMA"
-$excel->setActiveSheetIndex(0)->setCellValue('K3', "UKURAN KAOS"); // Set kolom C3 dengan tulisan "NAMA"
+$excel->setActiveSheetIndex(0)->setCellValue('A3', "PIN"); // Set kolom A3 dengan tulisan "NO"
+$excel->setActiveSheetIndex(0)->setCellValue('B3', "NO SERI IJAZAH"); // Set kolom A3 dengan tulisan "NO"
+$excel->setActiveSheetIndex(0)->setCellValue('C3', "NAMA MAHASISWA"); // Set kolom A3 dengan tulisan "NO"
+$excel->setActiveSheetIndex(0)->setCellValue('D3', "NIM"); // Set kolom B3 dengan tulisan "NIS"
+$excel->setActiveSheetIndex(0)->setCellValue('E3', "TEMPAT LAHIR"); // Set kolom C3 dengan tulisan "NAMA"
+$excel->setActiveSheetIndex(0)->setCellValue('F3', "TANGGAL LAHIR"); // Set kolom C3 dengan tulisan "NAMA"
+$excel->setActiveSheetIndex(0)->setCellValue('G3', "NIk"); // Set kolom C3 dengan tulisan "NAMA"
 // Apply style header yang telah kita buat tadi ke masing-masing kolom header
 $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_col);
@@ -84,10 +80,6 @@ $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('F3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
-$excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
-$excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
-$excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
-$excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
 
 
 // Set height baris ke 1, 2 dan 3
@@ -96,7 +88,7 @@ $excel->getActiveSheet()->getRowDimension('2')->setRowHeight(20);
 $excel->getActiveSheet()->getRowDimension('3')->setRowHeight(20);
 
 // Buat query untuk menampilkan semua data siswa
-$sql = $pdo->prepare("SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta, ms.UKURAN_KAOS FROM jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t WHERE jup.nim=ms.NIMHSMSMHS AND t.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
+$sql = $pdo->prepare("SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta, ms.UKURAN_KAOS, ms.NIKMSMHS FROM jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t WHERE jup.nim=ms.NIMHSMSMHS AND t.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
 
 $sql->execute(); // Eksekusi querynya
 
@@ -161,6 +153,7 @@ function TanggalIndonesia($date) {
 while ($d = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql  
     $nim = $d['nim'];
     $urutan = $d['urutan'];
+    $nik = $d['NIKMSMHS'];
     $nama = $d['NMMHSMSMHS'];
     $tempat_lahir = ucwords(strtolower($d['TPLHRMSMHS']));
     $tanggal_lahir = TanggalIndonesia($d['TGLHRMSMHS']);
@@ -181,57 +174,44 @@ while ($d = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $keahlian = ucwords(strtolower($d['KEAHLIAN']));
     $nama_orang_tua = ucwords(strtolower($d['NAMAORTUWALI']));
 
-    $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, trim($nama));
-    $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, trim($tempat_lahir) . "," . $tanggal_lahir);
-    $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, trim($nim));
-    $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, trim($nama_konsentrasi));
-    $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, trim($keahlian));
-    $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, trim($nama_orang_tua));
-    $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, trim($alamat_lengkap));
-    $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, trim($telp));
-    $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $nama_lokasi_pkl);
-    $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $judul_lta);
-    $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $ukuran_kaos);
-
+    $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, trim());
+    $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, trim());
+    $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, trim($nama));
+    $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, trim($nim));
+    $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, trim($tempat_lahir));
+    $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, trim($tanggal_lahir));
+    $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, trim($nik));
     // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
     $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
     $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);
-    $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($center_col);
-    $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row);
+    $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_row);
+    $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($center_col);
     $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row);
     $excel->getActiveSheet()->getStyle('F' . $numrow)->applyFromArray($style_row);
-    $excel->getActiveSheet()->getStyle('G' . $numrow)->applyFromArray($style_row);
-    $excel->getActiveSheet()->getStyle('H' . $numrow)->applyFromArray($center_col);
-    $excel->getActiveSheet()->getStyle('I' . $numrow)->applyFromArray($style_row);
-    $excel->getActiveSheet()->getStyle('J' . $numrow)->applyFromArray($style_row);
-    $excel->getActiveSheet()->getStyle('K' . $numrow)->applyFromArray($center_col);
+    $excel->getActiveSheet()->getStyle('G' . $numrow)->applyFromArray($center_col);
     $excel->getActiveSheet()->getRowDimension($numrow)->setRowHeight(20);
     $no++; // Tambah 1 setiap kali looping
     $numrow++; // Tambah 1 setiap kali looping
 }
 
 // Set width kolom
-$excel->getActiveSheet()->getColumnDimension('A')->setWidth(25); // Set width kolom A
-$excel->getActiveSheet()->getColumnDimension('B')->setWidth(35); // Set width kolom B
-$excel->getActiveSheet()->getColumnDimension('C')->setWidth(15); // Set width kolom C
-$excel->getActiveSheet()->getColumnDimension('D')->setWidth(40); // Set width kolom C
+$excel->getActiveSheet()->getColumnDimension('A')->setWidth(20); // Set width kolom A
+$excel->getActiveSheet()->getColumnDimension('B')->setWidth(30); // Set width kolom B
+$excel->getActiveSheet()->getColumnDimension('C')->setWidth(45); // Set width kolom C
+$excel->getActiveSheet()->getColumnDimension('D')->setWidth(10); // Set width kolom C
 $excel->getActiveSheet()->getColumnDimension('E')->setWidth(30); // Set width kolom C
 $excel->getActiveSheet()->getColumnDimension('F')->setWidth(20); // Set width kolom C
-$excel->getActiveSheet()->getColumnDimension('G')->setWidth(50); // Set width kolom C
-$excel->getActiveSheet()->getColumnDimension('H')->setWidth(10); // Set width kolom C
-$excel->getActiveSheet()->getColumnDimension('I')->setWidth(30); // Set width kolom C
-$excel->getActiveSheet()->getColumnDimension('J')->setWidth(100); // Set width kolom C
-$excel->getActiveSheet()->getColumnDimension('K')->setWidth(10); // Set width kolom C
+$excel->getActiveSheet()->getColumnDimension('G')->setWidth(20); // Set width kolom C
 // Set orientasi kertas jadi LANDSCAPE
 $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
 
 // Set judul file excel nya
-$excel->getActiveSheet(0)->setTitle("Data Wisuda");
+$excel->getActiveSheet(0)->setTitle("Data Ijazah");
 $excel->setActiveSheetIndex(0);
 
 // Proses file excel
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="Data_Wisuda.xlsx"'); // Set nama file excel nya
+header('Content-Disposition: attachment; filename="Data_Ijazah.xlsx"'); // Set nama file excel nya
 header('Cache-Control: max-age=0');
 
 $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
