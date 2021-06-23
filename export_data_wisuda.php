@@ -59,7 +59,7 @@ $style_row = array(
 );
 
 $excel->setActiveSheetIndex(0)->setCellValue('A1', "DATA WISUDA MAHASISWA"); // Set kolom A1 dengan tulisan "DATA SISWA"
-$excel->getActiveSheet()->mergeCells('A1:J1'); // Set Merge Cell pada kolom A1 sampai F1
+$excel->getActiveSheet()->mergeCells('A1:K1'); // Set Merge Cell pada kolom A1 sampai F1
 $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
 $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
 $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
@@ -75,6 +75,7 @@ $excel->setActiveSheetIndex(0)->setCellValue('G3', "ALAMAT ASAL"); // Set kolom 
 $excel->setActiveSheetIndex(0)->setCellValue('H3', "NOMOR TELP"); // Set kolom C3 dengan tulisan "NAMA"
 $excel->setActiveSheetIndex(0)->setCellValue('I3', "LOKASI PKL"); // Set kolom C3 dengan tulisan "NAMA"
 $excel->setActiveSheetIndex(0)->setCellValue('J3', "JUDUL LTA"); // Set kolom C3 dengan tulisan "NAMA"
+$excel->setActiveSheetIndex(0)->setCellValue('K3', "UKURAN KAOS"); // Set kolom C3 dengan tulisan "NAMA"
 // Apply style header yang telah kita buat tadi ke masing-masing kolom header
 $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_col);
@@ -86,6 +87,7 @@ $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
+$excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
 
 
 // Set height baris ke 1, 2 dan 3
@@ -94,7 +96,10 @@ $excel->getActiveSheet()->getRowDimension('2')->setRowHeight(20);
 $excel->getActiveSheet()->getRowDimension('3')->setRowHeight(20);
 
 // Buat query untuk menampilkan semua data siswa
-$sql = $pdo->prepare("SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta FROM  jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t WHERE jup.nim=ms.NIMHSMSMHS AND jup.nim=t.nim AND t.status='2' AND jup.status=3 AND jup.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
+//$sql = $pdo->prepare("SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta FROM  jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t WHERE jup.nim=ms.NIMHSMSMHS AND jup.nim=t.nim AND t.status='2' AND jup.status=3 AND jup.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
+$sql = $pdo->prepare("SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta, ut.nama_lokasi_pkl, ms.UKURAN_KAOS FROM  jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t, upload_ta ut WHERE jup.nim=ms.NIMHSMSMHS AND jup.nim=t.nim AND ut.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND ut.tahun=jup.tahun AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
+//$res = mysqli_query($mysqli, "SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta, ut.nama_lokasi_pkl FROM  jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t, upload_ta ut WHERE jup.nim=ms.NIMHSMSMHS AND jup.nim=t.nim AND ut.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND ut.tahun=jup.tahun AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
+                                
 $sql->execute(); // Eksekusi querynya
 
 $no = 1; // Untuk penomoran tabel, di awal set dengan 1
@@ -107,6 +112,8 @@ while ($d = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $tanggal_lahir = $d['TGLHRMSMHS'];
     $nama_konsentrasi = $d['nmkonsen'];
     $telp = $d['TELP'];
+    $ukuran_kaos = $d['UKURAN_KAOS'];
+    $nama_lokasi_pkl = ucwords(strtolower($d['nama_lokasi_pkl']));
     $judul_lta = ucwords(strtolower($d['judul_lta']));
     $alamat_lengkap = ucwords(strtolower($d['ALAMATLENGKAP']));
     $keahlian = ucwords(strtolower($d['KEAHLIAN']));
@@ -120,8 +127,9 @@ while ($d = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, trim($nama_orang_tua));
     $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, trim($alamat_lengkap));
     $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, trim($telp));
-    $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, "");
+    $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $nama_lokasi_pkl);
     $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $judul_lta);
+    $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $ukuran_kaos);
     
     // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
     $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
@@ -134,6 +142,7 @@ while ($d = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $excel->getActiveSheet()->getStyle('H' . $numrow)->applyFromArray($center_col);
     $excel->getActiveSheet()->getStyle('I' . $numrow)->applyFromArray($style_row);
     $excel->getActiveSheet()->getStyle('J' . $numrow)->applyFromArray($style_row);
+    $excel->getActiveSheet()->getStyle('K' . $numrow)->applyFromArray($center_col);
     $excel->getActiveSheet()->getRowDimension($numrow)->setRowHeight(20);
     $no++; // Tambah 1 setiap kali looping
     $numrow++; // Tambah 1 setiap kali looping
@@ -149,7 +158,8 @@ $excel->getActiveSheet()->getColumnDimension('F')->setWidth(20); // Set width ko
 $excel->getActiveSheet()->getColumnDimension('G')->setWidth(50); // Set width kolom C
 $excel->getActiveSheet()->getColumnDimension('H')->setWidth(10); // Set width kolom C
 $excel->getActiveSheet()->getColumnDimension('I')->setWidth(30); // Set width kolom C
-$excel->getActiveSheet()->getColumnDimension('J')->setWidth(70); // Set width kolom C
+$excel->getActiveSheet()->getColumnDimension('J')->setWidth(100); // Set width kolom C
+$excel->getActiveSheet()->getColumnDimension('K')->setWidth(10); // Set width kolom C
 // Set orientasi kertas jadi LANDSCAPE
 $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
 
