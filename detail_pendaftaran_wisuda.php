@@ -87,7 +87,7 @@
                             <a href="proses_status_berkas_wisuda.php?nim=<?php echo $nim; ?>&status=2" class='btn btn-success btn-xs'>ACC</a><br/>
                         <?php } ?>
                         <br/>
-                        <a class="media" href="http://localhost/sintama.amayogyakarta.ac.id/document/berkas_wisuda/<?php echo $file_berkas; ?>"></a>
+                        <a class="media" href="<?php echo $url_documet_wisuda ?>/document/berkas_wisuda/<?php echo $file_berkas; ?>"></a>
                     </div>
                 </div>
             </div>            <!-- /#page-wrapper -->
