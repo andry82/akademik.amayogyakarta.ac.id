@@ -71,6 +71,11 @@
                         NAMA MAHASISWA : <?php echo $nama; ?><br/>
                         <br/>
                         <?php if ($status_pendaftaran == 0) { ?>
+                            <?php if ($pesan_revisi != "") { ?>
+                            <div class="alert alert-warning alert-dismissible fade in">
+                                REVISI SEBELUMNYA : <?php echo $pesan_revisi; ?>
+                            </div>
+                            <?php } ?>
                             <a href="proses_status_berkas_wisuda.php?nim=<?php echo $nim; ?>&status=0" class='btn btn-success btn-xs'>PENGAJUAN</a>&nbsp;
                             <a data-toggle="modal" data-target="#exampleModalCenter" class='btn btn-default btn-xs'>REVISI</a>&nbsp;
                             <a href="proses_status_berkas_wisuda.php?nim=<?php echo $nim; ?>&status=2" class='btn btn-default btn-xs'>ACC</a><br/>
