@@ -25,7 +25,7 @@
     session_start();
     include('bar128.php');
     include 'config.php';
-    $nim = $_GET['nim'];
+    $nim = trim($_GET['nim']);
     $res = mysqli_query($mysqli, "SELECT * FROM msmhs m, pendaftaran_wisuda pw WHERE pw.nim=m.NIMHSMSMHS AND m.NIMHSMSMHS=$nim");
     while ($d = mysqli_fetch_array($res)) {
         $nim = $d['NIMHSMSMHS'];
