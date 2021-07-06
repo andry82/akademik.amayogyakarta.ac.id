@@ -1,10 +1,9 @@
 <?php
-
 session_start();
 include 'config.php';
 
-$username = $_POST['username'];
-$password = md5($_POST['password']);
+$password= md5($_POST['password']);
+$username=addslashes(trim($_POST['username']));
 
 // = mysql_query("select * from user where username='$username' and password='$password'");
 $login = mysqli_query($mysqli, "select * from siakad_admin where username='$username' and passwd='$password'");
