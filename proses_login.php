@@ -5,8 +5,7 @@ include 'config.php';
 $password= md5($_POST['password']);
 $username=addslashes(trim($_POST['username']));
 
-// = mysql_query("select * from user where username='$username' and password='$password'");
-$login = mysqli_query($mysqli, "select * from siakad_admin where username='$username' and passwd='$password'");
+$login = mysqli_query($mysqli, "select * from siakad_admin where passwd='$password' and username='$username'");
 $cek = mysqli_num_rows($login);
  while ($d = mysqli_fetch_array($login)) {
     $level_access = $d['level'];
