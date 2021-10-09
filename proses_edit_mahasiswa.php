@@ -14,11 +14,11 @@ $jalan = addslashes($_POST['JALAN']);
 $rtrw = addslashes($_POST['RTRW']);
 $dusun = addslashes($_POST['DUSUN']);
 $kelurahan = addslashes($_POST['KELURAHAN']);
-$kecamatan = addslashes($_POST['KECAMATAN']);
-$kabupaten = addslashes($_POST['KABUPATEN']);
+$kecamatan = addslashes($_POST['KECAMATAN_EKSPORT']);
+$kabupaten = addslashes($_POST['KABUPATEN_EKSPORT']);
 $kewarganegaraan = addslashes($_POST['KEWARGANEGARAAN']);
 $nokps = addslashes($_POST['NOKPS']);
-$propinsi = addslashes($_POST['ASSMAMSMHS']);
+$propinsi = addslashes($_POST['PROPINSI_EKSPORT']);
 $jenis_kelamin = addslashes($_POST['KDJEKMSMHS']);
 $telp = addslashes($_POST['TELP']);
 $email = addslashes($_POST['EMAIL']);
@@ -92,7 +92,7 @@ if (in_array($fileType_akte_lahir, $allowTypes)) {
     $terupload_akte_lahir = move_uploaded_file($nama_sementara_akte_lahir, $dirUpload_akte_lahir.$newfilename_akte_lahir);  
     $result = mysqli_query($mysqli, "UPDATE msmhs SET akte_kelahiran='$newfilename_akte_lahir' WHERE NIMHSMSMHS='$nim'");   
 }
-$result = mysqli_query($mysqli, "UPDATE msmhs SET NIKMSMHS='$nik', NMMHSMSMHS='$nama', TPLHRMSMHS='$tplahir', TELP='$telp', TGLHRMSMHS='$tgllahir',KDJEKMSMHS='$jenis_kelamin', AGAMA='$agama',ALAMATLENGKAP='$alamat_lengkap', JALAN='$jalan', RTRW='$rtrw',DUSUN='$dusun', KELURAHAN='$kelurahan', KECAMATAN='$kecamatan', KABUPATEN='$kabupaten', KEWARGANEGARAAN='$kewarganegaraan', NOKPS='$nokps', JENISTINGGAL='$jenis_tinggal', ASSMAMSMHS='$propinsi', ALAMATYOGYA='$alamat_sekarang', ALAMATORTUWALI='$alamat_tua', EMAIL='$email', TWITER='$twiter', INSTAGRAM='$instagram', FACEBOOK='$facebook', NAMASEKOLAH='$asal_sekolah', HOBI='$hobi', KEAHLIAN='$keahlian', NIKAYAH='$nikayah', NAMAORTUWALI='$orang_tua', TEMPATLAHIRAYAH='$tempat_lahir_ayah', PENDIDIKANAYAH='$pendidikan_ayah', PEKERJAANORTUWALI='$pekerjaan_ayah', PENGHASILANAYAH='$penghasilan_ayah', TANGGALLAHIRAYAH='$tanggal_lahir_ayah', TELPORTUWALI='$telp_tua', NIKIBU='$nikibu', NAMAIBU='$nama_ibu', TEMPATLAHIRIBU='$tempat_lahir_ibu', TANGGALLAHIRIBU='$tanggal_lahir_ibu', PENDIDIKANIBU='$pendidikan_ibu', PEKERJAANIBU='$pekerjaan_ibu', PENGHASILANIBU='$penghasilan_ibu', TELPIBU='$telp_ibu', ALAMATIBU='$alamat_ibu', NIKWALI='$nikwali', NAMAWALI='$nama_wali', TEMPATLAHIRWALI='$tempat_lahir_wali', TANGGALLAHIRWALI='$tanggal_lahir_wali', PENDIDIKANWALI='$pendidikan_wali', PEKERJAANWALI='$pekerjaan_wali', PENGHASILANWALI='$penghasilan_wali', TELPWALI='$telp_wali', ALAMATWALI='$alamat_wali', KET_REV='$keterangan_revisi' WHERE NIMHSMSMHS='$nim'");
+$result = mysqli_query($mysqli, "UPDATE msmhs SET NIKMSMHS='$nik', NMMHSMSMHS='$nama', TPLHRMSMHS='$tplahir', TELP='$telp', TGLHRMSMHS='$tgllahir',KDJEKMSMHS='$jenis_kelamin', AGAMA='$agama',ALAMATLENGKAP='$alamat_lengkap', JALAN='$jalan', RTRW='$rtrw',DUSUN='$dusun', KELURAHAN='$kelurahan', KECAMATAN_EKSPORT='$kecamatan', KABUPATEN_EKSPORT='$kabupaten', KEWARGANEGARAAN='$kewarganegaraan', NOKPS='$nokps', JENISTINGGAL='$jenis_tinggal', PROPINSI_EKSPORT='$propinsi', ALAMATYOGYA='$alamat_sekarang', ALAMATORTUWALI='$alamat_tua', EMAIL='$email', TWITER='$twiter', INSTAGRAM='$instagram', FACEBOOK='$facebook', NAMASEKOLAH='$asal_sekolah', HOBI='$hobi', KEAHLIAN='$keahlian', NIKAYAH='$nikayah', NAMAORTUWALI='$orang_tua', TEMPATLAHIRAYAH='$tempat_lahir_ayah', PENDIDIKANAYAH='$pendidikan_ayah', PEKERJAANORTUWALI='$pekerjaan_ayah', PENGHASILANAYAH='$penghasilan_ayah', TANGGALLAHIRAYAH='$tanggal_lahir_ayah', TELPORTUWALI='$telp_tua', NIKIBU='$nikibu', NAMAIBU='$nama_ibu', TEMPATLAHIRIBU='$tempat_lahir_ibu', TANGGALLAHIRIBU='$tanggal_lahir_ibu', PENDIDIKANIBU='$pendidikan_ibu', PEKERJAANIBU='$pekerjaan_ibu', PENGHASILANIBU='$penghasilan_ibu', TELPIBU='$telp_ibu', ALAMATIBU='$alamat_ibu', NIKWALI='$nikwali', NAMAWALI='$nama_wali', TEMPATLAHIRWALI='$tempat_lahir_wali', TANGGALLAHIRWALI='$tanggal_lahir_wali', PENDIDIKANWALI='$pendidikan_wali', PEKERJAANWALI='$pekerjaan_wali', PENGHASILANWALI='$penghasilan_wali', TELPWALI='$telp_wali', ALAMATWALI='$alamat_wali', KET_REV='$keterangan_revisi' WHERE NIMHSMSMHS='$nim'");
 //redirectig to the display page. In our case, it is index.php
 header("Location: detail_mahasiswa.php?nim=$nim");
 ?>

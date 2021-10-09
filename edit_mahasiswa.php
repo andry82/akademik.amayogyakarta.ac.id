@@ -83,11 +83,11 @@
                             $rtrw = $data['RTRW'];
                             $dusun = $data['DUSUN'];
                             $kelurahan = $data['KELURAHAN'];
-                            $kecamatan = $data['KECAMATAN'];
-                            $kabupaten = $data['KABUPATEN'];
+                            $kecamatan = $data['KECAMATAN_EKSPORT'];
+                            $kabupaten = $data['KABUPATEN_EKSPORT'];
                             $kewarganegaraan = $data['KEWARGANEGARAAN'];
                             $nokps = $data['NOKPS'];
-                            $propinsi = $data['ASSMAMSMHS'];
+                            $propinsi = $data['PROPINSI_EKSPORT'];
                             $agama = $data['AGAMA'];
                             $telp = $data['TELP'];
                             $email = $data['EMAIL'];
@@ -195,72 +195,54 @@
                                 <label for="Kelurahan">KELURAHAN</label>
                                 <input type="text" class="form-control" name="KELURAHAN" value="<?php echo $kelurahan; ?>" placeholder="Kelurahan">
                             </div>
-                            <!--<div class="form-group">
-                                <label for="Kelurahan">KELURAHAN</label>
-                            <?php
-                            $kel = mysqli_query($mysqli, "SELECT * FROM villages WHERE id='$kelurahan'");
-                            $datakel = mysqli_fetch_array($kel);
-                            $NMKELREG = $datakel["name"];
-                            ?>
-                                <select class="form-control" id="kelurahan" name="KELURAHAN"></select> 
-                            </div>-->
                             <div class="form-group">
-                                <label for="Kecamatan">KECAMATAN</label>
-                                <input type="text" class="form-control" name="KECAMATAN" value="<?php echo $kecamatan; ?>" placeholder="Kecamatan">
-                            </div>
-                            <!--<div class="form-group">
-                                <label for="Kecamatan">KECAMATAN</label>
-                            <?php
-                            $kec = mysqli_query($mysqli, "SELECT * FROM districts WHERE id='$kecamatan'");
-                            $datakec = mysqli_fetch_array($kec);
-                            $NMKECREG = $datakec["name"];
-                            ?>
-                                <select class="form-control" id="kecamatan" name="KECAMATAN"></select> 
-                            </div>-->
-                            <div class="form-group">
-                                <label for="Kabupaten">KABUPATEN</label>
-                                <input type="text" class="form-control" name="KABUPATEN" value="<?php echo $kabupaten; ?>" placeholder="Kecamatan">
-                            </div>
-                            <!--<div class="form-group">
-                                <label for="Kecamatan">KABUPATEN</label>
-                            <?php
-                            $kab = mysqli_query($mysqli, "SELECT * FROM regencies WHERE id='$kabupaten'");
-                            $datakab = mysqli_fetch_array($kab);
-                            $NMKABREG = $datakab["name"];
-                            ?>
-                                <select class="form-control" id="kabupaten" name="KABUPATEN"></select> 
-                            </div>-->
-                            <div class="form-group">
-                                <label for="Propinsi">PROPINSI</label>
-                                <select class="form-control" name="ASSMAMSMHS">
+                                <label for="propinsi">PROPINSI</label>
+                                <select style="text-transform: uppercase" class="form-control" name="PROPINSI_EKSPORT" id="propinsi">                                    
                                     <?php
-                                    $pro = mysqli_query($mysqli, "SELECT * FROM tbpro WHERE KDPROTBPRO='$propinsi'");
-                                    $datapro = mysqli_fetch_array($pro);
-                                    $KDPROTBPRO = $datapro["KDPROTBPRO"];
-                                    $NMPROTBPRO = $datapro["NMPROTBPRO"];
-                                    ?>
-                                    <option value="<?php echo $KDPROTBPRO; ?>"><?php echo $KDPROTBPRO; ?> - <?php echo $NMPROTBPRO; ?></option>
-                                    <?php
-                                    $qpeg2 = "SELECT distinct(KDPROTBPRO),NMPROTBPRO FROM tbpro order by KDPROTBPRO ASC";
-                                    $datapeg2 = mysqli_query($mysqli, $qpeg2);
-
-                                    while ($dataall2 = mysqli_fetch_array($datapeg2)) {
-                                        $KDPROTBPRO = $dataall2["KDPROTBPRO"];
-                                        $NMPROTBPRO = $dataall2["NMPROTBPRO"];
-                                        ?>
-                                        <option value="<?php echo $KDPROTBPRO; ?>"><?php echo $KDPROTBPRO; ?> - <?php echo $NMPROTBPRO; ?></option>
+                                    $prov = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_level_wil=1"); ?>
+                                    <?php if ($propinsi == "") { ?>
+                                      <option value="">-- PILIH --</option>
+                                    <?php } ?>
+                                    <?php while ($data_provinsi = mysqli_fetch_array($prov)) {
+                                        ?>   
+                                        <?php if ($data_provinsi['id_wilayah'] == $propinsi) { ?>
+                                            <option value="<?php echo $data_provinsi['id_wilayah']; ?>" selected><?php echo $data_provinsi['nama_wilayah']; ?></option>
+                                        <?php } else { ?>                                            
+                                            <option value="<?php echo $data_provinsi['id_wilayah']; ?>"><?php echo $data_provinsi['nama_wilayah']; ?></option>
+                                        <?php } ?>
                                     <?php } ?>
                                 </select>
                             </div>
-                            <!--<div class="form-group">
-                                <label for="Propinsi">PROPINSI</label>
-                            <?php
-                            $pro = mysqli_query($mysqli, "SELECT * FROM provinces WHERE id='$propinsi'");
-                            $datapro = mysqli_fetch_array($pro);
-                            $NMPROTBPRO = $datapro["name"];
-                            ?>
-                                <select class="form-control" id="provinsi" name="ASSMAMSMHS"></select> 
-                            </div>-->
+                            <div class="form-group">
+                                <label for="kab_kota">KABUPATEN / KOTA</label>
+                                <select style="text-transform: uppercase" class="form-control" name="KABUPATEN_EKSPORT" id="kabupaten">
+                                    <?php
+                                    $kab = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_induk_wilayah='$propinsi'"); ?>
+                                    <?php if ($kabupaten == "") { ?>
+                                      <option value="">-- PILIH --</option>
+                                    <?php } while ($data_kabupaten = mysqli_fetch_array($kab)) {
+                                        ?>
+                                        <?php if ($data_kabupaten['id_wilayah'] == $kabupaten) { ?>
+                                            <option value="<?php echo $data_kabupaten['id_wilayah']; ?>" selected><?php echo $data_kabupaten['nama_wilayah']; ?></option>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="kecamatan">KECAMATAN</label>
+                                <select style="text-transform: uppercase" class="form-control" name="KECAMATAN_EKSPORT" id="kecamatan">
+                                    <?php
+                                    $kec = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_induk_wilayah='$kabupaten'"); ?>
+                                    <?php if ($kecamatan == "") { ?>
+                                      <option value="">-- PILIH --</option>
+                                    <?php } while ($data_kecamatan = mysqli_fetch_array($kec)) {
+                                        ?>
+                                        <?php if ($data_kecamatan['id_wilayah'] == $kecamatan) { ?>
+                                            <option value="<?php echo $data_kecamatan['id_wilayah']; ?>" selected><?php echo $data_kecamatan['nama_wilayah']; ?></option>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="jeniskelamnin">JENIS KELAMIN</label>
                                 <select class="form-control" name="KDJEKMSMHS">
@@ -634,77 +616,37 @@
         });
         </script>
         <script type="text/javascript">
-
-            $(document).ready(function () {
-                var propinsi = '<? print($NMPROTBPRO);?>';
-                var kabupaten = '<? print($NMKABREG);?>';
-                var kecamatan = '<? print($NMKECREG);?>';
-                var kelurahan = '<? print($NMKELREG);?>';
-                $("#provinsi").append('<option value="">' + propinsi + '</option>');
-                $("#kabupaten").html('');
-                $("#kecamatan").html('');
-                $("#kelurahan").html('');
-                $("#kabupaten").append('<option value="">' + kabupaten + '</option>');
-                $("#kecamatan").append('<option value="">' + kecamatan + '</option>');
-                $("#kelurahan").append('<option value="">' + kelurahan + '</option>');
-                url = 'get_provinsi.php';
-                $.ajax({url: url,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (result) {
-                        for (var i = 0; i < result.length; i++)
-                            $("#provinsi").append('<option value="' + result[i].id_prov + '">' + result[i].nama + '</option>');
-                    }
-                });
+        $("#propinsi").change(function () {
+            // variabel dari nilai combo box kendaraan
+            var id_wilayah = $("#propinsi").val();
+            $.ajax({
+                method: "POST",
+                dataType: "html",
+                url: "kabupaten.php",
+                data: {
+                    wilayah: id_wilayah
+                },
+                success: function (data) {
+                    $("#kabupaten").html(data);
+                    $("#kecamatan").html(data);
+                }
             });
-            $("#provinsi").change(function () {
-                var id_prov = $("#provinsi").val();
-                var url = 'get_kabupaten.php?id_prov=' + id_prov;
-                $("#kabupaten").html('');
-                $("#kecamatan").html('');
-                $("#kelurahan").html('');
-                $("#kabupaten").append('<option value="">PILIH</option>');
-                $("#kecamatan").append('<option value="">PILIH</option>');
-                $("#kelurahan").append('<option value="">PILIH</option>');
-                $.ajax({url: url,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (result) {
-                        for (var i = 0; i < result.length; i++)
-                            $("#kabupaten").append('<option value="' + result[i].id_kab + '">' + result[i].nama + '</option>');
-                    }
-                });
+        });
+        $("#kabupaten").change(function () {
+            // variabel dari nilai combo box kendaraan
+            var id_wilayah = $("#kabupaten").val();
+            $.ajax({
+                method: "POST",
+                dataType: "html",
+                url: "kecamatan.php",
+                data: {
+                    wilayah: id_wilayah
+                },
+                success: function (data) {
+                    $("#kecamatan").html(data);
+                }
             });
-            $("#kabupaten").change(function () {
-                var id_kab = $("#kabupaten").val();
-                var url = 'get_kecamatan.php?id_kab=' + id_kab;
-                $("#kecamatan").html('');
-                $("#kelurahan").html('');
-                $("#kecamatan").append('<option value="">PILIH</option>');
-                $("#kelurahan").append('<option value="">PILIH</option>');
-                $.ajax({url: url,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (result) {
-                        for (var i = 0; i < result.length; i++)
-                            $("#kecamatan").append('<option value="' + result[i].id_kec + '">' + result[i].nama + '</option>');
-                    }
-                });
-            });
-            $("#kecamatan").change(function () {
-                var id_kec = $("#kecamatan").val();
-                var url = 'get_kelurahan.php?id_kec=' + id_kec;
-                $("#kelurahan").html('');
-                $("#kelurahan").append('<option value="">PILIH</option>');
-                $.ajax({url: url,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (result) {
-                        for (var i = 0; i < result.length; i++)
-                            $("#kelurahan").append('<option value="' + result[i].id_kel + '">' + result[i].nama + '</option>');
-                    }
-                });
-            });
+        });
         </script>
     </body>
 </html>

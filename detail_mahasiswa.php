@@ -86,9 +86,9 @@
                             $rtrw = $data['RTRW'];
                             $dusun = $data['DUSUN'];
                             $kelurahan = $data['KELURAHAN'];
-                            $kecamatan = $data['KECAMATAN'];
-                            $kabupaten = $data['KABUPATEN'];
-                            $propinsi = $data['ASSMAMSMHS'];
+                            $kecamatan = $data['KECAMATAN_EKSPORT'];
+                            $kabupaten = $data['KABUPATEN_EKSPORT'];
+                            $propinsi = $data['PROPINSI_EKSPORT'];
                             $kewarganegaraan = $data['KEWARGANEGARAAN'];
                             $nokps = $data['NOKPS'];
                             $agama = $data['AGAMA'];
@@ -325,21 +325,27 @@
                                 </tr>
                                 <tr>
                                     <th>KECAMATAN</th>
-                                    <td><?php echo $kecamatan; ?></td>
+                                    <?php
+                                     $kec = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$kecamatan'");
+                                     $data_kec = mysqli_fetch_array($kec)
+                                    ?>
+                                    <td style="text-transform: uppercase"><?php echo $data_kec['nama_wilayah']; ?></td>
                                 </tr>
                                 <tr>
                                     <th>KEBUPATEN</th>
-                                    <td><?php echo $kabupaten; ?></td>
+                                    <?php
+                                     $kab = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$kabupaten'");
+                                     $data_kab = mysqli_fetch_array($kab)
+                                    ?>
+                                    <td style="text-transform: uppercase"><?php echo $data_kab['nama_wilayah']; ?></td>
                                 </tr>
                                 <tr>
                                     <th>PROPINSI</th>
-                                    <td><?php
-                                        $pro = mysqli_query($mysqli, "SELECT * FROM provinces WHERE id='$propinsi'");
-                                        $datapro = mysqli_fetch_array($pro);
-                                        $KDPROTBPRO = $datapro["id"];
-                                        $NMPROTBPRO = $datapro["name"];
-                                        ?>
-                                        <?php echo $KDPROTBPRO; ?> - <?php echo $NMPROTBPRO; ?></td>
+                                    <?php
+                                     $prov = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$propinsi'");
+                                     $data_prov = mysqli_fetch_array($prov)
+                                    ?>
+                                    <td style="text-transform: uppercase"><?php echo $data_prov['nama_wilayah']; ?></td>
                                 </tr>
                                 <tr>
                                     <th>KEWARGANEGARAAN</th>
