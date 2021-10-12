@@ -439,7 +439,7 @@
                                     <th>KTP / KK SCAN</th>
                                     <td>
                                         <?php if ($ktp) { ?>
-                                            <img id="zoom_ktp" src="../document/ktp/<?php echo $ktp; ?>" data-zoom-image="../document/ktp/<?php echo $ktp; ?>" width="200">
+                                            <img id="zoom_ktp" src="http://simaster.amayogyakarta.ac.id/document/ktp/<?php echo $ktp; ?>" data-zoom-image="../document/ktp/<?php echo $ktp; ?>" width="200">
                                             <br/>
                                             <a href="http://simaster.amayogyakarta.ac.id/document/ktp/<?php echo $ktp; ?>" target="_blank"><span class="label label-primary">TAMPILKAN KTP</span></a>
                                             <br/>
@@ -449,7 +449,7 @@
                                 <tr>
                                     <th>IJAZAH SCAN</th>
                                     <td><?php if ($ijazah) { ?>
-                                            <img id="zoom_ijazah" src="../document/ijazah/<?php echo $ijazah; ?>" data-zoom-image="../document/ijazah/<?php echo $ijazah; ?>" width="200">
+                                            <img id="zoom_ijazah" src="http://simaster.amayogyakarta.ac.id/document/ijazah/<?php echo $ijazah; ?>" data-zoom-image="../document/ijazah/<?php echo $ijazah; ?>" width="200">
                                             <br/>
                                             <a href="http://simaster.amayogyakarta.ac.id/document/ijazah/<?php echo $ijazah; ?>" target="_blank"><span class="label label-primary">TAMPILKAN IJAZAH</span></a>
                                             <br/>
@@ -461,7 +461,7 @@
                                     <td><?php
                                         if ($akte_kelahiran) {
                                             ?>
-                                            <img id="zoom_akte" src="../document/akte/<?php echo $akte_kelahiran; ?>" data-zoom-image="../document/akte/<?php echo $akte_kelahiran; ?>" width="200">
+                                            <img id="zoom_akte" src="http://simaster.amayogyakarta.ac.id/document/akte/<?php echo $akte_kelahiran; ?>" data-zoom-image="../document/akte/<?php echo $akte_kelahiran; ?>" width="200">
                                             <br/>
                                             <a href="http://simaster.amayogyakarta.ac.id/document/akte/<?php echo $akte_kelahiran; ?>" target="_blank"><span class="label label-primary">TAMPILKAN AKTE</span></a>
                                             <br/>
