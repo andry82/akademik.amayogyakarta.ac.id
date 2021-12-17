@@ -2,13 +2,10 @@
 
 // Load file koneksi.php
 include '../config.php';
-
 // Load plugin PHPExcel nya
 require_once 'PHPExcel/PHPExcel.php';
-
 // Panggil class PHPExcel nya
 $excel = new PHPExcel();
-
 // Settingan awal fil excel
 $excel->getProperties()->setCreator('My Notes Code')
         ->setLastModifiedBy('My Notes Code')
@@ -79,35 +76,37 @@ $excel->setActiveSheetIndex(0)->setCellValue('K3', "RT"); // Set kolom F3 dengan
 $excel->setActiveSheetIndex(0)->setCellValue('L3', "RW"); // Set kolom F3 dengan tulisan "ALAMAT"
 $excel->setActiveSheetIndex(0)->setCellValue('M3', "DUSUN"); // Set kolom F3 dengan tulisan "ALAMAT"
 $excel->setActiveSheetIndex(0)->setCellValue('N3', "KELURAHAN"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('O3', "KECAMATAN"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('P3', "KABUPATEN"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('Q3', "KODE POS"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('R3', "KODE PROP"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('S3', "PROPINSI"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('T3', "JENIS TINGGAL"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('U3', "TELEPON"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('V3', "EMAIL"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('W3', "PENERIMA KPS"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('X3', "NO KPS"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('Y3', "NAMA AYAH"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('Z3', "NIK"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AA3', "TANGGAL LAHIR"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AB3', "PENDIDIKAN"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AC3', "PEKERJAAN"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AD3', "PENGHASILAN"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AE3', "NAMA IBU"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AF3', "NIK"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AG3', "TANGGAL LAHIR"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AH3', "PENDIDIKAN"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AI3', "PEKERJAAN"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AJ3', "PENGHASILAN"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AK3', "NAMA WALI"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AL3', "TANGGAL LAHIR"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AM3', "PENDIDIKAN"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AN3', "PEKERJAAN"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AO3', "PENGHASILAN"); // Set kolom F3 dengan tulisan "ALAMAT"
-$excel->setActiveSheetIndex(0)->setCellValue('AP3', "KELAS DPA"); // Set kolom F3 dengan tulisan "ALAMAT"
-// Apply style header yang telah kita buat tadi ke masing-masing kolom header
+$excel->setActiveSheetIndex(0)->setCellValue('O3', "KECAMATAN KODE"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('P3', "KECAMATAN"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('Q3', "KABUPATEN KODE"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('R3', "KABUPATEN"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('S3', "KODE POS"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('U3', "PROPINSI KODE"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('T3', "PROPINSI"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('U3', "JENIS TINGGAL"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('V3', "TELEPON"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('W3', "EMAIL"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('X3', "PENERIMA KPS"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('Y3', "NO KPS"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('Z3', "NAMA AYAH"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AA3', "NIK"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AB3', "TANGGAL LAHIR"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AC3', "PENDIDIKAN"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AD3', "PEKERJAAN"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AE3', "PENGHASILAN"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AF3', "NAMA IBU"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AG3', "NIK"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AH3', "TANGGAL LAHIR"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AI3', "PENDIDIKAN"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AJ3', "PEKERJAAN"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AK3', "PENGHASILAN"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AL3', "NAMA WALI"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AM3', "TANGGAL LAHIR"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AN3', "PENDIDIKAN"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AO3', "PEKERJAAN"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AP3', "PENGHASILAN"); // Set kolom F3 dengan tulisan "ALAMAT"
+$excel->setActiveSheetIndex(0)->setCellValue('AQ3', "KELAS DPA"); // Set kolom F3 dengan tulisan "ALAMAT"
+// Apply style header yang telah kita buat tadike masing-masing kolom header
 $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('C3')->applyFromArray($style_col);
@@ -150,6 +149,8 @@ $excel->getActiveSheet()->getStyle('AM3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('AN3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('AO3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('AP3')->applyFromArray($style_col);
+$excel->getActiveSheet()->getStyle('AQ3')->applyFromArray($style_col);
+$excel->getActiveSheet()->getStyle('AR3')->applyFromArray($style_col);
 // Apply style header yang telah kita buat tadi ke masing-masing kolom header
 $excel->getActiveSheet()->getStyle('A3')->applyFromArray($center_col);
 $excel->getActiveSheet()->getStyle('B3')->applyFromArray($center_col);
@@ -168,7 +169,15 @@ $no = 1; // Untuk penomoran tabel, di awal set dengan 1
 $numrow = 4; // Set baris pertama untuk isi tabel adalah baris ke 4
 while ($data = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql 
     $kelas_huruf = $splite = explode("/", $data['nmkelas']);
-    $kode_propinsi = $data['ASSMAMSMHS'];
+    $kode_propinsi = $data['PROPINSI_EXPORT'];
+    $prop = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$kode_propinsi'");
+    $data_prop = mysqli_fetch_array($prop);
+    $kode_kabupaten = $data['KABUPATEN_EXPORT'];
+    $kab = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$kode_kabupaten'");
+    $data_kab = mysqli_fetch_array($kab);
+    $kode_kecamatan = $data['KECAMATAN_EXPORT'];
+    $kec = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$kode_kecamatan'");
+    $data_kec = mysqli_fetch_array($kec);
     $thmskmhs = $data['TAHUNMSMHS'];
     $kelas_mhs = $kelas_huruf[0];
     $semester = (($ta - $thmskmhs) * 2) + $smtgg;
@@ -196,34 +205,36 @@ while ($data = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, $data['RTRW']);
     $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, $data['DUSUN']);
     $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, $data['KELURAHAN']);
-    $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, $data['KECAMATAN']);
-    $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, $data['KABUPATEN']);
-    $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, $data['KODEPOS']);
-    $excel->setActiveSheetIndex(0)->setCellValue('R' . $numrow, $data['ASSMAMSMHS']);
-    $excel->setActiveSheetIndex(0)->setCellValue('S' . $numrow, $nama_propinsi);
-    $excel->setActiveSheetIndex(0)->setCellValue('T' . $numrow, $data['JENISTINGGAL']);
-    $excel->setActiveSheetIndex(0)->setCellValue('U' . $numrow, $data['TELP']);
-    $excel->setActiveSheetIndex(0)->setCellValue('V' . $numrow, $data['EMAIL']);
-    $excel->setActiveSheetIndex(0)->setCellValue('W' . $numrow, $kps);
-    $excel->setActiveSheetIndex(0)->setCellValue('X' . $numrow, $data['NOKPS']);
-    $excel->setActiveSheetIndex(0)->setCellValue('Y' . $numrow, $data['NAMAORTUWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('Z' . $numrow, $data['NIKAYAH']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AA' . $numrow, $data['TANGGALLAHIRAYAH']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AB' . $numrow, $data['PENDIDIKANAYAH']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AC' . $numrow, $data['PEKERJAANORTUWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AD' . $numrow, $data['PENGHASILANAYAH']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AE' . $numrow, $data['NAMAIBU']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AF' . $numrow, $data['NIKIBU']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AG' . $numrow, $data['TANGGALLAHIRIBU']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AH' . $numrow, $data['PENDIDIKANIBU']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AI' . $numrow, $data['PEKERJAANIBU']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AJ' . $numrow, $data['PENGHASILANIBU']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AK' . $numrow, $data['NAMAWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AL' . $numrow, $data['TANGGALLAHIRWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AM' . $numrow, $data['PENDIDIKANWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AN' . $numrow, $data['PEKERJAANWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AO' . $numrow, $data['PENGHASILANWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AP' . $numrow, $kelas_mhs . $semester);
+    $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, $kode_kecamatan);
+    $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, $data_kec['nama_wilayah']);
+    $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, $kode_kabupaten);
+    $excel->setActiveSheetIndex(0)->setCellValue('R' . $numrow, $data_kab['nama_wilayah']);
+    $excel->setActiveSheetIndex(0)->setCellValue('S' . $numrow, $data['KODEPOS']);
+    $excel->setActiveSheetIndex(0)->setCellValue('T' . $numrow, $kode_propinsi);
+    $excel->setActiveSheetIndex(0)->setCellValue('U' . $numrow, $data_prop['nama_wilayah']);
+    $excel->setActiveSheetIndex(0)->setCellValue('V' . $numrow, $data['JENISTINGGAL']);
+    $excel->setActiveSheetIndex(0)->setCellValue('W' . $numrow, $data['TELP']);
+    $excel->setActiveSheetIndex(0)->setCellValue('X' . $numrow, $data['EMAIL']);
+    $excel->setActiveSheetIndex(0)->setCellValue('Y' . $numrow, $kps);
+    $excel->setActiveSheetIndex(0)->setCellValue('Z' . $numrow, $data['NOKPS']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AA' . $numrow, $data['NAMAORTUWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AB' . $numrow, $data['NIKAYAH']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AC' . $numrow, $data['TANGGALLAHIRAYAH']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AD' . $numrow, $data['PENDIDIKANAYAH']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AE' . $numrow, $data['PEKERJAANORTUWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AF' . $numrow, $data['PENGHASILANAYAH']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AG' . $numrow, $data['NAMAIBU']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AH' . $numrow, $data['NIKIBU']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AI' . $numrow, $data['TANGGALLAHIRIBU']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AJ' . $numrow, $data['PENDIDIKANIBU']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AK' . $numrow, $data['PEKERJAANIBU']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AL' . $numrow, $data['PENGHASILANIBU']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AM' . $numrow, $data['NAMAWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AN' . $numrow, $data['TANGGALLAHIRWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AO' . $numrow, $data['PENDIDIKANWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AP' . $numrow, $data['PEKERJAANWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AQ' . $numrow, $data['PENGHASILANWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AR' . $numrow, $kelas_mhs . $semester);
     // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
     $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($center_col);
     $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);
@@ -267,6 +278,8 @@ while ($data = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $excel->getActiveSheet()->getStyle('AN' . $numrow)->applyFromArray($style_row);
     $excel->getActiveSheet()->getStyle('AO' . $numrow)->applyFromArray($style_row);
     $excel->getActiveSheet()->getStyle('AP' . $numrow)->applyFromArray($center_col);
+    $excel->getActiveSheet()->getStyle('AR' . $numrow)->applyFromArray($center_col);
+    $excel->getActiveSheet()->getStyle('AS' . $numrow)->applyFromArray($center_col);
     $excel->getActiveSheet()->getRowDimension($numrow)->setRowHeight(20);
     $no++; // Tambah 1 setiap kali looping
     $numrow++; // Tambah 1 setiap kali looping

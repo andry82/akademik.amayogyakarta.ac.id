@@ -125,6 +125,9 @@ $ta = substr($tahunajar, 0, 4);
                 <a href="presensi_toga.php"><i class="fa fa-list fa-fw"></i> PRESENSI TOGA</a>
             </li>    
             <li>
+                <a href="data_foto_ijazah.php"><i class="fa fa-list fa-fw"></i> FOTO IJAZAH</a>
+            </li>    
+            <li>
                 <a href="data_wisuda.php"><i class="fa fa-list fa-fw"></i> DATA WISUDA</a>
             </li>    
             <li>
