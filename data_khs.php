@@ -120,12 +120,21 @@
                                 $nomor = 1;
                                 $semester = '01';
                                 while ($data = mysqli_fetch_array($nilai)) {
+                                    $nilai_agama = $data['STAGM'];
                                     ?>
                                     <tr>
                                         <td style="text-align: center"><?php echo $data['SEMESTBKMK']; ?></td>
                                         <td><?php echo $data['KDKMKTRNLM']; ?> - <?php echo $data['NAKMKTBKMK']; ?></td>
                                         <td style="text-align: center"><?php echo $data['SKSMKTBKMK']; ?></td>
-                                        <td style="text-align: center"><?php echo $data['TOTAL']; ?></td>
+                                        <td style="text-align: center">
+                                            <?php if($nilai_agama==0){
+                                                echo $data['TOTAL'];
+                                            }else{
+                                                if($data['NLAKHTRNLM']){
+                                                  echo $data['TOTAL_BPAS'];
+                                                }
+                                            }?>
+                                        </td>
                                         <td style="text-align: center"><?php echo $data['NLAKHTRNLM']; ?></td>
                                     </tr>  
     <?php $total_sks += $data['SKSMKTBKMK'];
