@@ -117,18 +117,19 @@
                                 $bln = 'UnKnown';
                             }break;
                     }
-                   
+
                     $tanggalIndonesia = $tgl . " " . $bln . " " . $thn;
                     return $tanggalIndonesia;
                 }
                 ?>
                 <div class="row">
                     <div class="col-lg-12">
-                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
                                     <th>KEGIATAN YUDISIUM</th>
                                     <th>TANGGAL / JAM / TEMPAT</th>
+                                    <th>TAHUN</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -142,16 +143,18 @@
                                     $waktu = $d['waktu'];
                                     $ruang = $d['ruang'];
                                     $status = $d['status'];
+                                    $tahun = $d['tahun'];
                                     ?>
                                     <tr>
-                                        <td class="col-lg-5"><?php echo $nama_kegiatan; ?></td>
+                                        <td class="col-lg-4"><?php echo $nama_kegiatan; ?></td>
                                         <td class="col-lg-4"><?php echo TanggalIndonesia($tanggal); ?> / <?php echo $waktu; ?> / <?php echo $ruang; ?></td>
+                                        <td class="col-lg-1"><?php echo $tahun; ?></td>
                                         <td class="col-lg-3">
                                             <a href="detail_presensi_yudisium.php?id=<?php echo $id; ?>"><span class="label label-primary">DATA PRESENSI</span></a>
-                                            <?php if($status==0){ ?>
-                                            <a href="proses_status_yudisium.php?id=<?php echo $id; ?>"><span class="label label-danger">TIDAK AKTIF</span></a>
-                                            <?php }elseif($status==1){ ?>
-                                            <a href="proses_batal_aktif_status_yudisium.php?id=<?php echo $id; ?>"><span class="label label-success">AKTIF</span></a>
+                                            <?php if ($status == 0) { ?>
+                                                <a href="proses_status_yudisium.php?id=<?php echo $id; ?>"><span class="label label-danger">TIDAK AKTIF</span></a>
+                                            <?php } elseif ($status == 1) { ?>
+                                                <a href="proses_batal_aktif_status_yudisium.php?id=<?php echo $id; ?>"><span class="label label-success">AKTIF</span></a>
                                             <?php } ?>
                                         </td>
                                     </tr>
@@ -160,6 +163,7 @@
                                 ?>
                             </tbody>
                         </table>
+                        <a href="tambah_jadwal_yudisium.php" class='btn btn-success btn-xs'>TAMBAH JADWAL</a>   
                         <br />
                         <br />
                     </div>

@@ -145,7 +145,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $pendaftar_yudisium = mysqli_query($mysqli, "SELECT * FROM pendaftaran_yudisium py, msmhs m, upload_ta ut, kelasparalel_mhs km WHERE km.nimhs=m.NIMHSMSMHS AND py.nim=m.NIMHSMSMHS AND ut.nim=m.NIMHSMSMHS AND ut.tahun=py.tahun AND py.tahun=$ta AND py.sesi=$id_kegiatan");
+                                $pendaftar_yudisium = mysqli_query($mysqli, "SELECT * FROM pendaftaran_yudisium py, msmhs m, upload_ta ut, kelasparalel_mhs km WHERE km.nimhs=m.NIMHSMSMHS AND py.nim=m.NIMHSMSMHS AND ut.nim=m.NIMHSMSMHS AND ut.tahun=py.tahun AND py.tahun=$ta AND py.kegiatan_id=$id_kegiatan");
                                 while ($data_pendaftar = mysqli_fetch_array($pendaftar_yudisium)) {
                                     $pendaftaran_id = $data_pendaftar['pendaftaran_id'];
                                     $nim = trim($data_pendaftar['nim']);
@@ -199,17 +199,19 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <?php
-                                                                            $pilihan_sesi = mysqli_query($mysqli, "SELECT * FROM kegiatan");
+                                                                            $n1 = 1;
+                                                                            $pilihan_sesi = mysqli_query($mysqli, "SELECT * FROM kegiatan WHERE tahun=$ta_lengkap");
                                                                             while ($data_sesi = mysqli_fetch_array($pilihan_sesi)) {
+                                                                                $nomor1 = $n1++;
                                                                                 ?>
                                                                                 <tr style="text-align:center">
                                                                                     <?php if($sesi_awal==$data_sesi['id']){ ?>
-                                                                                    <td style="font-weight: bold"><?php echo $data_sesi['id']; ?></td>
+                                                                                    <td style="font-weight: bold"><?php echo $nomor1; ?></td>
                                                                                     <td style="font-weight: bold"><?php echo $data_sesi['tanggal']; ?></td>
                                                                                     <td style="font-weight: bold"><?php echo $data_sesi['waktu']; ?></td>
                                                                                     <td style="font-weight: bold"><?php echo $data_sesi['ruang']; ?></td>
                                                                                     <?php } else { ?>
-                                                                                    <td><?php echo $data_sesi['id']; ?></td>
+                                                                                    <td><?php echo $nomor1; ?></td>
                                                                                     <td><?php echo $data_sesi['tanggal']; ?></td>
                                                                                     <td><?php echo $data_sesi['waktu']; ?></td>
                                                                                     <td><?php echo $data_sesi['ruang']; ?></td>
@@ -273,17 +275,19 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <?php
-                                                                            $pilihan_sesi = mysqli_query($mysqli, "SELECT * FROM kegiatan");
+                                                                            $n2 = 1;
+                                                                            $pilihan_sesi = mysqli_query($mysqli, "SELECT * FROM kegiatan WHERE tahun=$ta_lengkap");
                                                                             while ($data_sesi = mysqli_fetch_array($pilihan_sesi)) {
+                                                                                $nomor2 = $n2++;
                                                                                 ?>
                                                                                 <tr style="text-align:center">
                                                                                     <?php if($sesi_awal==$data_sesi['id']){ ?>
-                                                                                    <td style="font-weight: bold"><?php echo $data_sesi['id']; ?></td>
+                                                                                    <td style="font-weight: bold"><?php echo $nomor2; ?></td>
                                                                                     <td style="font-weight: bold"><?php echo $data_sesi['tanggal']; ?></td>
                                                                                     <td style="font-weight: bold"><?php echo $data_sesi['waktu']; ?></td>
                                                                                     <td style="font-weight: bold"><?php echo $data_sesi['ruang']; ?></td>
                                                                                     <?php } else { ?>
-                                                                                    <td><?php echo $data_sesi['id']; ?></td>
+                                                                                    <td><?php echo $nomor2; ?></td>
                                                                                     <td><?php echo $data_sesi['tanggal']; ?></td>
                                                                                     <td><?php echo $data_sesi['waktu']; ?></td>
                                                                                     <td><?php echo $data_sesi['ruang']; ?></td>
