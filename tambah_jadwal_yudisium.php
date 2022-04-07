@@ -124,42 +124,30 @@
                 ?>
                 <div class="row">
                     <div class="col-lg-12">
-                        <form name="form" method="post" action="update_profile.php" enctype="multipart/form-data">
+                        <form name="form" method="post" action="proses_tambah_yudisium.php">
                             <div class="form-group">
-                                <label for="KegiatanYudisium">KEGIATAN YUDISIUM</label>
-                                <input type="text" class="form-control" name="kegiatan_yudisium" value="<?php echo $nama_dosen; ?>" placeholder="Nama Lengkap">
+                                <label for="NamaKegiatanYudisium">NAMA KEGIATAN YUDISIUM</label>
+                                <input type="text" class="form-control" name="nama_kegiatan" value="<?php echo $data['nama_kegiatan']; ?>" placeholder="Nama Kegiatan">
                             </div>
                             <div class="form-group">
                                 <label for="Tanggal">TANGGAL</label>
-                                <input type="text" class="form-control" name="tanggal" value="<?php echo $gelar_dosen; ?>" placeholder="Gelar Dosen">
+                                <input type="text" class="form-control" name="tanggal" value="<?php echo $data['tanggal']; ?>" placeholder="Tanggal">
                             </div>
                             <div class="form-group">
-                                <label for="Jam">JAM</label>
-                                <input type="text" class="form-control" name="jam" value="<?php echo $tplahir; ?>" placeholder="Tempat Lahir">
+                                <label for="Waktu">WAKTU</label>
+                                <input type="text" class="form-control" name="waktu" value="<?php echo $data['waktu']; ?>" placeholder="Waktu">
                             </div>                           
                             <div class="form-group">
                                 <label for="TempatLahir">TEMPAT</label>
-                                <input type="text" class="form-control" name="ttl" value="<?php echo $tgllahir; ?>" placeholder="Tempat Lahir">
+                                <input type="text" class="form-control" name="ruang" value="<?php echo $data['ruang']; ?>" placeholder="Ruang">
                             </div>                           
-                            <!--<div class="form-group">
-                                <label for="TempatLahir">TAHUN PERIODE SEMESTER</label>
-                                <input type="text" class="form-control" name="THPERIODE" value="<?php echo $thperiode; ?>" placeholder="Tahun Periode Semester">
-                            </div>         -->                  
-                            <!--<?php
-                            $filename_ijazah = "document/ijazah/$ijazah";
-                            //print($filename);				
-                            if (file_exists($filename_ijazah)) {
-                                ?>
-                                <img src="document/ijazah/<?php echo $ijazah; ?>" width="400">
-                                <br /><br />
-                            <?php } ?>
                             <div class="form-group">
-                                <label for="IJAZAH">UPLOAD IJAZAH / SKL (JPG, JPEG)</label>
-                                <input type="file" name="ijazah" class="form-control">
-                            </div>-->
+                                <label for="Tahun">TAHUN</label>
+                                <input type="text" class="form-control" name="tahun" value="<?php echo $ta_lengkap; ?>" placeholder="Tahun">
+                            </div>
                                                
                             <div class="form-group">
-                                <a href="presensi_yudisium.php" class='btn btn-primary btn-sm'><i class="fa fa-backward fa-fw"></i> KEMBALI</a>   
+                                <a href="jadwal_yudisium.php" class='btn btn-primary btn-sm'><i class="fa fa-backward fa-fw"></i> KEMBALI</a>   
                                 <input type="submit" name="update" value="SIMPAN" class="btn btn-success btn-sm">
                             </div> 
                         </form>
