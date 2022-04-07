@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>PRESENSI YUDISIUM | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
+        <title>JADWAL YUDISIUM | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h4 class="page-header"><i class="fa fa-user fa-fw"></i> PRESENSI YUDISIUM</h4>
+                        <h4 class="page-header"><i class="fa fa-user fa-fw"></i> JADWAL YUDISIUM</h4>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -151,6 +151,7 @@
                                         <td class="col-lg-1"><?php echo $tahun; ?></td>
                                         <td class="col-lg-3">
                                             <a href="detail_presensi_yudisium.php?id=<?php echo $id; ?>"><span class="label label-primary">DATA PRESENSI</span></a>
+                                            <a href="edit_jadwal_yudisium.php?id=<?php echo $id; ?>"><span class="label label-warning">EDIT</span></a>
                                             <?php if ($status == 0) { ?>
                                                 <a href="proses_status_yudisium.php?id=<?php echo $id; ?>"><span class="label label-danger">TIDAK AKTIF</span></a>
                                             <?php } elseif ($status == 1) { ?>
@@ -163,7 +164,7 @@
                                 ?>
                             </tbody>
                         </table>
-                        <a href="tambah_jadwal_yudisium.php" class='btn btn-success btn-xs'>TAMBAH JADWAL</a>   
+                        <a href="tambah_jadwal_yudisium.php" class='btn btn-primary btn-sm'><i class="fa fa-plus fa-fw"></i>TAMBAH JADWAL</a>   
                         <br />
                         <br />
                     </div>
