@@ -117,10 +117,19 @@ $ta = substr($tahunajar, 0, 4);
             </li>    
             <li>
                 <a href="data_calon_wisuda.php"><i class="fa fa-list fa-fw"></i> DATA CALON WISUDA</a>
-            </li>    
+            </li>   
             <li>
-                <a href="jadwal_yudisium.php"><i class="fa fa-list fa-fw"></i> JADWAL YUDISIUM</a>
-            </li>    
+                <a href="#"><i class="fa fa-list fa-fw"></i> JADWAL<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="jadwal_yudisium.php"><i class="fa fa-list fa-fw"></i> YUDISIUM</a>
+                    </li>    
+                    <li>
+                        <a href="jadwal_pengambilan_toga.php"><i class="fa fa-list fa-fw"></i> PENGAMBILAN TOGA</a>
+                    </li>
+                </ul>
+            </li> 
+
             <li>
                 <a href="presensi_toga.php"><i class="fa fa-list fa-fw"></i> PRESENSI TOGA</a>
             </li>    
