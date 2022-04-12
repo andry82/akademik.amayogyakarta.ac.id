@@ -158,7 +158,7 @@
                                     ?>
                                     <tr>
                                         <td class="col-lg-2">
-                                            <img width="150px" src="http://<?php echo $url_documet_wisuda ?>/document/foto_ijazah/<?php echo $d['foto_ijazah']; ?>">                         
+                                            <img width="150px" src="<?php echo $url_documet_wisuda ?>/document/foto_ijazah/<?php echo $d['foto_ijazah']; ?>">                         
                                         </td>
                                         <td class="col-lg-6">
                                             <table border="0" width="100%">
