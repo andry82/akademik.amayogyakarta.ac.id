@@ -133,6 +133,9 @@
                         TANGGAL : <?php echo TanggalIndonesia($data_yudisium['tanggal']); ?><br/>
                         WAKTU : <?php echo $data_yudisium['waktu']; ?> WIB<br/>
                         TEMPAT : <?php echo $data_yudisium['ruang']; ?><br/><br/>
+                        <a href="export_presensi_yudisium.php?id=<?php echo $id_kegiatan; ?>" class='btn btn-primary btn-sm'><i class="fa fa-download fa-fw"></i>DOWNLOAD PRESENSI</a>  
+                        <br/>  
+                        <br/>
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
@@ -205,16 +208,16 @@
                                                                                 $nomor1 = $n1++;
                                                                                 ?>
                                                                                 <tr style="text-align:center">
-                                                                                    <?php if($sesi_awal==$data_sesi['id']){ ?>
-                                                                                    <td style="font-weight: bold"><?php echo $nomor1; ?></td>
-                                                                                    <td style="font-weight: bold"><?php echo $data_sesi['tanggal']; ?></td>
-                                                                                    <td style="font-weight: bold"><?php echo $data_sesi['waktu']; ?></td>
-                                                                                    <td style="font-weight: bold"><?php echo $data_sesi['ruang']; ?></td>
+                                                                                    <?php if ($sesi_awal == $data_sesi['id']) { ?>
+                                                                                        <td style="font-weight: bold"><?php echo $nomor1; ?></td>
+                                                                                        <td style="font-weight: bold"><?php echo $data_sesi['tanggal']; ?></td>
+                                                                                        <td style="font-weight: bold"><?php echo $data_sesi['waktu']; ?></td>
+                                                                                        <td style="font-weight: bold"><?php echo $data_sesi['ruang']; ?></td>
                                                                                     <?php } else { ?>
-                                                                                    <td><?php echo $nomor1; ?></td>
-                                                                                    <td><?php echo $data_sesi['tanggal']; ?></td>
-                                                                                    <td><?php echo $data_sesi['waktu']; ?></td>
-                                                                                    <td><?php echo $data_sesi['ruang']; ?></td>
+                                                                                        <td><?php echo $nomor1; ?></td>
+                                                                                        <td><?php echo $data_sesi['tanggal']; ?></td>
+                                                                                        <td><?php echo $data_sesi['waktu']; ?></td>
+                                                                                        <td><?php echo $data_sesi['ruang']; ?></td>
                                                                                     <?php } ?>
                                                                                     <td><a href="proses_pilih_sesi.php?id=<?php echo $pendaftaran_id; ?>&sesi=<?php echo $data_sesi['id']; ?>&kegiatan=<?php echo $id_kegiatan; ?>&nim=<?php echo $nim; ?>" class="btn btn-primary btn-xs"><i class="fa fa-arrows fa-fw"></i> PILIH SESI</a></td>
                                                                                 </tr>
@@ -281,16 +284,16 @@
                                                                                 $nomor2 = $n2++;
                                                                                 ?>
                                                                                 <tr style="text-align:center">
-                                                                                    <?php if($sesi_awal==$data_sesi['id']){ ?>
-                                                                                    <td style="font-weight: bold"><?php echo $nomor2; ?></td>
-                                                                                    <td style="font-weight: bold"><?php echo $data_sesi['tanggal']; ?></td>
-                                                                                    <td style="font-weight: bold"><?php echo $data_sesi['waktu']; ?></td>
-                                                                                    <td style="font-weight: bold"><?php echo $data_sesi['ruang']; ?></td>
+                                                                                    <?php if ($sesi_awal == $data_sesi['id']) { ?>
+                                                                                        <td style="font-weight: bold"><?php echo $nomor2; ?></td>
+                                                                                        <td style="font-weight: bold"><?php echo $data_sesi['tanggal']; ?></td>
+                                                                                        <td style="font-weight: bold"><?php echo $data_sesi['waktu']; ?></td>
+                                                                                        <td style="font-weight: bold"><?php echo $data_sesi['ruang']; ?></td>
                                                                                     <?php } else { ?>
-                                                                                    <td><?php echo $nomor2; ?></td>
-                                                                                    <td><?php echo $data_sesi['tanggal']; ?></td>
-                                                                                    <td><?php echo $data_sesi['waktu']; ?></td>
-                                                                                    <td><?php echo $data_sesi['ruang']; ?></td>
+                                                                                        <td><?php echo $nomor2; ?></td>
+                                                                                        <td><?php echo $data_sesi['tanggal']; ?></td>
+                                                                                        <td><?php echo $data_sesi['waktu']; ?></td>
+                                                                                        <td><?php echo $data_sesi['ruang']; ?></td>
                                                                                     <?php } ?>
                                                                                     <td><a href="proses_pilih_sesi.php?id=<?php echo $pendaftaran_id; ?>&sesi=<?php echo $data_sesi['id']; ?>&kegiatan=<?php echo $id_kegiatan; ?>&nim=<?php echo $nim; ?>" class="btn btn-primary btn-xs"><i class="fa fa-arrows fa-fw"></i> PILIH SESI</a></td>
                                                                                 </tr>

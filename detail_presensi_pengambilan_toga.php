@@ -134,6 +134,10 @@
                         TANGGAL : <?php echo TanggalIndonesia($data_yudisium['tanggal']); ?><br/>
                         WAKTU : <?php echo $data_yudisium['waktu']; ?> WIB<br/>
                         TEMPAT : <?php echo $data_yudisium['ruang']; ?><br/><br/>
+                        <a href="export_presensi_yudisium.php" class='btn btn-primary btn-sm'><i class="fa fa-download fa-fw"></i>DOWNLOAD PRESENSI</a>  
+                        <br/>  
+                        <br/>
+                        
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
