@@ -467,7 +467,8 @@ $nim = $_GET['nim'];
                                                                         <table style="margin-top: 5px; font-size: 10px;" class="tabelkhs" bgcolor="#000000" border="0" cellpadding="3" cellspacing="0" width="100%">
                                                                             <tbody><tr bgcolor="#ffffff" valign="middle">
                                                                                     <th class="thl" width="2%">No.</th>
-                                                                                    <th class="thc" style="text-align: left;" width="23%">Nama Mata Kuliah</th>
+                                                                                    <th class="thl" width="5%">Kode<br/>Mata Kuliah</th>
+                                                                                    <th class="thc" width="23%">Nama Mata Kuliah</th>
                                                                                     <!--<th class="thk" style="border-top: 1px solid #000000;
                             border-bottom: 2px solid #000000; text-align: right;" width="23%">Subject</th>-->
                                                                                     <th class="thcb" width="5%">SKS/Credit</th>                                                                      
@@ -478,7 +479,7 @@ $nim = $_GET['nim'];
                                                                                 <? $color2 = "#fff" ?>
                                                                                 <?php include('mktranskrip_sementara.php'); ?>
                                                                                 <tr bgcolor="#ffffff" valign="middle" style="border: 1px solid #000000; font-size: 11px;">
-                                                                                    <td class="tdl" colspan="2" align="center" style="border-top: 2px solid;"><strong> 
+                                                                                    <td class="tdl" colspan="3" align="center" style="border-top: 2px solid;"><strong> 
                                                                                             <?
                                                                                             //print($kdkonsen);
                                                                                             ?>

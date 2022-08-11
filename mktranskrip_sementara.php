@@ -5,7 +5,7 @@ if($ipkaktif=="open")
 $totip2 = "SELECT distinct(KDKMKTRNLM) from trnlm  where NIMHSTRNLM='$id_mhs' order by KDKMKTRNLM,NLAKHTRNLM ASC";
 }else
 {
-$totip2 = "SELECT distinct(tr.KDKMKTRNLM) from trnlm tr, tbkmk tbk where tr.KDKMKTRNLM=tbk.KDKMKTBKMK AND tr.THSMSTRNLM<='$tahunajaran' and tr.NIMHSTRNLM='$id_mhs' order by tbk.SEMESTBKMK ASC";
+$totip2 = "SELECT distinct(tr.KDKMKTRNLM) from trnlm tr, tbkmk tbk where tr.KDKMKTRNLM=tbk.KDKMKTBKMK AND tr.THSMSTRNLM<='$tahunajaran' and tr.NIMHSTRNLM='$id_mhs' order by tr.KDKMKTRNLM,tr.NLAKHTRNLM ASC";
 } 
 
 $hasilip2 = mysql_query($totip2);
@@ -30,11 +30,12 @@ $THSMSTRNLM= $dataip3["THSMSTRNLM"];
 $kode3= $dataip3["KDKMKTRNLM"];
 $kode4= $dataip3["KDKMKTRNLM"];
 
-$totmk2= "SELECT m.SKSMKTBKMK,m.NAKMKTBKMK, m.NAKMKTBKMK_EN from tbkmk m where m.KDKMKTBKMK='$kode3' and m.THSMSTBKMK='$THSMSTRNLM' and (kdkonsen='u' or kdkonsen='$kdkonsen')";
+$totmk2= "SELECT m.SKSMKTBKMK,m.NAKMKTBKMK, m.NAKMKTBKMK_EN, m.KDKMKTBKMK from tbkmk m where m.KDKMKTBKMK='$kode3' and m.THSMSTBKMK='$THSMSTRNLM' and (kdkonsen='u' or kdkonsen='$kdkonsen')";
 $hasilmk2 = mysql_query($totmk2);
 
 $datamk2 = mysql_fetch_array($hasilmk2);
 $sks2= $datamk2["SKSMKTBKMK"];
+$kode_mk = $datamk2["KDKMKTBKMK"];
 $namamk= $datamk2["NAKMKTBKMK"];
 $namamk_en = $datamk2["NAKMKTBKMK_EN"];
 $nasks2=$sks2*$bobot2;
@@ -51,7 +52,9 @@ $ipk2=number_format($ipk2,2);
 <tr style="background-color: <?= ($warna) ?>;"><td class="tdl" style="background: none repeat scroll 0 0 white;
     padding: 3px;
     border-bottom: 1px solid black;" align="center"><? print($no + 1); ?></td>
-
+    <td class="tdc" style="background: none repeat scroll 0 0 white;
+    padding: 3px;
+    border-bottom: 1px solid black;" align="center"><? print($kode_mk); ?></td>
     <?
     if($nilai2=="T" or $nilai2=="E" or $nilai2=="0")
     {
@@ -71,7 +74,7 @@ $ipk2=number_format($ipk2,2);
         <? print($namamk); ?></td>
     <?
     }
-    ?>                                     
+    ?>
     <td class="tdc" style="background: none repeat scroll 0 0 white;
     padding: 3px;
     border-bottom: 1px solid black;" align="center"><? print($sks2); ?></td>
@@ -99,7 +102,8 @@ $ipk2=number_format($ipk2,2);
 <table style="margin-top: 5px; font-size: 10px;" class="tabelkhs" bgcolor="#000000" border="0" cellpadding="3" cellspacing="0" width="100%">
                                                                 <tbody><tr bgcolor="#ffffff" valign="middle">
                                                                         <th class="thl" width="2%">No.</th>
-                                                                        <th class="thc" style="text-align: left;" width="23%">Nama Mata Kuliah</th>
+                                                                        <th class="thl" width="5%">Kode<br/>Mata Kuliah</th>                                                                                    
+                                                                        <th class="thc" width="23%">Nama Mata Kuliah</th>
                                                                         <!--<th class="thk" style="border-top: 1px solid #000000;
                 border-bottom: 2px solid #000000; text-align: right;" width="23%">Subject</th>-->
                                                                         <th class="thcb" width="5%">SKS/Credit</th>                                                                      
