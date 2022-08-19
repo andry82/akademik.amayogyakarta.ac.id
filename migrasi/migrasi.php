@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../config.php';
 $result = mysqli_query($mysqli, "SELECT * FROM msmhs");
 while ($data = mysqli_fetch_array($result)) {
     $nim = $data['NIMHSMSMHS'];    
