@@ -124,6 +124,7 @@
                             $alamat_wali = $data['ALAMATWALI'];
                             $hobi = $data['HOBI'];
                             $keahlian = $data['KEAHLIAN'];
+                            $kurikulum_berjalan = $data['KURIKULUM'];
                             $ktp = $data['ktpkk'];
                             $ijazah = $data['ijazah_sma'];
                             $akte_kelahiran = $data['akte_kelahiran'];
@@ -220,28 +221,41 @@
                                 <td><?php echo $nama_dosen; ?>, <?php echo $gelar_dosen; ?>  </td>
                             </tr>    
                             <tr>
+                                <th class="col-lg-3">KURIKULUM BERJALAN</th>
+                                <td>
+                                    <?php
+                                    $kurikulum = mysqli_query($mysqli, "SELECT DISTINCT(KURIKULUM) FROM trakm WHERE NIMHSTRAKM='$nim'");
+                                    while ($data_kurikulum = mysqli_fetch_array($kurikulum)) {
+                                        if($data_kurikulum['KURIKULUM'] == $kurikulum_berjalan){ ?>                                    
+                                    <a href="proses_pindah_kurikulum.php?nim=<?php echo $nim; ?>&kurikulum=<?php echo $data_kurikulum['KURIKULUM']; ?>"><span class="label label-success"><?php echo $data_kurikulum['KURIKULUM']; ?></span></a>
+                                        <?php }else{ ?>
+                                    <a href="proses_pindah_kurikulum.php?nim=<?php echo $nim; ?>&kurikulum=<?php echo $data_kurikulum['KURIKULUM']; ?>"><span class="label label-default"><?php echo $data_kurikulum['KURIKULUM']; ?></span></a>
+                                    <?php }} ?>
+                                </td>
+                            </tr>    
+                            <tr>
                                 <th class="col-lg-3">STATUS MAHASISWA</th>
                                 <td>
-                                    <?php if ($statusmhs == 'A') { ?>
+<?php if ($statusmhs == 'A') { ?>
                                         <a href="proses_status_akademik_mahasiswa.php?nim=<?php echo $nim; ?>&status_akademik=1"><span class="label label-success">AKTIF</span></a>
                                         <a href="proses_status_akademik_mahasiswa.php?nim=<?php echo $nim; ?>&status_akademik=2"><span class="label label-default">LULUS</span></a>
                                         <a href="proses_status_akademik_mahasiswa.php?nim=<?php echo $nim; ?>&status_akademik=3"><span class="label label-default">KELUAR</span></a>
-                                    <?php } elseif ($statusmhs == 'L') { ?>
+<?php } elseif ($statusmhs == 'L') { ?>
                                         <a href="proses_status_akademik_mahasiswa.php?nim=<?php echo $nim; ?>&status_akademik=1"><span class="label label-default">AKTIF</span></a>
                                         <a href="proses_status_akademik_mahasiswa.php?nim=<?php echo $nim; ?>&status_akademik=2"><span class="label label-success">LULUS</span></a>
                                         <a href="proses_status_akademik_mahasiswa.php?nim=<?php echo $nim; ?>&status_akademik=3"><span class="label label-default">KELUAR</span></a>
-                                    <?php } elseif ($statusmhs == 'K') { ?>
+<?php } elseif ($statusmhs == 'K') { ?>
                                         <a href="proses_status_akademik_mahasiswa.php?nim=<?php echo $nim; ?>&status_akademik=1"><span class="label label-default">AKTIF</span></a>
                                         <a href="proses_status_akademik_mahasiswa.php?nim=<?php echo $nim; ?>&status_akademik=2"><span class="label label-default">LULUS</span></a>
                                         <a href="proses_status_akademik_mahasiswa.php?nim=<?php echo $nim; ?>&status_akademik=3"><span class="label label-success">KELUAR</span></a>
-                                    <?php } ?>
+<?php } ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="col-lg-3">PASSWORD </th>
                                 <td><?php echo $password; ?></td>
                             </tr>  
-                            <?php if ($statusmhs == 'L') { ?>
+<?php if ($statusmhs == 'L') { ?>
                                 <tr>
                                     <th class="col-lg-3">TH STATUS KELULUSAN</th>
                                     <td><?php echo $thstatuslulusmhs; ?></td>
@@ -255,7 +269,7 @@
                                         if (file_exists($ijazahama)) {
                                             ?>
                                             <img id="zoom_ijazahama" src="../document/ijazahama/<?php echo $nim; ?>.jpg" data-zoom-image="../document/ijazahama/<?php echo $nim; ?>.jpg" width="200">
-                                        <?php } ?>
+    <?php } ?>
                                     </td>
                                 </tr>   
                                 <tr>
@@ -267,10 +281,10 @@
                                         if (file_exists($transkrip)) {
                                             ?>
                                             <img id="zoom_transkrip" src="../document/transkrip/<?php echo $nim; ?>.jpg" data-zoom-image="../document/ijazahama/<?php echo $nim; ?>.jpg" width="200">
-                                        <?php } ?>
+    <?php } ?>
                                     </td>
                                 </tr>   
-                            <?php } ?>
+<?php } ?>
                         </table>
                         <center><label>DATA MAHASISWA</label></center>
                         <br/>
@@ -326,24 +340,24 @@
                                 <tr>
                                     <th>KECAMATAN</th>
                                     <?php
-                                     $kec = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$kecamatan'");
-                                     $data_kec = mysqli_fetch_array($kec)
+                                    $kec = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$kecamatan'");
+                                    $data_kec = mysqli_fetch_array($kec)
                                     ?>
                                     <td style="text-transform: uppercase"><?php echo $data_kec['nama_wilayah']; ?></td>
                                 </tr>
                                 <tr>
                                     <th>KEBUPATEN</th>
                                     <?php
-                                     $kab = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$kabupaten'");
-                                     $data_kab = mysqli_fetch_array($kab)
+                                    $kab = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$kabupaten'");
+                                    $data_kab = mysqli_fetch_array($kab)
                                     ?>
                                     <td style="text-transform: uppercase"><?php echo $data_kab['nama_wilayah']; ?></td>
                                 </tr>
                                 <tr>
                                     <th>PROPINSI</th>
                                     <?php
-                                     $prov = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$propinsi'");
-                                     $data_prov = mysqli_fetch_array($prov)
+                                    $prov = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$propinsi'");
+                                    $data_prov = mysqli_fetch_array($prov)
                                     ?>
                                     <td style="text-transform: uppercase"><?php echo $data_prov['nama_wilayah']; ?></td>
                                 </tr>
@@ -438,12 +452,12 @@
                                 <tr>
                                     <th>KTP / KK SCAN</th>
                                     <td>
-                                        <?php if ($ktp) { ?>
+<?php if ($ktp) { ?>
                                             <img id="zoom_ktp" src="http://simaster.amayogyakarta.ac.id/document/ktp/<?php echo $ktp; ?>" data-zoom-image="../document/ktp/<?php echo $ktp; ?>" width="200">
                                             <br/>
                                             <a href="http://simaster.amayogyakarta.ac.id/document/ktp/<?php echo $ktp; ?>" target="_blank"><span class="label label-primary">TAMPILKAN KTP</span></a>
                                             <br/>
-                                        <?php } ?>
+<?php } ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -453,7 +467,7 @@
                                             <br/>
                                             <a href="http://simaster.amayogyakarta.ac.id/document/ijazah/<?php echo $ijazah; ?>" target="_blank"><span class="label label-primary">TAMPILKAN IJAZAH</span></a>
                                             <br/>
-                                        <?php } ?>
+<?php } ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -465,7 +479,7 @@
                                             <br/>
                                             <a href="http://simaster.amayogyakarta.ac.id/document/akte/<?php echo $akte_kelahiran; ?>" target="_blank"><span class="label label-primary">TAMPILKAN AKTE</span></a>
                                             <br/>
-                                        <?php } ?>
+<?php } ?>
                                     </td>
                                 </tr>
                             </tbody>
@@ -494,7 +508,7 @@
                                         <td><?php echo $d['CAPAIAN_PRESTASI']; ?></td>
                                         <td><?php echo $d['TINGKAT']; ?></td>
                                     </tr>
-                                <?php } ?>
+<?php } ?>
                             </tbody>
                         </table>
                         <center><label>DATA ORGANISASI</label></center>
@@ -524,18 +538,19 @@
                                                 Kegiatan Dalam Kampus
                                             <?php } else { ?>
                                                 Kegiatan Luar Kampus
-                                            <?php } ?>
+    <?php } ?>
                                         </td>
                                         <td>
                                             <?php if ($d['jenis_kegiatan'] == '1') { ?>
-                                                <?php $id_ukm = $d['nama_ukm'];
+                                                <?php
+                                                $id_ukm = $d['nama_ukm'];
                                                 $data_ukm = mysqli_query($mysqli, "select * from data_ukm WHERE id='$id_ukm'");
                                                 $dukm = mysqli_fetch_array($data_ukm);
                                                 echo $dukm['nama_ukm'];
                                                 ?>
                                             <?php } else { ?>
-                                                <?php echo $d['nama_organisasi']; ?>
-                                            <?php } ?>
+        <?php echo $d['nama_organisasi']; ?>
+    <?php } ?>
                                         </td>
                                         <td><?php echo $d['jabatan']; ?></td>
                                         <td><?php echo $d['tahun']; ?></td>
@@ -544,10 +559,10 @@
                                                 <a href="proses_aktivasi_organisasi.php?id=<?php echo $id; ?>" class='btn btn-success btn-xs'>AKTIF</a>                                          
                                             <?php } else { ?>
                                                 <a href="proses_aktivasi_organisasi.php?id=<?php echo $id; ?>" class='btn btn-danger btn-xs'>TIDAK AKTIF</a>
-                                            <?php } ?>
+                                    <?php } ?>
                                         </td>
                                     </tr>
-                                <?php } ?>
+<?php } ?>
                             </tbody>
                         </table>
                         <center><label>DATA PELATIHAN</label></center>
