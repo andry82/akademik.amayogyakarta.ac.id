@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>CETAK BERKAS | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
+        <title>MIGRASI KURIKULUM | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -58,7 +58,7 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h4 class="page-header"><i class="fa fa-print fa-fw"></i> DAFTAR CETAK BERKAS</h4>
+                        <h4 class="page-header"><i class="fa fa-arrows-v fa-fw"></i> MIGRASI KURIKULUM</h4>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -70,7 +70,7 @@
                                 <tr>
                                     <th>NIM</th>
                                     <th>NAMA LENGKAP</th>
-                                    <th>KONSENTRASI</th>
+                                    <th>KURIKULUM</th>
                                     <th>NAVIGASI</th>
                                 </tr>
                             </thead>
@@ -80,20 +80,13 @@
                                 $no = 1;
                                 while ($data = mysqli_fetch_array($result)) {
                                     $nim = $data['NIMHSMSMHS'];
-                                    $kelas = $splite = explode("/", $data['nmkelas']);
-                                    $status_data = $data['tgl_update'];
-                                    $status_mahasiswa = $data['STMHSMSMHS'];
-                                    $thmskmhs = $data['TAHUNMSMHS']; 
-                                    $stat_data = $data['STATUSDATA'];
                                     ?>
                                     <tr>
                                         <td><?php echo $nim ?></td>
                                         <td><?php echo $data['NMMHSMSMHS']; ?></td>                                        
-                                        <td><?php echo $data['kdkonsen']; ?></td>                                        
+                                        <td><?php echo $data['KURIKULUM']; ?></td>                                        
                                         <td style="text-align: center">
-                                            <a href="cetak_krs.php?ta=<?php echo $ta_lengkap?>&nim=<?php echo $nim ?>" class="btn btn-default btn-xs"><i class="fa fa-print fa-fw"></i> KRS</a>
-                                            <a href="cetak_khs.php?ta=<?php echo $ta_lengkap?>&nim=<?php echo $nim ?>" class="btn btn-default btn-xs"><i class="fa fa-print fa-fw"></i> KHS</a>
-                                            <a href="cetak_transkrip_sementara.php?ta=<?php echo $ta_lengkap?>&nim=<?php echo $nim ?>" class="btn btn-default btn-xs"><i class="fa fa-print fa-fw"></i> TRANSKRIP SEMENTARA</a>
+                                            <a href="migrasi_kurikulum.php?nim=<?php echo $nim ?>" class="btn btn-default btn-xs"><i class="fa fa-print fa-fw"></i> MIGRASI</a>
                                         </td>
                                     </tr>
                                     <?php
