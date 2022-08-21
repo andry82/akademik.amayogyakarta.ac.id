@@ -68,6 +68,7 @@
                         $mkkuliah = mysqli_query($mysqli, "SELECT * FROM tbkmk WHERE KDKMKTBKMK='$kdmk' AND THSMSTBKMK='$ta_lengkap'");
                         $datamkk = mysqli_fetch_array($mkkuliah);
                         $mode = $datamkk['MDLTBKMK'];
+                        $kurikulum = $datamkk['KURIKULUM'];
                         if ($mode == "KELAS") {
                             $data_akhir = mysqli_query($mysqli, "SELECT * FROM dosen_pengajar WHERE KDMK='$kdmk' AND KLSMHS like '$kelas%' AND PUBNILAI='1' AND THSMS='$ta_lengkap'");
                             $countkhs = mysqli_num_rows($data_akhir);
@@ -118,7 +119,7 @@
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    $res = mysqli_query($mysqli, "SELECT * FROM trnlm t, msmhs m, kelasparalel_mhs k WHERE t.NIMHSTRNLM=m.NIMHSMSMHS AND t.NIMHSTRNLM=k.nimhs AND t.THSMSTRNLM='$ta_lengkap' AND t.KDKMKTRNLM='$kdmk' AND nmkelas like '$kelas%' ORDER BY  t.NIMHSTRNLM ASC");
+                                    $res = mysqli_query($mysqli, "SELECT * FROM trnlm t, msmhs m, kelasparalel_mhs k WHERE t.NIMHSTRNLM=m.NIMHSMSMHS AND t.NIMHSTRNLM=k.nimhs AND t.THSMSTRNLM='$ta_lengkap' AND t.KDKMKTRNLM='$kdmk' AND t.KURIKULUM='$kurikulum' AND nmkelas like '$kelas%' ORDER BY  t.NIMHSTRNLM ASC");
                                     while ($data = mysqli_fetch_array($res)) {
                                         $nim = $data['NIMHSTRNLM'];
                                         ?>                                   

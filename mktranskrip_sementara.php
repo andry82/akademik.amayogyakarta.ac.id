@@ -5,7 +5,7 @@ if($ipkaktif=="open")
 $totip2 = "SELECT distinct(KDKMKTRNLM) from trnlm  where NIMHSTRNLM='$id_mhs' order by KDKMKTRNLM,NLAKHTRNLM ASC";
 }else
 {
-$totip2 = "SELECT distinct(tr.KDKMKTRNLM) from trnlm tr, tbkmk tbk where tr.KDKMKTRNLM=tbk.KDKMKTBKMK AND tr.THSMSTRNLM<='$tahunajaran' and tr.NIMHSTRNLM='$id_mhs' order by tr.KDKMKTRNLM,tr.NLAKHTRNLM ASC";
+$totip2 = "SELECT distinct(tr.KDKMKTRNLM) from trnlm tr, tbkmk tbk where tr.KURIKULUM=tbk.KURIKULUM AND tr.KDKMKTRNLM=tbk.KDKMKTBKMK AND tr.THSMSTRNLM<='$tahunajaran' and tr.NIMHSTRNLM='$id_mhs' and tbk.KURIKULUM='$kurikulum' order by tr.KDKMKTRNLM,tr.NLAKHTRNLM ASC";
 } 
 
 $hasilip2 = mysql_query($totip2);
@@ -20,7 +20,7 @@ while($dataip2 = mysql_fetch_array($hasilip2))
 $warna = ($no % 2) ? $color2 : $color1;
 
 $kode2= $dataip2["KDKMKTRNLM"];
-$totip3 = "SELECT NLAKHTRNLM,BOBOTTRNLM,THSMSTRNLM,KDKMKTRNLM from trnlm  where NIMHSTRNLM='$id_mhs' and KDKMKTRNLM='$kode2' order by NLAKHTRNLM ASC LIMIT 0,1";
+$totip3 = "SELECT NLAKHTRNLM,BOBOTTRNLM,THSMSTRNLM,KDKMKTRNLM from trnlm  where NIMHSTRNLM='$id_mhs' and KDKMKTRNLM='$kode2' and KURIKULUM='$kurikulum' order by NLAKHTRNLM ASC LIMIT 0,1";
 $hasilip3 = mysql_query($totip3);
 $dataip3 = mysql_fetch_array($hasilip3);
 
@@ -30,7 +30,7 @@ $THSMSTRNLM= $dataip3["THSMSTRNLM"];
 $kode3= $dataip3["KDKMKTRNLM"];
 $kode4= $dataip3["KDKMKTRNLM"];
 
-$totmk2= "SELECT m.SKSMKTBKMK,m.NAKMKTBKMK, m.NAKMKTBKMK_EN, m.KDKMKTBKMK from tbkmk m where m.KDKMKTBKMK='$kode3' and m.THSMSTBKMK='$THSMSTRNLM' and (kdkonsen='u' or kdkonsen='$kdkonsen')";
+$totmk2= "SELECT m.SKSMKTBKMK,m.NAKMKTBKMK, m.NAKMKTBKMK_EN, m.KDKMKTBKMK from tbkmk m where m.KDKMKTBKMK='$kode3' and m.THSMSTBKMK='$THSMSTRNLM' and (kdkonsen='u' or kdkonsen='$kdkonsen') and m.KURIKULUM='$kurikulum'";
 $hasilmk2 = mysql_query($totmk2);
 
 $datamk2 = mysql_fetch_array($hasilmk2);

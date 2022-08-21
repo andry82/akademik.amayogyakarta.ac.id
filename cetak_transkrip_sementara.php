@@ -138,6 +138,7 @@ $nim = $_GET['nim'];
             $data = mysql_fetch_array($hasilall);
             $nomor_induk_mahasiswa = strtoupper($data['NIMHSMSMHS']);
             $nama_mahasiswa = strtoupper($data['NMMHSMSMHS']);
+            $kurikulum = strtoupper($data['KURIKULUM']);
             $tptlhr_mahasiswa = strtoupper($data['TPLHRMSMHS']);
             $tgllhr_mahasiswa = strtoupper($data['TGLHRMSMHS']);
             $transkrip = "SELECT * from transkrip where nim='$nomor_induk_mahasiswa'";
@@ -300,12 +301,12 @@ $nim = $_GET['nim'];
             $SP="1";
             $LALU="$LALUX$SP";
             }
-            $hasil3 = mysql_query("select NLIPSTRAKM,NLIPKTRAKM,SKSEMTRAKM from trakm where NIMHSTRAKM = '$id_mhs' and THSMSTRAKM='$tahunajaran'");
+            $hasil3 = mysql_query("select NLIPSTRAKM,NLIPKTRAKM,SKSEMTRAKM from trakm where NIMHSTRAKM = '$id_mhs' and KURIKULUM='$kurikulum' and THSMSTRAKM='$tahunajaran'");
             $data3 = mysql_fetch_array($hasil3);
             $adalalu = mysql_num_rows($hasil3);
             if($adalalu<=0)
             {
-            $hasillalu = mysql_query("select THSMSTRAKM,NLIPSTRAKM,NLIPKTRAKM,SKSEMTRAKM from trakm where NIMHSTRAKM = '$id_mhs' order by THSMSTRAKM DESC limit 0,1");
+            $hasillalu = mysql_query("select THSMSTRAKM,NLIPSTRAKM,NLIPKTRAKM,SKSEMTRAKM from trakm where KURIKULUM='$kurikulum' and NIMHSTRAKM = '$id_mhs' order by THSMSTRAKM DESC limit 0,1");
             $datalalu = mysql_fetch_array($hasillalu);
             $NLIPSTRAKM=$datalalu['NLIPSTRAKM'];
             $NLIPKTRAKM=$datalalu['NLIPKTRAKM'];
@@ -415,6 +416,8 @@ $nim = $_GET['nim'];
                     </script>
                     <table id="contentKHS" border="0" bordercolor="#0000cc" cellpadding="0" cellspacing="0">
                         <tbody><tr><td style="padding: 0.5cm;">
+                                    KURIKULUM : <?php echo $kurikulum; ?><br/>
+                                    <br/>
                                     <div id="printarea" class="paperA4">
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                             <tbody><tr valign="top">

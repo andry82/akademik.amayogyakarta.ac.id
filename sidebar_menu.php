@@ -102,10 +102,13 @@ $ta = substr($tahunajar, 0, 4);
             </li>    
             <li>
                 <a href="data_bimbingan_akademik.php"><i class="fa fa-list fa-fw"></i> DATA BIMBINGAN AKADEMIK</a>
-            </li>    
+            </li>
             <li>
                 <a href="data_nilai_tahun.php"><i class="fa fa-list fa-fw"></i> DATA NILAI TAHUN</a>
-            </li>    
+            </li>
+            <li>
+                <a href="migrasi.php"><i class="fa fa-list fa-fw"></i> MIGRASI KURIKULUM</a>
+            </li>
             <li>
                 <a href="data_ips.php"><i class="fa fa-list fa-fw"></i> DATA IPS TERTINGGI</a>
             </li>    

@@ -70,6 +70,7 @@
                             $thmskmhs = $datamhs['TAHUNMSMHS'];
                             $nama_kelas = $datamhs['nmkelas'];
                             $jurusan = $datamhs['kdkonsen'];
+                            $kurikulum = $datamhs['KURIKULUM'];
                         }
                         $kelas_splite = explode("/", $nama_kelas);
                         $semester = (($ta - $thmskmhs) * 2) + $smtgg;
@@ -98,7 +99,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $nilai = mysqli_query($mysqli, "SELECT * FROM  trakm WHERE NIMHSTRAKM='$nim' ORDER BY THSMSTRAKM ASC");
+                                $nilai = mysqli_query($mysqli, "SELECT * FROM  trakm WHERE NIMHSTRAKM='$nim' and KURIKULUM='$kurikulum' ORDER BY THSMSTRAKM ASC");
                                 $nomor = 1;
                                 $semester = '01';
                                 while ($data = mysqli_fetch_array($nilai)) {
@@ -127,7 +128,7 @@
                                     <th width="55%">MATA KULIAH</th>
                                     <th width="5%" style="text-align: center">SKS</th>
                                     <th width="10%" style="text-align: center">NILAI</th>
-                                    <th width="10%" style="text-align: center">HURUD</th>
+                                    <th width="10%" style="text-align: center">HURUF</th>
                                 </tr>
                             </thead>
                             <tbody>

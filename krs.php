@@ -63,8 +63,9 @@
                         <?php
                         $nim = $_GET['nim'];
                         if (isset($_POST['tahun_ajaran'])) {
+                            $kurikulum = $_POST['kurikulum'];
                             $jml_cek = count($_POST['kodemk']);
-                            mysqli_query($mysqli, "delete from tmpkrs where nimhs = '".$nim."' and thsms = '".$ta_lengkap."'");
+                            mysqli_query($mysqli, "delete from tmpkrs where nimhs = '".$nim."' and KURIKULUM = '".$kurikulum."' and thsms = '".$ta_lengkap."'");
                             $waktu =date("d-m-Y, H:i:s");
                             foreach ($_POST['kodemk'] as $kodemk) {
                                 if ($kodemk) {
@@ -72,7 +73,7 @@
                                     $kodemk = $parse[0];
                                     $sksmk = $parse[1];
                                     $ulang = $parse[2];                                   
-                                    mysqli_query($mysqli, "INSERT INTO tmpkrs (nimhs,thsms,kdjen,kdpst,kdkmk,tglinput,sksmk,ulang) VALUES ('".$nim."','$ta_lengkap','E','61401','$kodemk','$waktu','$sksmk','$ulang')");
+                                    mysqli_query($mysqli, "INSERT INTO tmpkrs (nimhs,thsms,kdjen,kdpst,kdkmk,tglinput,KURIKULUM,sksmk,ulang) VALUES ('".$nim."','$ta_lengkap','E','61401','$kodemk','$waktu','$kurikulum','$sksmk','$ulang')");
                                     //echo "INSERT INTO tmpkrs (nimhs,thsms,kdjen,kdpst,kdkmk,tglinput,sksmk,ulang) VALUES ('".$nim."','$ta_lengkap','E','61401','$kodemk','$tgl_tmpkrs','$sksmk','$ulang')";
                                 }
                             }
@@ -115,12 +116,13 @@
                             $status_data = $data['tgl_update'];
                             $konsentrasi = $data['kdkonsen'];
                             $thmskmhs = $data['TAHUNMSMHS'];
+                            $kurikulum = $data['KURIKULUM'];
                             $statusmhs = $data['STMHSMSMHS'];
                         }
                         $semester = (($ta - $thmskmhs) * 2) + $smtgg;
                         $smt_view = "0$semester";
                         $smt = "$semester";
-                        $trakm = mysqli_query($mysqli, "SELECT * FROM trakm WHERE NIMHSTRAKM='$nim' AND THSMSTRAKM<'$ta_lengkap' ORDER BY THSMSTRAKM DESC LIMIT 1");
+                        $trakm = mysqli_query($mysqli, "SELECT * FROM trakm WHERE NIMHSTRAKM='$nim' AND THSMSTRAKM<'$ta_lengkap' AND KURIKULUM='$kurikulum' ORDER BY THSMSTRAKM DESC LIMIT 1");
                         while ($dttrakm = mysqli_fetch_array($trakm)) {
                             $NLIPSTRAKM = $dttrakm['NLIPSTRAKM'];
                         }
@@ -145,6 +147,7 @@
                         </table>
                         <form name="form" method="post" action="">
                             <input name="nim" value="<?php echo $nim; ?>" type="hidden">
+                            <input name="kurikulum" value="<?php echo $kurikulum; ?>" type="hidden">
                             <input name="tahun_ajaran" value="<?php echo $ta; ?>" type="hidden">
                             <button id="tab01" onclick="bukaPilihan('01')" type="button" class="btn btn-primary">SEMESTER 1</button>
                             <button id="tab02" onclick="bukaPilihan('02')" type="button" class="btn btn-primary">SEMESTER 2</button>
@@ -154,7 +157,7 @@
                             <button id="tab06" onclick="bukaPilihan('06')" type="button" class="btn btn-primary">SEMESTER 6</button>                            
                             <br/><br/>
                             <?php
-                            $smt = mysqli_query($mysqli, "SELECT DISTINCT SEMESTBKMK FROM tbkmk WHERE THSMSTBKMK='$ta_lengkap' ORDER BY SEMESTBKMK ASC");
+                            $smt = mysqli_query($mysqli, "SELECT DISTINCT SEMESTBKMK FROM tbkmk WHERE KURIKULUM='$kurikulum' AND THSMSTBKMK='$ta_lengkap' ORDER BY SEMESTBKMK ASC");
                             while ($dtsmt = mysqli_fetch_array($smt)) {
                                 $semester = $dtsmt['SEMESTBKMK'];
                                 ?>
@@ -169,7 +172,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $result = mysqli_query($mysqli, "SELECT * FROM tbkmk WHERE THSMSTBKMK='$ta_lengkap' AND SEMESTBKMK='$semester' AND (kdkonsen='u' or kdkonsen='$konsentrasi') ORDER BY KDKMKTBKMK ASC");
+                                        $result = mysqli_query($mysqli, "SELECT * FROM tbkmk WHERE THSMSTBKMK='$ta_lengkap' AND KURIKULUM='$kurikulum' AND SEMESTBKMK='$semester' AND (kdkonsen='u' or kdkonsen='$konsentrasi') ORDER BY KDKMKTBKMK ASC");
                                         $no = 1;
                                         while ($data = mysqli_fetch_array($result)) {
                                             $urutan = $semester . $no++;

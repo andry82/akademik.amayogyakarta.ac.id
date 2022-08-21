@@ -71,6 +71,7 @@
                             $thmskmhs = $datamhs['TAHUNMSMHS'];
                             $nama_kelas = $datamhs['nmkelas'];
                             $konsentrasi = $datamhs['nmkonsen'];
+                            $kurikulum = $datamhs['KURIKULUM'];
                             $kdkonsen = $datamhs['kdkonsen'];
                         }
                         $kelas_splite = explode("-", $nama_kelas);
@@ -116,7 +117,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $nilai = mysqli_query($mysqli, "SELECT * FROM  trnlm trn, tbkmk tbk WHERE trn.KDKMKTRNLM=tbk.KDKMKTBKMK AND trn.THSMSTRNLM=tbk.THSMSTBKMK AND trn.THSMSTRNLM='$tahun' AND trn.NIMHSTRNLM='$nim' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='$kdkonsen') ORDER BY tbk.SEMESTBKMK, trn.KDKMKTRNLM ASC");
+                                $nilai = mysqli_query($mysqli, "SELECT * FROM  trnlm trn, tbkmk tbk WHERE trn.KURIKULUM=tbk.KURIKULUM and trn.KDKMKTRNLM=tbk.KDKMKTBKMK AND trn.THSMSTRNLM=tbk.THSMSTBKMK AND trn.THSMSTRNLM='$tahun' AND trn.NIMHSTRNLM='$nim' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='$kdkonsen') and tbk.KURIKULUM='$kurikulum' ORDER BY tbk.SEMESTBKMK, trn.KDKMKTRNLM ASC");
                                 $nomor = 1;
                                 $semester = '01';
                                 while ($data = mysqli_fetch_array($nilai)) {
