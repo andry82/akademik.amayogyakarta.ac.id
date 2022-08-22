@@ -29,17 +29,17 @@ while ($dataip2 = mysqli_fetch_array($hasilip2)) {
 
     $mk = "SELECT * from konfersi_mata_kuliah where mk_lama='$kode_mk' and kurikulum_lama='$kurikulum_lama' and kurikulum_baru='$kurikulum_tujuan' and kdkonsen='$kdkonsen'";
     $mk_konversi = mysqli_query($mysqli, $mk);
-    $data_mk = mysqli_fetch_array($mk_konversi);
+    while ($data_mk = mysqli_fetch_array($mk_konversi)){
     $mk_lama = $data_mk['mk_lama'];
     $mk_baru = $data_mk['mk_baru'];
     $kurikulum_baru = $data_mk['kurikulum_baru'];
-
     $migrasi = "SELECT * from  trnlm where NIMHSTRNLM='$nim' and KDKMKTRNLM='$mk_baru' and THSMSTRNLM='$THSMSTRNLM'";
     $mk_migrasi = mysqli_query($mysqli, $migrasi);
     $count_migrasi = mysqli_num_rows($mk_migrasi);
     if ($count_migrasi == 0) {
         $sql_baru = "INSERT INTO trnlm (THSMSTRNLM, KDPTITRNLM, KDJENTRNLM, KURIKULUM, KDPSTTRNLM, NIMHSTRNLM, KDKMKTRNLM, MID, UAS, NLAKHTRNLM, BOBOTTRNLM, acc, ulang, MKASAL) VALUES ('$THSMSTRNLM', '054039', 'E', '$kurikulum_baru', '61401', '$nim', '$mk_baru', '', '', '$nilai2', '$bobot2', '0', 0, 0)";
         mysqli_query($mysqli, $sql_baru);
+    }
     }
 }
 #trakm
