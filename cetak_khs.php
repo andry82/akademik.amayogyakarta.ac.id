@@ -150,6 +150,7 @@ $status = $_GET['sp'];
             {
             $nimnya= $dataall["NIMHSMSMHS"];
             $nama= $dataall["NMMHSMSMHS"];
+            $kurikulum= $dataall["KURIKULUM"];
             $KDPSTMSMHS= $dataall["KDPSTMSMHS"];
             $kelas= $dataall["nmkelas"];
             $NMPSTMSPST= $dataall["NMPSTMSPST"];
@@ -515,7 +516,7 @@ $status = $_GET['sp'];
                                                                 $sks2 = 0;
                                                                 $totalambil=0;
                                                                 //$hasilt = mysql_query("select * from trnlm where NIMHSTRNLM='$nim' and THSMSTRNLM='$ta' order by KDKMKTRNLM ASC");				
-                                                                $hasilt = mysql_query("select * from trnlm t, tbkmk m where m.KDKMKTBKMK=t.KDKMKTRNLM and m.THSMSTBKMK=t.THSMSTRNLM and t.NIMHSTRNLM='$nim' and t.THSMSTRNLM='$ta'and (m.kdkonsen='u' or m.kdkonsen='$kdkonsen') order by m.KDKMKTBKMK ASC");				
+                                                                $hasilt = mysql_query("select * from trnlm t, tbkmk m where t.KURIKULUM=m.KURIKULUM and m.KDKMKTBKMK=t.KDKMKTRNLM and m.THSMSTBKMK=t.THSMSTRNLM and t.NIMHSTRNLM='$nim' and t.THSMSTRNLM='$ta'and (m.kdkonsen='u' or m.kdkonsen='$kdkonsen') and m.KURIKULUM='$kurikulum' order by m.KDKMKTBKMK ASC");				
                                                                 while ($datat = mysql_fetch_array($hasilt))
                                                                 {						
                                                                 //warna pada kolom
