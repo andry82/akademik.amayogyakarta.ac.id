@@ -2,24 +2,26 @@
 session_start();
 include 'config.php';
 $nim = $_GET['nim'];
+$mahasiswa = mysqli_query($mysqli, "SELECT * FROM msmhs WHERE NIMHSMSMHS='$nim'");                               
+$data_mahasiswa = mysqli_fetch_array($mahasiswa);
+$kurikulum = $data_mahasiswa['KURIKULUM'];
 mysqli_query($mysqli, "UPDATE statusmhs SET  tglacc='', tglrekap='' where nim='$nim' and tahun='$ta_lengkap'");
-$ipk_akhir = mysqli_query($mysqli, "SELECT * FROM trakm WHERE NIMHSTRAKM='$nim' ORDER BY THSMSTRAKM DESC LIMIT 1");                               
+$ipk_akhir = mysqli_query($mysqli, "SELECT * FROM trakm WHERE NIMHSTRAKM='$nim' AND KURIKULUM='$kurikulum' ORDER BY THSMSTRAKM DESC LIMIT 1");                               
 $dataipk = mysqli_fetch_array($ipk_akhir);
 $total_ipk_akhir = $dataipk['SKSTTTRAKM'];
-$trnlm = mysqli_query($mysqli, "SELECT * FROM  trnlm WHERE THSMSTRNLM='$ta_lengkap' AND NIMHSTRNLM='$nim'");
+$trnlm = mysqli_query($mysqli, "SELECT * FROM  trnlm WHERE THSMSTRNLM='$ta_lengkap' AND KURIKULUM='$kurikulum' AND NIMHSTRNLM='$nim'");
 $trnlmcount = mysqli_num_rows($trnlm);
 if ($trnlmcount > 0) {
-    $dateletrnlm = mysqli_query($mysqli, "DELETE FROM trnlm where NIMHSTRNLM='$nim' and THSMSTRNLM='$ta_lengkap'");
-    $dateletrakm = mysqli_query($mysqli, "DELETE FROM trakm where THSMSTRAKM='$ta_lengkap' and NIMHSTRAKM='$nim'");
+    $dateletrnlm = mysqli_query($mysqli, "DELETE FROM trnlm where NIMHSTRNLM='$nim' and KURIKULUM='$kurikulum' and THSMSTRNLM='$ta_lengkap'");
+    $dateletrakm = mysqli_query($mysqli, "DELETE FROM trakm where THSMSTRAKM='$ta_lengkap' and KURIKULUM='$kurikulum' and NIMHSTRAKM='$nim'");
     $dateleta = mysqli_query($mysqli, "DELETE FROM pendaftaran_ta where tahun='$ta' AND nim='$nim'");
 } elseif ($trnlmcount == 0) {
     $no = 0;
-    $tmpkrs = mysqli_query($mysqli, "SELECT * FROM  tmpkrs WHERE thsms='$ta_lengkap' AND nimhs='$nim'");
+    $tmpkrs = mysqli_query($mysqli, "SELECT * FROM  tmpkrs WHERE thsms='$ta_lengkap' AND KURIKULUM='$kurikulum' AND nimhs='$nim'");
     while ($datatmpkrs = mysqli_fetch_array($tmpkrs)) {
         $urut_nim = $no + 1;
         $nimhs = $datatmpkrs['nimhs'];
         $kodemk = $datatmpkrs['kdkmk'];
-        $kurikulum = $datatmpkrs['KURIKULUM'];
         $jumlah_sks += $datatmpkrs['sksmk'];
         $sql = "INSERT INTO trnlm (THSMSTRNLM, KDPTITRNLM, KDJENTRNLM, KURIKULUM, KDPSTTRNLM, NIMHSTRNLM, KDKMKTRNLM, MID, UAS, NLAKHTRNLM, BOBOTTRNLM, acc, ulang, MKASAL) VALUES ('$ta_lengkap', '054039', 'E', '$kurikulum', '61401', '$nim', '$kodemk', '', '', '', 0.00, '0', 0, 0)";
         mysqli_query($mysqli, $sql);
