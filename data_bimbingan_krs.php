@@ -133,7 +133,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $nilai = mysqli_query($mysqli, "SELECT * FROM  trnlm trn, tbkmk tbk WHERE trn.KDKMKTRNLM=tbk.KDKMKTBKMK AND trn.THSMSTRNLM=tbk.THSMSTBKMK AND trn.THSMSTRNLM='$semester_lalu' AND trn.NIMHSTRNLM='$nim' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='$jurusan') ORDER BY tbk.SEMESTBKMK, trn.KDKMKTRNLM ASC");
+                                $nilai = mysqli_query($mysqli, "SELECT * FROM  trnlm trn, tbkmk tbk WHERE trn.KDKMKTRNLM=tbk.KDKMKTBKMK AND trn.KURIKULUM=tbk.KURIKULUM AND trn.THSMSTRNLM=tbk.THSMSTBKMK AND trn.THSMSTRNLM='$semester_lalu' AND trn.NIMHSTRNLM='$nim' AND tbk.KURIKULUM='$kurikulum' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='$jurusan') ORDER BY tbk.SEMESTBKMK, trn.KDKMKTRNLM ASC");
                                 $nomor = 1;
                                 $semester = '01';
                                 while ($data = mysqli_fetch_array($nilai)) {
@@ -200,10 +200,10 @@
                             <tbody>
                                 <?php
                                 $no = 1;
-                                $res = mysqli_query($mysqli, "SELECT * FROM  tmpkrs tmp, tbkmk tbk WHERE tmp.kdkmk=tbk.KDKMKTBKMK AND tmp.thsms=tbk.THSMSTBKMK AND tmp.thsms='$ta_lengkap' AND tmp.nimhs='$nim' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='$jurusan')");
+                                $res = mysqli_query($mysqli, "SELECT * FROM  tmpkrs tmp, tbkmk tbk WHERE tmp.kdkmk=tbk.KDKMKTBKMK AND tmp.KURIKULUM=tbk.KURIKULUM AND tmp.thsms=tbk.THSMSTBKMK AND tmp.thsms='$ta_lengkap' AND tmp.nimhs='$nim' AND tbk.KURIKULUM='$kurikulum' AND (tbk.kdkonsen='u' OR tbk.kdkonsen='$jurusan')");
                                 while ($data = mysqli_fetch_array($res)) {
                                     $kodemk = $data['kdkmk'];
-                                    $totulang = mysqli_query($mysqli, "SELECT * from tmpkrs where nimhs='$nim' and thsms<='$ta_lengkap' and kdkmk='$kodemk'");
+                                    $totulang = mysqli_query($mysqli, "SELECT * from tmpkrs where nimhs='$nim' and KURIKULUM='$kurikulum' and thsms<='$ta_lengkap' and kdkmk='$kodemk'");
                                     $ulang = mysqli_num_rows($totulang);
                                     $totalsks += $data['SKSMKTBKMK'];
                                     ?>

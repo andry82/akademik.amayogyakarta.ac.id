@@ -19,8 +19,9 @@ if ($trnlmcount > 0) {
         $urut_nim = $no + 1;
         $nimhs = $datatmpkrs['nimhs'];
         $kodemk = $datatmpkrs['kdkmk'];
+        $kurikulum = $datatmpkrs['KURIKULUM'];
         $jumlah_sks += $datatmpkrs['sksmk'];
-        $sql = "INSERT INTO trnlm (THSMSTRNLM, KDPTITRNLM, KDJENTRNLM, KDPSTTRNLM, NIMHSTRNLM, KDKMKTRNLM, MID, UAS, NLAKHTRNLM, BOBOTTRNLM, acc, ulang, MKASAL) VALUES ('$ta_lengkap', '054039', 'E', '61401', '$nim', '$kodemk', '', '', '', 0.00, '0', 0, 0)";
+        $sql = "INSERT INTO trnlm (THSMSTRNLM, KDPTITRNLM, KDJENTRNLM, KURIKULUM, KDPSTTRNLM, NIMHSTRNLM, KDKMKTRNLM, MID, UAS, NLAKHTRNLM, BOBOTTRNLM, acc, ulang, MKASAL) VALUES ('$ta_lengkap', '054039', 'E', '$kurikulum', '61401', '$nim', '$kodemk', '', '', '', 0.00, '0', 0, 0)";
         mysqli_query($mysqli, $sql);
         $pembimbing = mysqli_query($mysqli, "SELECT pembimbing_1,pembimbing_2,pembimbing_aktif FROM  ploting_pembimbing_ta WHERE nim='$nim'");
         $datapembimbing = mysqli_fetch_array($pembimbing);
@@ -39,9 +40,7 @@ if ($trnlmcount > 0) {
     $waktu = date("d-m-Y H:i:s");
     $total_sks = $total_ipk_akhir + $jumlah_sks;
     mysqli_query($mysqli, "UPDATE statusmhs SET  tglacc='$waktu', tglrekap='$waktu' where nim='$nim' and tahun='$ta_lengkap'");
-    $trakm = "INSERT INTO `trakm` (`THSMSTRAKM`, `KDPTITRAKM`, `KDJENTRAKM`, `KDPSTTRAKM`, `NIMHSTRAKM`, `NLIPSTRAKM`, `SKSEMTRAKM`, `NLIPKTRAKM`, `SKSTTTRAKM`, `nodos`, `sksmaks`, `bobottotal`) VALUES
-('$ta_lengkap', '054039', 'E', '', '$nim', 0.00, '$jumlah_sks', 0.00, '$total_sks', '', NULL, 0.00)";
-    mysqli_query($mysqli, $trakm);
-}
+    mysqli_query($mysqli, "INSERT INTO trakm(THSMSTRAKM,KURIKULUM,KDPTITRAKM,KDJENTRAKM,KDPSTTRAKM,NIMHSTRAKM,NLIPSTRAKM,SKSEMTRAKM,NLIPKTRAKM,SKSTTTRAKM,nodos,sksmaks,bobottotal) VALUES('$ta_lengkap','$kurikulum','054039','E','','$nim','','','0','','','','')");
+  }
 header("location: data_bimbingan_krs.php?nim=$nim");
 
