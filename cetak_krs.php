@@ -391,9 +391,8 @@ $nim=$_GET['nim'];
                                                                         <span class="header1">AKADEMI MANAJEMEN ADMINISTRASI</span><br>
                                                                         <span class="header2">AMA YOGYAKARTA</span> <br>
                                                                         <span class="alamat">
-                                                                            Kampus: Jl. Pramuka No. 70-85B Yogyakarta, 55163<br>Telepon : (0274) 4340658, Fax/Telp. (0274) 4340658<br>
-                                                                            Website: http://www.amayogyakarta.ac.id, Email: info@amayagyakarta.ac.id
-                                                                        </span>
+                                                                            Kampus: Jl. Brawijaya No 101 Ringroad Selatan Tamantirto Kasihan Bantul DIY, 55183<br>Telp/Fax. (0274) 2818878<br>
+                                                                            Website: http://www.amayogyakarta.ac.id, Email: info@amayogyakarta.ac.id
                                                                         </span>
                                                                     </td>
                                                                     <td style="border-bottom: 2px solid Black;
@@ -482,7 +481,7 @@ $nim=$_GET['nim'];
                                                                                     }
                                                                                     ?>
                                                                                     <td width="16%">Dosen Wali</td><td width="1%">:</td><td width="200"><strong><? print($namados); ?>, <? print($gelardos); ?></strong></td>
-                                                                                   
+
                                                                                 </tr>
                                                                             </tbody></table>
 
@@ -540,7 +539,7 @@ $nim=$_GET['nim'];
                                                                 $hasilnmdos = mysql_query($nmdos);
                                                                 $datanm = mysql_fetch_array($hasilnmdos);
                                                                 $namadosen = $datanm["NMDOSMSDOS"];
-                                                                
+
                                                                 if ($model_mk != 'KELOMPOK'){
                                                                 $kelas_lengkap = explode("/", $kelas_splite[0]);
                                                                 $kelas_huruf = $kelas_lengkap[0];
@@ -574,7 +573,7 @@ $nim=$_GET['nim'];
 
                                                                     <td class="tdc">
                                                                         <?if ($model_mk == 'KELOMPOK'){ ?>
-                                                                         <? print($nama_pengajar); ?>, <? print($gelar_pengajar); ?>
+                                                                        <? print($nama_pengajar); ?>, <? print($gelar_pengajar); ?>
                                                                         <? }else{ ?>
                                                                         <? print($nama_pengajar); ?>, <? print($gelar_pengajar); ?>
                                                                         <? }?>
