@@ -542,7 +542,10 @@ $nim=$_GET['nim'];
                                                                 $namadosen = $datanm["NMDOSMSDOS"];
                                                                 
                                                                 if ($model_mk != 'KELOMPOK'){
-                                                                $nmpengajar = "SELECT md.NMDOSMSDOS, md.GELARMSDOS FROM dosen_pengajar d, msdos md WHERE d.NODOS=md.NODOSMSDOS AND d.KDMK='$KDKMKTRNLM' AND d.KLSMHS='$kelas_splite[0]' AND d.THSMS='$ta'";
+                                                                $kelas_lengkap = explode("/", $kelas_splite[0]);
+                                                                $kelas_huruf = $kelas_lengkap[0];
+                                                                $nmpengajar = "SELECT md.NMDOSMSDOS, md.GELARMSDOS FROM dosen_pengajar d, msdos md WHERE d.NODOS=md.NODOSMSDOS AND d.KDMK='$KDKMKTRNLM' AND d.KLSMHS LIKE '$kelas_huruf%' AND d.THSMS='$ta'";
+                                                                //$nmpengajar = "SELECT md.NMDOSMSDOS, md.GELARMSDOS FROM dosen_pengajar d, msdos md WHERE d.NODOS=md.NODOSMSDOS AND d.KDMK='$KDKMKTRNLM' AND d.KLSMHS='$kelas_splite[0]'";
                                                                 $hasil = mysql_query($nmpengajar);
                                                                 $datapengajar = mysql_fetch_array($hasil);
                                                                 $nama_pengajar = $datapengajar["NMDOSMSDOS"];
