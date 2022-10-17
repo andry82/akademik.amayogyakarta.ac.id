@@ -702,19 +702,25 @@ $nim=$_GET['nim'];
                                                     <img src="ttd/017.png" style="z-index: 2; position: absolute; height: 71px; margin-left: -24px; margin-top: 5px;">
                                                     <?
                                                     }
-                                                    ?>
 
+                                                    ?>
                                                     Dosen Pembimbing<br>
                                                     <br /><br />
                                                     <? }else{ ?>
                                                     Dosen Pembimbing<br>
                                                     <br /><br />	
                                                     <?
+                                                    include_once("phpqrcode/qrlib.php");
+                                                    $tempdir = "document/qrttd/";
+                                                    $dpa = mysql_query("SELECT * FROM  statusmhs s, kelasparalel_mhs km, kelasparalel kp WHERE km.nimhs=s.nim and km.nmkelas=kp.namakelas and s.nim='$nim' and s.tahun='$ta'");
+                                                    $data_dpa = mysql_fetch_array($dpa); 
+                                                    $count_status_mhs = mysql_num_rows($dpa); 
+                                                    $qr_krs = $data_dpa['qr_krs'];
+                                                    if($count_status_mhs == 1 && $qr_krs != ""){
+                                                    $codeKRS = 'http://validasi.amayogyakarta.ac.id/index.php?route=' . $generate_qrkrs . '';
+                                                    QRcode::png($codeKRS, $tempdir . "$qr_krs.png");                                                    
                                                     }
-                                                    ?>
-                                                    <?
-                                                    }
-                                                    ?>
+                                                    }} ?>
                                                     <br  />
                                                     ( <strong><? print($namados); ?>, <? print($gelardos); ?></strong> )
                                                     <br /><br />
@@ -725,7 +731,11 @@ $nim=$_GET['nim'];
                                                     {?>
                                                     <div style="font-size: 9px; text-align: left; width: 240px; margin-top: 6px;"><i>NB : Lembar Putih (Mahasiswa), Lembar Kuning (Arsip)</i></div>
                                                     <?}?>
-
+                                                </td>
+                                                <td>
+                                                    <? if($count_status_mhs == 1 && $qr_krs != ""){ ?>
+                                                    <br/><br/><img src="document/qrttd/<?php echo $qr_krs; ?>.png" style="height: 71px;">
+                                                    <? } ?>
                                                 </td>
                                                 <td colspan="3" class="ttd" valign="top"><br/>
                                                     Yogyakarta, <? echo "". $indDate ."";?>								<br>

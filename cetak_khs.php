@@ -713,7 +713,19 @@ $status = $_GET['sp'];
                             </tr>
                             <tr>
                                 <td colspan="4" valign="top">	
-
+                                    <?php
+                                    include_once("phpqrcode/qrlib.php");
+                                    $tempdir = "document/qrttd/";
+                                    $dpa = mysql_query("SELECT * FROM  statusmhs s, kelasparalel_mhs km, kelasparalel kp WHERE km.nimhs=s.nim and km.nmkelas=kp.namakelas and s.nim='$nim' and s.tahun='$ta'");
+                                    $data_dpa = mysql_fetch_array($dpa);
+                                    $qr_khs = $data_dpa['qr_khs'];
+                                    $waktu = $data_dpa['tglacc'];
+                                    $count_status_mhs = mysql_num_rows($dpa);
+                                    if($count_status_mhs == 1 && $qr_khs != ""){
+                                    $codeKHS = 'http://validasi.amayogyakarta.ac.id/index.php?route=' . $qr_khs . '';
+                                    QRcode::png($codeKHS, $tempdir . "$qr_khs.png");
+                                    }
+                                    ?>
                                     <table class="tabelIndek" bgcolor="#000000" border="0" cellpadding="3" cellspacing="0" height="100%" width="100%">
                                         <tbody><tr bgcolor="#ffffff" valign="top">
                                                 <td colspan="3">
@@ -742,6 +754,11 @@ $status = $_GET['sp'];
                                                                         Kurang Memuaskan</em></td>
                                                             </tr>
                                                         </tbody></table>
+                                                </td>
+                                                <td>
+                                                    <? if($count_status_mhs == 1 && $qr_khs != ""){ ?>
+                                                    <br/><br/><img src="document/qrttd/<?php echo $qr_khs; ?>.png" style="height: 71px;">
+                                                    <? } ?>
                                                 </td>
                                                 <td colspan="3" class="ttd" valign="top">
                                                     <br/><br/>
