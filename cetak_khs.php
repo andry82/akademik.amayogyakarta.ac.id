@@ -765,7 +765,7 @@ $status = $_GET['sp'];
                                                 </td>
                                                 <td>
                                                     <? if($count_status_mhs == 1 && $tglacc != ""){ ?>
-                                                    <br/><br/><img src="document/qrttd/<?php echo $qr_khs; ?>.png" style="height: 71px;">
+                                                    <br/><br/><img src="document/qrttd/<?php echo $generate_qrkhs; ?>.png" style="height: 71px;">
                                                     <? } ?>
                                                 </td>
                                                 <td colspan="3" class="ttd" valign="top">
