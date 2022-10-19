@@ -250,6 +250,7 @@ $status = $_GET['sp'];
             }
             $perintah=mysql_query("select * from kelasparalel k,msdos t where k.namakelas='$kelas' and t.NODOSMSDOS=k.nodos"); 
             $datanya=mysql_fetch_array($perintah);
+            $nomdos = $datanya['NODOSMSDOS'];
             $namados=$datanya['NMDOSMSDOS'];
             $gelardos=$datanya['GELARMSDOS'];
             $kdkonsen=$datanya['kdkonsen'];
@@ -718,12 +719,19 @@ $status = $_GET['sp'];
                                     $tempdir = "document/qrttd/";
                                     $dpa = mysql_query("SELECT * FROM  statusmhs s, kelasparalel_mhs km, kelasparalel kp WHERE km.nimhs=s.nim and km.nmkelas=kp.namakelas and s.nim='$nim' and s.tahun='$ta'");
                                     $data_dpa = mysql_fetch_array($dpa);
-                                    $qr_khs = $data_dpa['qr_khs'];
-                                    $waktu = $data_dpa['tglacc'];
+                                    $tglacc = $data_dpa['tglacc'];
+                                    $generate_qrkrs = md5('KRS-' . $nim . '-' . $tglacc . '');
+                                    $generate_qrkhs = md5('KHS-' . $nim . '-' . $tglacc . '');
                                     $count_status_mhs = mysql_num_rows($dpa);
-                                    if($count_status_mhs == 1 && $qr_khs != ""){
-                                    $codeKHS = 'http://validasi.amayogyakarta.ac.id/index.php?route=' . $qr_khs . '';
-                                    QRcode::png($codeKHS, $tempdir . "$qr_khs.png");
+                                    if ($count_status_mhs == 1 && $tglacc != "") {
+                                        mysql_query("UPDATE statusmhs SET dpa='$nomdos', qr_krs='$generate_qrkrs', qr_khs='$generate_qrkhs' where nim='$nim' and tahun='$ta'");
+                                        $codeKHS = 'http://validasi.amayogyakarta.ac.id/index.php?route=' . $generate_qrkhs . '';
+                                        QRcode::png($codeKHS, $tempdir . "$generate_qrkhs.png");
+                                    }
+                                    $verivikasi = mysql_query("SELECT * FROM  validasi_document WHERE key_code='$generate_qrkhs'");
+                                    $count_verivikasi = mysql_num_rows($verivikasi);
+                                    if ($count_verivikasi == 0) {
+                                        mysql_query("INSERT INTO validasi_document(key_code,document_type_id)VALUES('$generate_qrkhs','2')");
                                     }
                                     ?>
                                     <table class="tabelIndek" bgcolor="#000000" border="0" cellpadding="3" cellspacing="0" height="100%" width="100%">
@@ -756,7 +764,7 @@ $status = $_GET['sp'];
                                                         </tbody></table>
                                                 </td>
                                                 <td>
-                                                    <? if($count_status_mhs == 1 && $qr_khs != ""){ ?>
+                                                    <? if($count_status_mhs == 1 && $tglacc != ""){ ?>
                                                     <br/><br/><img src="document/qrttd/<?php echo $qr_khs; ?>.png" style="height: 71px;">
                                                     <? } ?>
                                                 </td>

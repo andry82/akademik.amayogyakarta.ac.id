@@ -715,11 +715,19 @@ $nim=$_GET['nim'];
                                                     $dpa = mysql_query("SELECT * FROM  statusmhs s, kelasparalel_mhs km, kelasparalel kp WHERE km.nimhs=s.nim and km.nmkelas=kp.namakelas and s.nim='$nim' and s.tahun='$ta'");
                                                     $data_dpa = mysql_fetch_array($dpa); 
                                                     $count_status_mhs = mysql_num_rows($dpa); 
-                                                    $qr_krs = $data_dpa['qr_krs'];
-                                                    if($count_status_mhs == 1 && $qr_krs != ""){
-                                                    $codeKRS = 'http://validasi.amayogyakarta.ac.id/index.php?route=' . $generate_qrkrs . '';
-                                                    QRcode::png($codeKRS, $tempdir . "$qr_krs.png");                                                    
+                                                    $tglacc = $data_dpa['tglacc'];
+                                                    $generate_qrkrs = md5('KRS-'.$nim.'-'.$tglacc.'');
+                                                    $generate_qrkhs = md5('KHS-'.$nim.'-'.$tglacc.'');
+                                                    if($count_status_mhs == 1 && $tglacc != ""){
+                                                      mysql_query("UPDATE statusmhs SET dpa='$nomdos', qr_krs='$generate_qrkrs', qr_khs='$generate_qrkhs' where nim='$nim' and tahun='$ta'");
+                                                      $codeKRS = 'http://validasi.amayogyakarta.ac.id/index.php?route=' . $generate_qrkrs . '';
+                                                      QRcode::png($codeKRS, $tempdir . "$generate_qrkrs.png");                                                    
                                                     }
+                                                    $verivikasi = mysql_query("SELECT * FROM  validasi_document WHERE key_code='$generate_qrkrs'");
+                                                    $count_verivikasi = mysql_num_rows($verivikasi);
+                                                    if($count_verivikasi==0){ 
+                                                    mysql_query("INSERT INTO validasi_document(key_code,document_type_id)VALUES('$generate_qrkrs','1')");
+                                                    }            
                                                     }} ?>
                                                     <br  />
                                                     ( <strong><? print($namados); ?>, <? print($gelardos); ?></strong> )
@@ -733,8 +741,9 @@ $nim=$_GET['nim'];
                                                     <?}?>
                                                 </td>
                                                 <td>
-                                                    <? if($count_status_mhs == 1 && $qr_krs != ""){ ?>
-                                                    <br/><br/><img src="document/qrttd/<?php echo $qr_krs; ?>.png" style="height: 71px;">
+                                                    <? 
+                                                    if($count_status_mhs == 1 && $tglacc != ""){ ?>
+                                                    <br/><br/><img src="document/qrttd/<?php echo $generate_qrkrs; ?>.png" style="height: 71px;">
                                                     <? } ?>
                                                 </td>
                                                 <td colspan="3" class="ttd" valign="top"><br/>
