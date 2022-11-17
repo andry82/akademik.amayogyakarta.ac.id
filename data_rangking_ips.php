@@ -65,7 +65,8 @@
                                 <tr>
                                     <th width="5%">RANK</th>
                                     <th width="15%">NIM</th>
-                                    <th width="65%">NAMA LENGKAP</th>
+                                    <th width="50%">NAMA LENGKAP</th>
+                                    <th width="15%">KELAS</th>
                                     <th width="10%">IPS</th>
                                 </tr>
                             </thead>
@@ -76,11 +77,13 @@
                                 $tahun_semester = $_GET['tahun'];
                                 $res = mysqli_query($mysqli, "SELECT * FROM trakm t, msmhs m,  kelasparalel_mhs km, kelasparalel kp WHERE km.nimhs=m.NIMHSMSMHS and t.NIMHSTRAKM=m.NIMHSMSMHS and km.nmkelas=kp.namakelas and kp.kodekelas='$kode_kelas' and t.THSMSTRAKM='$tahun_semester' ORDER BY NLIPSTRAKM DESC");
                                 while ($data = mysqli_fetch_array($res)) {
+                                    $kelas = explode("-", $data['namakelas']);
                                     ?>
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $data['NIMHSTRAKM']; ?></td>
                                         <td><?php echo $data['NMMHSMSMHS']; ?></td>
+                                        <td><?php echo $kelas[0]; ?></td>
                                         <td><?php echo $data['NLIPSTRAKM']; ?></td>
                                     </tr>
                                     <?php
