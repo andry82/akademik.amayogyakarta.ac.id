@@ -627,32 +627,29 @@ $status = $_GET['sp'];
                                                                 <?
                                                                 }
 
-                                                                $engDate=date("l F d, Y H:i:s A");
-                                                                //echo "English Date : ". $engDate ."<p>";
+                                                                function tgl_indo($tanggal){
+                                                                $bulan = array (
+                                                                1 =>   'Januari',
+                                                                'Februari',
+                                                                'Maret',
+                                                                'April',
+                                                                'Mei',
+                                                                'Juni',
+                                                                'Juli',
+                                                                'Agustus',
+                                                                'September',
+                                                                'Oktober',
+                                                                'November',
+                                                                'Desember'
+                                                                );
+                                                                $pecahkan = explode('-', $tanggal);
 
-                                                                switch (date("w")) {
-                                                                case "0" : $hari="Minggu";break;
-                                                                case "1" : $hari="Senin";break;
-                                                                case "2" : $hari="Selasa";break;
-                                                                case "3" : $hari="Rabu";break;
-                                                                case "4" : $hari="Kamis";break;
-                                                                case "5" : $hari="Jumat";break;
-                                                                case "6" : $hari="Sabtu";break;
-                                                                } switch (date("m")) {
-                                                                case "1" : $bulan="Januari";break;
-                                                                case "2" : $bulan="Februari";break;
-                                                                case "3" : $bulan="Maret";break;
-                                                                case "4" : $bulan="April";break;
-                                                                case "5" : $bulan="Mei";break;
-                                                                case "6" : $bulan="Juni";break;
-                                                                case "7" : $bulan="Juli";break;
-                                                                case "8" : $bulan="Agustus";break;
-                                                                case "9" : $bulan="September";break;
-                                                                case "10" : $bulan="Oktober";break;
-                                                                case "11" : $bulan="November";break;
-                                                                case "12" : $bulan="Desember";break;
+                                                                // variabel pecahkan 0 = tanggal
+                                                                // variabel pecahkan 1 = bulan
+                                                                // variabel pecahkan 2 = tahun
+
+                                                                return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
                                                                 }
-                                                                $indDate="". date("d") ." $bulan". date(" Y");
                                                                 $qall22 = "UPDATE trakm SET SKSEMTRAKM='$totsksipk2',NLIPSTRAKM=$totnasksipk2 where THSMSTRAKM='$ta' and NIMHSTRAKM='$nim' and KDPSTTRAKM='$JUR'";
                                                                 $hasilall22 = mysql_query($qall22);
                                                                 ?>									
@@ -770,7 +767,7 @@ $status = $_GET['sp'];
                                                 </td>
                                                 <td colspan="3" class="ttd" valign="top">
                                                     <br/><br/>
-                                                    Yogyakarta, <? echo "". $indDate ."";?>								<br>
+                                                    Yogyakarta, <? echo "". tgl_indo(date('Y-m-d', strtotime($tglacc))) ."";?>								<br>
                                                     AMA YOGYAKARTA<br>
 <!--<img src="source/stemple.png" style="border-width: 0px; z-index: 3; position: absolute; height: 122px; margin-top: -54px; margin-left: -40px;">-->
                                                     <img src="images/ttd.png" style="z-index: 2;
