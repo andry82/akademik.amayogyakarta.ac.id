@@ -514,11 +514,20 @@ $nim = $_GET['nim'];
                                                 <tr valign="top" style="font-weight: bold"><td width="10%">Predikat</td><td width="1%">:</td><td width="89%"><?php echo $predikat; ?></td></tr>
                                             </tbody>
                                         </table>
+                                        <?php
+                                        $trankript_sementara = mysql_query("select * from  transkrip where nim= '$id_mhs' and periode_yudisium='$tahunajaran'");
+                                        $data_ts  = mysql_fetch_array($trankript_sementara);
+                                        $count_ts  = mysql_num_rows($trankript_sementara);
+                                        if($count_ts != 0){
+                                            $tanggal_ts = tanggal_indo(date($data_ts['tgl_yudisium']));
+                                        }else{
+                                            $tanggal_ts = tanggal_indo(date('Y-m-d'));
+                                        } ?>
                                         <table border="0" style="font-size: 12px;" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
                                             <tbody>        
                                                 <tr valign="top"><td width="70%"></td>
                                                     <td width="30%">
-                                                        Yogyakarta, <?php echo tanggal_indo(date('Y-m-d')); ?><br/>
+                                                        Yogyakarta, <?php echo $tanggal_ts; ?><br/>
                                                         Wakil Direktur I
                                                         <br/>
                                                         <br/>

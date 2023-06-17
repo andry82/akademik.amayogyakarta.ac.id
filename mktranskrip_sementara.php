@@ -30,7 +30,7 @@ $THSMSTRNLM= $dataip3["THSMSTRNLM"];
 $kode3= $dataip3["KDKMKTRNLM"];
 $kode4= $dataip3["KDKMKTRNLM"];
 
-$totmk2= "SELECT m.SKSMKTBKMK,m.NAKMKTBKMK, m.NAKMKTBKMK_EN, m.KDKMKTBKMK from tbkmk m where m.KDKMKTBKMK='$kode3' and m.THSMSTBKMK='$THSMSTRNLM' and (kdkonsen='u' or kdkonsen='$kdkonsen') and m.KURIKULUM='$kurikulum'";
+$totmk2= "SELECT m.SKSMKTBKMK,m.NAKMKTBKMK, m.NAKMKTBKMK_EN, m.KDKMKTBKMK from tbkmk m where m.KDKMKTBKMK='$kode3' and m.THSMSTBKMK='$THSMSTRNLM' and (m.kdkonsen='u' or m.kdkonsen='$kdkonsen') and m.KURIKULUM='$kurikulum'";
 $hasilmk2 = mysql_query($totmk2);
 
 $datamk2 = mysql_fetch_array($hasilmk2);
@@ -54,7 +54,7 @@ $ipk2=number_format($ipk2,2);
     border-bottom: 1px solid black;" align="center"><? print($no + 1); ?></td>
     <td class="tdc" style="background: none repeat scroll 0 0 white;
     padding: 3px;
-    border-bottom: 1px solid black;" align="center"><? print($kode_mk); ?></td>
+    border-bottom: 1px solid black;" align="center"><? print($kode3); ?></td>
     <?
     if($nilai2=="T" or $nilai2=="E" or $nilai2=="0")
     {
