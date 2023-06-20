@@ -515,7 +515,7 @@ $nim = $_GET['nim'];
                                             </tbody>
                                         </table>
                                         <?php
-                                        $trankript_sementara = mysql_query("select * from  transkrip_sementara where nim= '$id_mhs' and periode_yudisium='$tahunajaran'");
+                                        $trankript_sementara = mysql_query("select * from  transkrip_sementara where nim='$id_mhs' and periode_yudisium='$tahunajaran'");
                                         $data_ts  = mysql_fetch_array($trankript_sementara);
                                         $count_ts  = mysql_num_rows($trankript_sementara);
                                         if($count_ts != 0){
