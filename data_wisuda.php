@@ -137,7 +137,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $res = mysqli_query($mysqli, "SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta FROM jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t WHERE jup.nim=ms.NIMHSMSMHS AND t.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
+                                $res = mysqli_query($mysqli, "SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KABUPATEN_EKSPORT, ms.PROPINSI_EKSPORT, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta FROM jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t WHERE jup.nim=ms.NIMHSMSMHS AND t.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
                                 while ($d = mysqli_fetch_array($res)) {
                                     $nim = $d['nim'];
                                     $urutan = $d['urutan'];
@@ -148,8 +148,8 @@
                                     $telp = $d['TELP'];
                                     $judul_lta = ucwords(strtolower($d['judul_lta']));
                                     $alamat_lengkap = ucwords(strtolower($d['ALAMATLENGKAP']));
-                                    $kabupaten = $data['KABUPATEN_EKSPORT'];
-                                    $propinsi = $data['PROPINSI_EKSPORT'];
+                                    $kabupaten = $d['KABUPATEN_EKSPORT'];
+                                    $propinsi = $d['PROPINSI_EKSPORT'];
                                     $keahlian = ucwords(strtolower($d['KEAHLIAN']));
                                     $nama_orang_tua = ucwords(strtolower($d['NAMAORTUWALI']));
                                     $data_pkl = mysqli_query($mysqli, "SELECT nama_lokasi_pkl FROM upload_ta WHERE nim='$nim'");

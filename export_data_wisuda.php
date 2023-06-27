@@ -96,7 +96,7 @@ $excel->getActiveSheet()->getRowDimension('2')->setRowHeight(20);
 $excel->getActiveSheet()->getRowDimension('3')->setRowHeight(20);
 
 // Buat query untuk menampilkan semua data siswa
-$sql = $pdo->prepare("SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta, ms.UKURAN_KAOS FROM jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t WHERE jup.nim=ms.NIMHSMSMHS AND t.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
+$sql = $pdo->prepare("SELECT ks.urutan, ms.NMMHSMSMHS, ms.TPLHRMSMHS, ms.TGLHRMSMHS, ms.KABUPATEN_EKSPORT, ms.PROPINSI_EKSPORT, ms.KEAHLIAN, ms.ALAMATLENGKAP, ms.NAMAORTUWALI, ms.TELP, jup.nim, ks.nmkonsen, t.judul_lta, ms.UKURAN_KAOS FROM jadwal_ujian_pendadaran jup, msmhs ms, konsentrasi ks, ta t WHERE jup.nim=ms.NIMHSMSMHS AND t.nim=ms.NIMHSMSMHS AND t.status='2' AND jup.status=3 AND jup.tahun='$ta' AND t.tahun='$ta' AND ms.kdkonsen=ks.kdkonsen ORDER BY ks.urutan, jup.nim ASC");
 
 $sql->execute(); // Eksekusi querynya
 
@@ -169,10 +169,10 @@ while ($d = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $ukuran_kaos = $d['UKURAN_KAOS'];
     $kabupaten = $d['KABUPATEN_EKSPORT'];
     $kab = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$kabupaten'");
-    $data_kab = mysqli_fetch_array($kab)
+    $data_kab = mysqli_fetch_array($kab);
     $propinsi = $d['PROPINSI_EKSPORT'];
     $prov = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$propinsi'");
-    $data_prov = mysqli_fetch_array($prov)           
+    $data_prov = mysqli_fetch_array($prov);           
     $data_pkl = mysqli_query($mysqli, "SELECT nama_lokasi_pkl FROM upload_ta WHERE nim='$nim'");
     $data_lokasi = mysqli_fetch_array($data_pkl);
     if ($data_lokasi['nama_lokasi_pkl'] == '') {
@@ -188,6 +188,7 @@ while ($d = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $nama_orang_tua = ucwords(strtolower($d['NAMAORTUWALI']));
     $nama_kabupaten = $data_kab['nama_wilayah'];
     $nama_propinsi = $data_prov['nama_wilayah'];
+    $alamat_asal = $nama_kabupaten.', '.$nama_propinsi;
 
     $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, trim($nama));
     $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, trim($tempat_lahir) . "," . $tanggal_lahir);
@@ -195,7 +196,7 @@ while ($d = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, trim($nama_konsentrasi));
     $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, trim($keahlian));
     $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, trim($nama_orang_tua));
-    $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, trim($nama_kabupaten, $nama_propinsi));
+    $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, trim($alamat_asal));
     $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, trim($telp));
     $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $nama_lokasi_pkl);
     $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $judul_lta);
