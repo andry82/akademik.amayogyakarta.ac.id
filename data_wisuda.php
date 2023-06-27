@@ -148,6 +148,8 @@
                                     $telp = $d['TELP'];
                                     $judul_lta = ucwords(strtolower($d['judul_lta']));
                                     $alamat_lengkap = ucwords(strtolower($d['ALAMATLENGKAP']));
+                                    $kabupaten = $data['KABUPATEN_EKSPORT'];
+                                    $propinsi = $data['PROPINSI_EKSPORT'];
                                     $keahlian = ucwords(strtolower($d['KEAHLIAN']));
                                     $nama_orang_tua = ucwords(strtolower($d['NAMAORTUWALI']));
                                     $data_pkl = mysqli_query($mysqli, "SELECT nama_lokasi_pkl FROM upload_ta WHERE nim='$nim'");
@@ -158,6 +160,10 @@
                                     }else{
                                          $nama_lokasi_pkl = $data_lokasi['nama_lokasi_pkl'];
                                     }
+                                    $kab = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$kabupaten'");
+                                    $data_kab = mysqli_fetch_array($kab);
+                                    $prov = mysqli_query($mysqli, "SELECT * FROM wilayah WHERE id_wilayah='$propinsi'");
+                                    $data_prov = mysqli_fetch_array($prov);
                                     ?>
                                     <tr>
                                         <td class="col-lg-3"></td>
@@ -169,7 +175,7 @@
                                                 <tr><th style="vertical-align:top">KONSENTRASI</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $nama_konsentrasi; ?></td></tr>
                                                 <tr><th style="vertical-align:top">KEAHLIAN</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $keahlian; ?></td></tr>
                                                 <tr><th style="vertical-align:top">NAMA ORANG TUA</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $nama_orang_tua; ?></td></tr>
-                                                <tr><th style="vertical-align:top">ALAMAT ASAL</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $alamat_lengkap; ?></td></tr>
+                                                <tr><th style="vertical-align:top">ALAMAT ASAL</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $data_kab['nama_wilayah']; ?>, <?php echo $data_prov['nama_wilayah']; ?></td></tr>
                                                 <tr><th style="vertical-align:top">NOMOR TELP</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $telp; ?></td></tr>
                                                 <tr><th style="vertical-align:top">LOKASI PKL</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $nama_lokasi_pkl; ?></td></tr>
                                                 <tr><th style="vertical-align:top">JUDUL LTA</th><td width="3%" style="text-align:center; vertical-align:top">&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><?php echo $judul_lta; ?></td></tr>
