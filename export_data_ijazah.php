@@ -71,7 +71,7 @@ $excel->setActiveSheetIndex(0)->setCellValue('C3', "NAMA MAHASISWA"); // Set kol
 $excel->setActiveSheetIndex(0)->setCellValue('D3', "NIM"); // Set kolom B3 dengan tulisan "NIS"
 $excel->setActiveSheetIndex(0)->setCellValue('E3', "TEMPAT LAHIR"); // Set kolom C3 dengan tulisan "NAMA"
 $excel->setActiveSheetIndex(0)->setCellValue('F3', "TANGGAL LAHIR"); // Set kolom C3 dengan tulisan "NAMA"
-$excel->setActiveSheetIndex(0)->setCellValue('G3', "NIk"); // Set kolom C3 dengan tulisan "NAMA"
+$excel->setActiveSheetIndex(0)->setCellValue('G3', "NIK"); // Set kolom C3 dengan tulisan "NAMA"
 // Apply style header yang telah kita buat tadi ke masing-masing kolom header
 $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_col);
@@ -156,7 +156,15 @@ while ($d = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $nik = $d['NIKMSMHS'];
     $nama = $d['NMMHSMSMHS'];
     $tempat_lahir = ucwords(strtolower($d['TPLHRMSMHS']));
-    $tanggal_lahir = TanggalIndonesia($d['TGLHRMSMHS']);
+    $revisi_identitas = mysqli_query($mysqli, "SELECT * FROM revisi_identitas WHERE nim='$nim'");
+    $count_revisi_identitas = mysqli_num_rows($revisi_identitas);
+    $data_revisi_identitas = mysqli_fetch_array($revisi_identitas);
+    if($count_revisi_identitas == 1){
+        $tanggal_lahir = $data_revisi_identitas['value'];
+    }else{
+        $tanggal_lahir = TanggalIndonesia($d['TGLHRMSMHS']);
+    }
+    
     $nama_konsentrasi = $d['nmkonsen'];
     $telp = $d['TELP'];
     $ukuran_kaos = $d['UKURAN_KAOS'];
