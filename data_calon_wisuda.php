@@ -131,10 +131,11 @@
                             <thead>
                                 <tr>
                                     <th class="col-lg-1">NIM</th>
-                                    <th class="col-lg-6">NAMA MAHASISWA</th>
+                                    <th class="col-lg-9">NAMA MAHASISWA</th>
                                     <th class="col-lg-1">KELAS</th>                                    
                                     <th class="col-lg-1">D</th>
                                     <th class="col-lg-1">E</th>
+                                    <th class="col-lg-1">K</th>
                                     <th class="col-lg-1">TOTAL</th>
                                     <th class="col-lg-1">SKS</th>
                                 </tr>
@@ -144,24 +145,29 @@
                                 $res = mysqli_query($mysqli, "SELECT * FROM trakm t, msmhs m, kelasparalel_mhs km WHERE t.NIMHSTRAKM=km.nimhs AND t.NIMHSTRAKM=m.NIMHSMSMHS AND t.SKSTTTRAKM>='91' AND m.STMHSMSMHS='A' AND t.THSMSTRAKM='$ta_lengkap'");
                                 while ($d = mysqli_fetch_array($res)) {
                                     $nim = $d['NIMHSTRAKM'];
+                                    $konsentrasi = $d['kdkonsen'];
                                     $thmskmhs = $d['TAHUNMSMHS'];
                                     $pecah_kelas = explode("/", $d['nmkelas']);
+                                    include 'count_nilai.php';
                                     ?>
                                     <tr>
                                         <td class="col-lg-1"><?php echo $d['NIMHSTRAKM']; ?></td>
-                                        <td class="col-lg-6"><?php echo $d['NMMHSMSMHS']; ?></td>
+                                        <td class="col-lg-2"><?php echo $d['NMMHSMSMHS']; ?></td>
                                         <td class="col-lg-1"><?php echo $pecah_kelas[0]; ?><?php echo (($ta - $thmskmhs) * 2) + $smtgg; ?></td>
                                         <?php
-                                        $total_mk = mysqli_query($mysqli, "SELECT * FROM trnlm WHERE NIMHSTRNLM='$nim'");
-                                        $count_mk = mysqli_num_rows($total_mk);
-                                        $total_D = mysqli_query($mysqli, "SELECT * FROM trnlm WHERE NIMHSTRNLM='$nim' AND NLAKHTRNLM='D'");
-                                        $count_D = mysqli_num_rows($total_D);
-                                        $total_E = mysqli_query($mysqli, "SELECT * FROM trnlm WHERE NIMHSTRNLM='$nim' AND NLAKHTRNLM='E'");
-                                        $count_E = mysqli_num_rows($total_E);
+                                        $total_mk = mysqli_query($mysqli, "SELECT * FROM rekapitulasi_nilai WHERE nim='$nim'");
+                                        $data_total_mk = mysqli_fetch_array($total_mk);
+                                        $jumlah_nilai_a = $data_total_mk['nilai_a'];
+                                        $jumlah_nilai_b = $data_total_mk['nilai_b'];
+                                        $jumlah_nilai_c = $data_total_mk['nilai_c'];
+                                        $jumlah_nilai_d = $data_total_mk['nilai_d'];
+                                        $jumlah_nilai_e = $data_total_mk['nilai_e'];
+                                        $jumlah_nilai_k = $data_total_mk['nilai_k'];
                                         ?>
-                                        <td class="col-lg-1"><?php echo $count_D; ?> MK</td>
-                                        <td class="col-lg-1"><?php echo $count_E; ?> MK</td>
-                                        <td class="col-lg-1"><?php echo $count_mk; ?> MK</td>
+                                        <td class="col-lg-1"><?php if ($data_total_mk['nilai_d'] != '') {echo $data_total_mk['nilai_d'].' MK';}else{ echo '0 MK'; } ?></td>
+                                        <td class="col-lg-1"><?php if ($data_total_mk['nilai_e'] != '') {echo $data_total_mk['nilai_e'].' MK';}else{ echo '0 MK'; } ?></td>
+                                        <td class="col-lg-1"><?php if ($data_total_mk['nilai_k'] != '') {echo $data_total_mk['nilai_k'].' MK';}else{ echo '0 MK'; } ?></td>
+                                        <td class="col-lg-1"><?php echo $jumlah_nilai_a + $jumlah_nilai_b + $jumlah_nilai_c + $jumlah_nilai_d + $jumlah_nilai_e + $jumlah_nilai_k ?></td>
                                         <td class="col-lg-1"><?php echo $d['SKSTTTRAKM']; ?> SKS</td>
                                     </tr>
                                     <?php
