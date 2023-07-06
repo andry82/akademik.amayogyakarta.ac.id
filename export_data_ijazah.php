@@ -159,12 +159,12 @@ while ($d = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $revisi_identitas = mysqli_query($mysqli, "SELECT * FROM revisi_identitas WHERE nim='$nim'");
     $count_revisi_identitas = mysqli_num_rows($revisi_identitas);
     $data_revisi_identitas = mysqli_fetch_array($revisi_identitas);
-    if($count_revisi_identitas == 1){
+    if ($count_revisi_identitas == 1) {
         $tanggal_lahir = $data_revisi_identitas['value'];
-    }else{
+    } else {
         $tanggal_lahir = TanggalIndonesia($d['TGLHRMSMHS']);
     }
-    
+
     $nama_konsentrasi = $d['nmkonsen'];
     $telp = $d['TELP'];
     $ukuran_kaos = $d['UKURAN_KAOS'];
@@ -175,14 +175,15 @@ while ($d = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     } else {
         $nama_lokasi_pkl = ucwords(strtolower($data_lokasi['nama_lokasi_pkl']));
     }
-
-
+    $pin = mysqli_query($mysqli, "SELECT pin FROM transkrip WHERE nim='$nim'");
+    $data_pin = mysqli_fetch_array($pin);
+    $pin_ijazah = $data_pin['pin'];
     $judul_lta = ucwords(strtolower($d['judul_lta']));
     $alamat_lengkap = ucwords(strtolower($d['ALAMATLENGKAP']));
     $keahlian = ucwords(strtolower($d['KEAHLIAN']));
     $nama_orang_tua = ucwords(strtolower($d['NAMAORTUWALI']));
 
-    $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, trim());
+    $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, trim($pin_ijazah));
     $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, trim());
     $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, trim($nama));
     $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, trim($nim));
