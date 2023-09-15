@@ -16,6 +16,7 @@ $status_pembimbing_pkl = $dataaturan['setting_pembimbing_pkl'];
 $ta = substr($tahunajar, 0, 4);
 ?>
 <ul class="nav navbar-top-links navbar-right">
+    <li><a href="notifikasi_simakad.php"><i class="fa fa-gear fa-fw"></i> NOTIFIKASI SIMAKAD</a>
     <li><a href="logout.php"><i class="fa fa-sign-out fa-fw"></i> KELUAR</a>
 </ul>
 <div class="navbar-default sidebar" role="navigation">
@@ -144,7 +145,7 @@ $ta = substr($tahunajar, 0, 4);
             </li>    
             <li>
                 <a href="cetak_berkas.php"><i class="fa fa-print fa-fw"></i> CETAK BERKAS</a>
-            </li>    
+            </li>  
         </ul>
     </div>
     <!-- /.sidebar-collapse -->
