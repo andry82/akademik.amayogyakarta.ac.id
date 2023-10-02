@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>DATA CALON WISUDA | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
+        <title>DAFTAR SEMUA MK | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +23,6 @@
     </head>
     <?php
     session_start();
-    include('bar128.php');
     include 'config.php';
 
 // cek apakah yang mengakses halaman ini sudah login
@@ -57,122 +56,37 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h4 class="page-header"><i class="fa fa-user fa-fw"></i> DATA CALON WISUDA <?php echo $ta ?></h4>
+                        <h4 class="page-header"><i class="fa fa-user fa-fw"></i> DAFTAR SEMUA MATA KULIAH</h4>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-                <?php
-                $aturan = mysqli_query($mysqli, "select * from config");
-                $dataaturan = mysqli_fetch_array($aturan);
-                $tahun = $dataaturan['tahun'];
-                $ta = substr($tahun, 0, 4);
-
-                function TanggalIndonesia($date) {
-                    $date = date('Y-m-d', strtotime($date));
-                    if ($date == '0000-00-00')
-                        return 'Tanggal Kosong';
-
-                    $tgl = substr($date, 8, 2);
-                    $bln = substr($date, 5, 2);
-                    $thn = substr($date, 0, 4);
-
-                    switch ($bln) {
-                        case 1 : {
-                                $bln = 'Januari';
-                            }break;
-                        case 2 : {
-                                $bln = 'Februari';
-                            }break;
-                        case 3 : {
-                                $bln = 'Maret';
-                            }break;
-                        case 4 : {
-                                $bln = 'April';
-                            }break;
-                        case 5 : {
-                                $bln = 'Mei';
-                            }break;
-                        case 6 : {
-                                $bln = "Juni";
-                            }break;
-                        case 7 : {
-                                $bln = 'Juli';
-                            }break;
-                        case 8 : {
-                                $bln = 'Agustus';
-                            }break;
-                        case 9 : {
-                                $bln = 'September';
-                            }break;
-                        case 10 : {
-                                $bln = 'Oktober';
-                            }break;
-                        case 11 : {
-                                $bln = 'November';
-                            }break;
-                        case 12 : {
-                                $bln = 'Desember';
-                            }break;
-                        default: {
-                                $bln = 'UnKnown';
-                            }break;
-                    }
-
-                    $tanggalIndonesia = $tgl . " " . $bln . " " . $thn;
-                    return $tanggalIndonesia;
-                }
-                ?>
                 <div class="row">
                     <div class="col-lg-12">
-                        <a href="export_data_calon_wisuda.php" class="btn btn-primary btn-xs"><i class="fa fa-download fa-fw"></i> DOWNLOAD DATA WISUDA</a>
-                        <br /> 
-                        <br />
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
-                                    <th class="col-lg-1">NIM</th>
-                                    <th class="col-lg-9">NAMA MAHASISWA</th>
-                                    <th class="col-lg-1">KELAS</th>                                    
-                                    <th class="col-lg-1">D</th>
-                                    <th class="col-lg-1">E</th>
-                                    <th class="col-lg-1">K</th>
-                                    <th class="col-lg-1">TOTAL</th>
+                                    <th class="col-lg-2">KODE MK</th>
+                                    <th class="col-lg-9">NAMA MK</th>
                                     <th class="col-lg-1">SKS</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $res = mysqli_query($mysqli, "SELECT * FROM trakm t, msmhs m, kelasparalel_mhs km WHERE t.NIMHSTRAKM=km.nimhs AND t.NIMHSTRAKM=m.NIMHSMSMHS AND t.SKSTTTRAKM>='91' AND m.STMHSMSMHS='A' AND t.THSMSTRAKM='$ta_lengkap'");
-                                while ($d = mysqli_fetch_array($res)) {
-                                    $nim = $d['NIMHSTRAKM'];
-                                    $konsentrasi = $d['kdkonsen'];
-                                    $thmskmhs = $d['TAHUNMSMHS'];
-                                    $pecah_kelas = explode("/", $d['nmkelas']);
-                                    include 'count_nilai.php';
-                                    ?>
-                                    <tr>
-                                        <td class="col-lg-1"><?php echo $d['NIMHSTRAKM']; ?></td>
-                                        <td class="col-lg-2"><?php echo $d['NMMHSMSMHS']; ?></td>
-                                        <td class="col-lg-1"><?php echo $pecah_kelas[0]; ?><?php echo (($ta - $thmskmhs) * 2) + $smtgg; ?></td>
-                                        <?php
-                                        $total_mk = mysqli_query($mysqli, "SELECT * FROM rekapitulasi_nilai WHERE nim='$nim'");
-                                        $data_total_mk = mysqli_fetch_array($total_mk);
-                                        $jumlah_nilai_a = $data_total_mk['nilai_a'];
-                                        $jumlah_nilai_b = $data_total_mk['nilai_b'];
-                                        $jumlah_nilai_c = $data_total_mk['nilai_c'];
-                                        $jumlah_nilai_d = $data_total_mk['nilai_d'];
-                                        $jumlah_nilai_e = $data_total_mk['nilai_e'];
-                                        $jumlah_nilai_k = $data_total_mk['nilai_k'];
-                                        ?>
-                                        <td class="col-lg-1"><?php if ($data_total_mk['nilai_d'] != '') {echo $data_total_mk['nilai_d'].' MK';}else{ echo '0 MK'; } ?></td>
-                                        <td class="col-lg-1"><?php if ($data_total_mk['nilai_e'] != '') {echo $data_total_mk['nilai_e'].' MK';}else{ echo '0 MK'; } ?></td>
-                                        <td class="col-lg-1"><?php if ($data_total_mk['nilai_k'] != '') {echo $data_total_mk['nilai_k'].' MK';}else{ echo '0 MK'; } ?></td>
-                                        <td class="col-lg-1"><?php echo $jumlah_nilai_a + $jumlah_nilai_b + $jumlah_nilai_c + $jumlah_nilai_d + $jumlah_nilai_e + $jumlah_nilai_k ?></td>
-                                        <td class="col-lg-1"><?php echo $d['SKSTTTRAKM']; ?> SKS</td>
-                                    </tr>
-                                    <?php
-                                }
+                                $nim = $_GET['nim'];
+                                $tbkmk = mysqli_query($mysqli, "SELECT * FROM tbkmk t, msmhs m WHERE t.THSMSTBKMK='$ta_lengkap' AND (t.kdkonsen='u' OR t.kdkonsen=m.kdkonsen) AND t.KURIKULUM=m.KURIKULUM AND m.NIMHSMSMHS='$nim' ORDER BY t.KDKMKTBKMK ASC");
+                                $nomor = 1;
+                                while ($data = mysqli_fetch_array($tbkmk)) {
+                                $kdmk = $data['KDKMKTBKMK'];
+                                $mk = mysqli_query($mysqli, "SELECT * FROM trnlm WHERE NIMHSTRNLM='$nim' AND KDKMKTRNLM='$kdmk'");
+                                $count_mk = mysqli_num_rows($mk);
+                                if($count_mk == 0){
                                 ?>
+                                <tr>
+                                    <td class="col-lg-2"><?php echo $data['KDKMKTBKMK'];?></td>
+                                    <td class="col-lg-9"><?php echo $data['NAKMKTBKMK']; ?></td>
+                                    <td class="col-lg-1"><?php echo $data['SKSMKTBKMK']; ?></td>
+                                </tr>
+                                <?php } } ?>
                             </tbody>
                         </table>
                         <br />
