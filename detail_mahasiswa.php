@@ -735,7 +735,7 @@
             });
         });
         </script>
-        <script src="js/jquery.elevateZoom-3.0.8.min.js"></script>
+        <script src="dist/js/jquery.elevateZoom-3.0.8.min.js"></script>
         <script type="text/javascript">
 //script untuk menampilkan image zoom
         $("#zoom_ktp").elevateZoom({

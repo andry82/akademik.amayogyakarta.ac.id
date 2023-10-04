@@ -59,34 +59,33 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h4 class="page-header"><i class="fa fa-list-alt fa-fw"></i> KARTU RENCANA STUDI</h4>
-
                         <?php
                         $nim = $_GET['nim'];
                         if (isset($_POST['tahun_ajaran'])) {
                             $kurikulum = $_POST['kurikulum'];
                             $jml_cek = count($_POST['kodemk']);
-                            mysqli_query($mysqli, "delete from tmpkrs where nimhs = '".$nim."' and KURIKULUM = '".$kurikulum."' and thsms = '".$ta_lengkap."'");
-                            $waktu =date("d-m-Y, H:i:s");
+                            mysqli_query($mysqli, "delete from tmpkrs where nimhs = '" . $nim . "' and KURIKULUM = '" . $kurikulum . "' and thsms = '" . $ta_lengkap . "'");
+                            $waktu = date("d-m-Y, H:i:s");
                             foreach ($_POST['kodemk'] as $kodemk) {
                                 if ($kodemk) {
                                     $parse = explode("##", $kodemk);
                                     $kodemk = $parse[0];
                                     $sksmk = $parse[1];
-                                    $ulang = $parse[2];                                   
-                                    mysqli_query($mysqli, "INSERT INTO tmpkrs (nimhs,thsms,kdjen,kdpst,kdkmk,tglinput,KURIKULUM,sksmk,ulang) VALUES ('".$nim."','$ta_lengkap','E','61401','$kodemk','$waktu','$kurikulum','$sksmk','$ulang')");
+                                    $ulang = $parse[2];
+                                    mysqli_query($mysqli, "INSERT INTO tmpkrs (nimhs,thsms,kdjen,kdpst,kdkmk,tglinput,KURIKULUM,sksmk,ulang) VALUES ('" . $nim . "','$ta_lengkap','E','61401','$kodemk','$waktu','$kurikulum','$sksmk','$ulang')");
                                     //echo "INSERT INTO tmpkrs (nimhs,thsms,kdjen,kdpst,kdkmk,tglinput,sksmk,ulang) VALUES ('".$nim."','$ta_lengkap','E','61401','$kodemk','$tgl_tmpkrs','$sksmk','$ulang')";
                                 }
                             }
                             $jumlah_status = mysqli_query($mysqli, "SELECT * FROM statusmhs WHERE nim='$nim' and tahun='$ta_lengkap'");
                             $count = mysqli_num_rows($jumlah_status);
-                            if($count== '0'){
-                              $statusmhs = "INSERT INTO `statusmhs` (`tahun`, `nim`, `status`, `tglaktifasi`, `tglkrs`, `tglacc`, `tglrekap`, `tglmid`, `tgluas`, `terlambat`) VALUES ('$ta_lengkap', '$nim', 'A', '$waktu', '$waktu', '', '', '', '', 'T')";
-                              mysqli_query($mysqli, $statusmhs);
-                            }elseif ($count != '0' && $jml_cek == '0'){
-                              mysqli_query($mysqli, "UPDATE statusmhs SET tglkrs='' where nim = '".$nim."' and tahun='".$ta_lengkap."' and status='A'");
-                            }else{
-                              mysqli_query($mysqli, "UPDATE statusmhs SET tglkrs='$waktu' where nim = '".$nim."' and tahun='".$ta_lengkap."' and status='A'");
-                            }  
+                            if ($count == '0') {
+                                $statusmhs = "INSERT INTO `statusmhs` (`tahun`, `nim`, `status`, `tglaktifasi`, `tglkrs`, `tglacc`, `tglrekap`, `tglmid`, `tgluas`, `terlambat`) VALUES ('$ta_lengkap', '$nim', 'A', '$waktu', '$waktu', '', '', '', '', 'T')";
+                                mysqli_query($mysqli, $statusmhs);
+                            } elseif ($count != '0' && $jml_cek == '0') {
+                                mysqli_query($mysqli, "UPDATE statusmhs SET tglkrs='' where nim = '" . $nim . "' and tahun='" . $ta_lengkap . "' and status='A'");
+                            } else {
+                                mysqli_query($mysqli, "UPDATE statusmhs SET tglkrs='$waktu' where nim = '" . $nim . "' and tahun='" . $ta_lengkap . "' and status='A'");
+                            }
                         }
                         ?>
                         <?php
@@ -126,7 +125,7 @@
                         while ($dttrakm = mysqli_fetch_array($trakm)) {
                             $NLIPSTRAKM = $dttrakm['NLIPSTRAKM'];
                         }
-                            $SKSMAX = "24";
+                        $SKSMAX = "24";
                         ?>
                         <table class="table table-striped table-bordered">
                             <tr><th>NIM</th><td><?php echo $nim; ?></td><th>Dosen Pembimbing Akademik</th><td><?php echo $nama_dosen; ?></td></tr>
@@ -144,6 +143,51 @@
                                     $parts = explode('-', $kelas);
                                     echo $parts[0]
                                     ?> - <?php echo $smt; ?></td><th>Jumlah SKS diambil</th><td><span id="JumlahSksDipilih" style="font-weight: bold;">0</span> SKS<?php echo $totalambil; ?></td></tr>
+                        </table>    
+                        <h4 class="page-header"><i class="fa fa-list-alt fa-fw"></i> MATA KULIAH REKOMENDASI MENGULANG</h4>
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <th class="col-lg-2">KODE MK</th>
+                                <th class="col-lg-8">MATA KULIAH</th>
+                                <th class="col-lg-1">SKS</th>
+                                <th class="col-lg-1">NILAI</th>
+                            </tr>
+                            <?php
+                            $ta = substr($ta_lengkap, 0, 4);                            
+                            $smtgg = substr($ta_lengkap, 4, 1);
+                            $ta_1 = $ta - 1 .$smtgg;
+                            $ta_2 = $ta - 2 .$smtgg;
+                            $query = "SELECT distinct(tr.KDKMKTRNLM) from trnlm tr, tbkmk tbk where tr.KURIKULUM=tbk.KURIKULUM AND tr.KDKMKTRNLM=tbk.KDKMKTBKMK AND (tr.THSMSTRNLM='$ta_lengkap' OR tr.THSMSTRNLM='$ta_1' OR tr.THSMSTRNLM='$ta_2') and tr.NIMHSTRNLM='$nim' and tbk.KURIKULUM='$kurikulum' order by tr.KDKMKTRNLM,tr.NLAKHTRNLM ASC";
+                            $hasil = mysqli_query($mysqli, $query);
+                            while ($data_mk = mysqli_fetch_array($hasil)) {
+                                $kode2 = $data_mk["KDKMKTRNLM"];
+                                $totip3 = "SELECT NLAKHTRNLM,BOBOTTRNLM,THSMSTRNLM,KDKMKTRNLM from trnlm  where NIMHSTRNLM='$nim' and KDKMKTRNLM='$kode2' and KURIKULUM='$kurikulum' order by NLAKHTRNLM ASC LIMIT 0,1";
+                                $hasilip3 = mysqli_query($mysqli, $totip3);
+                                $dataip3 = mysqli_fetch_array($hasilip3);
+                                $nilai2 = $dataip3["NLAKHTRNLM"];
+                                $bobot2 = $dataip3["BOBOTTRNLM"];
+                                $THSMSTRNLM = $dataip3["THSMSTRNLM"];
+                                $kode3 = $dataip3["KDKMKTRNLM"];
+                                $totmk2 = "SELECT m.SKSMKTBKMK,m.NAKMKTBKMK, m.NAKMKTBKMK_EN, m.KDKMKTBKMK from tbkmk m where m.KDKMKTBKMK='$kode3' and m.THSMSTBKMK='$THSMSTRNLM' and (m.kdkonsen='u' or m.kdkonsen='$konsentrasi') and m.KURIKULUM='$kurikulum'";
+                                $hasilmk2 = mysqli_query($mysqli, $totmk2);
+                                $datamk2 = mysqli_fetch_array($hasilmk2);
+                                $sks2 = $datamk2["SKSMKTBKMK"];
+                                $kode_mk = $datamk2["KDKMKTBKMK"];
+                                $namamk = $datamk2["NAKMKTBKMK"];
+                                $namamk_en = $datamk2["NAKMKTBKMK_EN"];
+                                if ($nilai2 == "T" or $nilai2 == "D" or $nilai2 == "E" or $nilai2 == "0") {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $kode3; ?></td>
+                                        <td><?php echo $namamk; ?></td>
+                                        <td><?php echo $sks2; ?></td>
+                                        <td><?php echo $nilai2; ?></td>
+                                    </tr>
+                                <?php
+                                }
+                            }
+                            ?>
+
                         </table>
                         <form name="form" method="post" action="">
                             <input name="nim" value="<?php echo $nim; ?>" type="hidden">
@@ -192,23 +236,33 @@
                                                         <input name="kodemk[<?php echo $urutan ?>]" id="checkboxMK<?php echo $urutan ?>" onclick="hitungSKS('<?php echo $data['SKSMKTBKMK']; ?>', '<?php echo $urutan ?>')" value="<?php echo $data['KDKMKTBKMK']; ?>##<?php echo $data['SKSMKTBKMK']; ?>##<? print($ulang); ?>" type="checkbox" checked="checked">
                                                     <?php } else { ?>
                                                         <input name="kodemk[<?php echo $urutan ?>]" id="checkboxMK<?php echo $urutan ?>" onclick="hitungSKS('<?php echo $data['SKSMKTBKMK']; ?>', '<?php echo $urutan ?>')" value="<?php echo $data['KDKMKTBKMK']; ?>##<?php echo $data['SKSMKTBKMK']; ?>##<? print($ulang); ?>" type="checkbox">
-                                                    <?php } ?>
+                                                <?php } ?>
                                                 </td>
-                                                <td><?php echo $data['KDKMKTBKMK']; ?></td>
-                                                <td><?php echo $data['NAKMKTBKMK']; ?></td>
-                                                <td><?php echo $data['SKSMKTBKMK']; ?></td>
+                                                <?php
+                                                $data_krs_mhs = mysqli_query($mysqli, "SELECT * FROM tmpkrs WHERE nimhs='$nim' AND kdkmk='$kdmk' AND thsms < '$ta_lengkap'");
+                                                $count = mysqli_num_rows($data_krs_mhs);
+                                                if ($count == 0) {
+                                                    ?>
+                                                    <td><?php echo $data['KDKMKTBKMK']; ?></td>
+                                                    <td><?php echo $data['NAKMKTBKMK']; ?></td>
+                                                    <td><?php echo $data['SKSMKTBKMK']; ?></td>
+        <?php } else { ?>
+                                                    <td><b><?php echo $data['KDKMKTBKMK']; ?></b></td>
+                                                    <td><b><?php echo $data['NAKMKTBKMK']; ?></b></td>
+                                                    <td><b><?php echo $data['SKSMKTBKMK']; ?></b></td>
+                                            <?php } ?>
                                             </tr>
                                             <?php
                                         }
                                         ?>
                                     </tbody>
                                 </table>             
-                            <?php } ?>
+<?php } ?>
                             <a href="data_bimbingan_krs.php?nim=<?php echo $nim ?>" class="btn btn-danger" role="button" aria-pressed="true"> KEMBALI</a> <button type="submit" class="btn btn-success"><i class="fa fa-save fa-fw"></i> SIMPAN</button>
                         </form>
                         <br/>
-                        
-                                                       
+
+
                     </div>
                 </div>
             </div>

@@ -116,11 +116,11 @@
 <?php } ?>
                             </tbody>
                         </table>
-                        <a href="import/trnlm.php?nim=<?php echo $nim ?>" class="btn btn-primary" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> GENERATE TRLNLM</a>
+                        <!--<a href="import/trnlm.php?nim=<?php echo $nim ?>" class="btn btn-primary" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> GENERATE TRLNLM</a>
                         <a href="import/generate_trakm.php?nim=<?php echo $nim ?>" class="btn btn-primary" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> GENERATE TRAKM</a>
-                        <a href="import/import_nilai_simakpro_nim.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> IMPORT NILAI</a>
+                        <a href="import/import_nilai_simakpro_nim.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> IMPORT NILAI</a>-->
                         <a href="generate_ipk.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> GENERATE IPK</a>
-                        <a href="daftar_semua_mk.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-book fa-fw"></i> DAFTAR SEMA MK</a>
+                        <a href="daftar_semua_mk.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-book fa-fw"></i> MK BELUM DIAMBIL</a>
                         <br/><br/>
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
