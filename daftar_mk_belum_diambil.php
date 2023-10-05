@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>DAFTAR SEMUA MK | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
+        <title>DAFTAR MATA KULIAH BELUM DIAMBIL | SISTEM INFORMASI AKADEMIK - AMA Yogyakarta</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -56,7 +56,7 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h4 class="page-header"><i class="fa fa-user fa-fw"></i> DAFTAR SEMUA MATA KULIAH</h4>
+                        <h4 class="page-header"><i class="fa fa-user fa-fw"></i> DAFTAR MATA KULIAH BELUM DIAMBIL</h4>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -89,6 +89,7 @@
                                 <?php } } ?>
                             </tbody>
                         </table>
+                        <a href="data_bimbingan_krs.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-arrow-left fa-fw"></i> KEMBALI</a>
                         <br />
                         <br />
                     </div>

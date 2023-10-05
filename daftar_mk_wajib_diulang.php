@@ -96,7 +96,7 @@
                                     $kode_mk = $datamk2["KDKMKTBKMK"];
                                     $namamk = $datamk2["NAKMKTBKMK"];
                                     $namamk_en = $datamk2["NAKMKTBKMK_EN"];
-                                    if ($nilai2 == "T" or $nilai2 == "D" or $nilai2 == "E" or $nilai2 == "0" or $nilai2 == "") {
+                                    if ($nilai2 == "T" or $nilai2 == "D" or $nilai2 == "E" or $nilai2 == "0" or $nilai2 == "" or $bobot2 == "0.00") {
                                         ?>
                                         <tr>
                                             <td><?php echo $kode3; ?></td>
@@ -109,6 +109,7 @@
                                 ?>
                             </tbody>
                         </table>
+                        <a href="data_bimbingan_krs.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-arrow-left fa-fw"></i> KEMBALI</a>
                         <br />
                         <br />
                     </div>
