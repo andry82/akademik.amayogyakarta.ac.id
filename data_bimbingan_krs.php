@@ -64,14 +64,18 @@
                     </div>
                     <div class="col-lg-12">  
                         <?php
-                        $mhs = mysqli_query($mysqli, "SELECT * FROM  msmhs m, kelasparalel_mhs kpm WHERE m.NIMHSMSMHS=kpm.nimhs AND m.NIMHSMSMHS=$nim");
+                        $mhs = mysqli_query($mysqli, "SELECT * FROM  msmhs m, kelasparalel_mhs kpm, kelasparalel k, msdos md WHERE k.nodos=md.NODOSMSDOS AND kpm.nmkelas=k.namakelas AND m.NIMHSMSMHS=kpm.nimhs AND m.NIMHSMSMHS=$nim");
                         while ($datamhs = mysqli_fetch_array($mhs)) {
                             $nama_mahasiswa = $datamhs['NMMHSMSMHS'];
+                            $nama_dpa = $datamhs['NMDOSMSDOS'];
+                            $gelar_dpa = $datamhs['GELARMSDOS'];
+                            $status_data = $datamhs['tgl_update'];
                             $thmskmhs = $datamhs['TAHUNMSMHS'];
                             $nama_kelas = $datamhs['nmkelas'];
                             $jurusan = $datamhs['kdkonsen'];
                             $kurikulum = $datamhs['KURIKULUM'];
                         }
+                        $foto_diri = "http://simaster.amayogyakarta.ac.id/images/foto_mhs/$nim.JPG";
                         $kelas_splite = explode("/", $nama_kelas);
                         $semester = (($ta - $thmskmhs) * 2) + $smtgg;
                         if ($smtgg == '2') {
@@ -82,10 +86,35 @@
                             $semester_lalu = (($ta - 1) . $smt);
                         }
                         ?>
-                        N.I.M : <?php echo $nim; ?><br/>
-                        NAMA MAHASISWA : <?php echo $nama_mahasiswa; ?><br/>
-                        KELAS : <?php echo $kelas_splite[0]; ?><?php echo (($ta - $thmskmhs) * 2) + $smtgg; ?><br/>
-                        <br/>
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <th width="50px" rowspan="5"style="padding: 0px">
+                                    <?php if ($foto_diri != "") { ?>       
+                                        <img src="<?php echo $foto_diri; ?>" height="200">
+                                    <?php } else { ?>
+                                        <img src="https://via.placeholder.com/150x200">
+                                    <?php } ?>           
+                                </th>
+                                <th>NIM</th><td><?php echo $nim; ?></td></tr>
+                            <tr><th>NAMA MAHASISWA</th>
+                                <td><?php echo strtoupper($nama_mahasiswa); ?>&nbsp;&nbsp;
+                                    <?php if ($status_data) { ?>
+                                        <a href="proses_status_data_mahasiswa.php?nim=<?php echo $nim; ?>&status_data=1"><span class="label label-success">VALID</span></a>
+                                    <?php } else { ?>
+                                        <a href="proses_status_data_mahasiswa.php?nim=<?php echo $nim; ?>&status_data=2"><span class="label label-default">BELUM VALID</span></a>
+                                    <?php } ?>
+                                </td></tr>
+                            <tr><th>KELAS</th><td><?php echo $kelas_splite[0]; ?><?php echo (($ta - $thmskmhs) * 2) + $smtgg; ?></td></tr>
+                            <tr><th>KONSENTRASI</th><td>
+                                    <?php
+                                    $konsen = mysqli_query($mysqli, "select * from konsentrasi where kdkonsen='$jurusan'");
+                                    $data_konsen = mysqli_fetch_array($konsen);
+                                    echo $data_konsen['jenjang'] . ' - ' . strtoupper($data_konsen['nmkonsen']);
+                                    ?>
+                                </td>
+                            </tr>
+                            <tr><th>DOSEN PEMBIMBING AKADEMIK</th><td><?php echo $nama_dpa; ?>, <?php echo $gelar_dpa; ?></td></tr>
+                        </table>
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
@@ -121,6 +150,7 @@
                         <a href="import/import_nilai_simakpro_nim.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> IMPORT NILAI</a>-->
                         <a href="generate_ipk.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-gear fa-fw"></i> GENERATE IPK</a>
                         <a href="daftar_semua_mk.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-book fa-fw"></i> MK BELUM DIAMBIL</a>
+                        <a href="daftar_mk_wajib_diulang.php?nim=<?php echo $nim ?>" class="btn btn-success" role="button" aria-pressed="true"><i class="fa fa-book fa-fw"></i> DAFTAR MK WAJIB DIULANG</a>
                         <br/><br/>
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
