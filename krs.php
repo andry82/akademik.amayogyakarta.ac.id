@@ -158,7 +158,9 @@
                             $ta_1 = $ta - 1 .$smtgg;
                             $ta_2 = $ta - 2 .$smtgg;
                             $ta_3 = $ta - 3 .$smtgg;
-                            $query = "SELECT distinct(tr.KDKMKTRNLM) from trnlm tr, tbkmk tbk where tr.KURIKULUM=tbk.KURIKULUM AND tr.KDKMKTRNLM=tbk.KDKMKTBKMK AND (tr.THSMSTRNLM='$ta_1' OR tr.THSMSTRNLM='$ta_2' OR tr.THSMSTRNLM='$ta_3') and tr.NIMHSTRNLM='$nim' and tbk.KURIKULUM='$kurikulum' order by tr.KDKMKTRNLM,tr.NLAKHTRNLM ASC";
+                            $ta_4 = $ta - 4 .$smtgg;
+                            $ta_5 = $ta - 5 .$smtgg;
+                            $query = "SELECT distinct(tr.KDKMKTRNLM) from trnlm tr, tbkmk tbk where tr.KURIKULUM=tbk.KURIKULUM AND tr.KDKMKTRNLM=tbk.KDKMKTBKMK AND (tr.THSMSTRNLM='$ta_1' OR tr.THSMSTRNLM='$ta_2' OR tr.THSMSTRNLM='$ta_3' OR tr.THSMSTRNLM='$ta_4' OR tr.THSMSTRNLM='$ta_5') and tr.NIMHSTRNLM='$nim' and tbk.KURIKULUM='$kurikulum' order by tr.KDKMKTRNLM,tr.NLAKHTRNLM ASC";
                             $hasil = mysqli_query($mysqli, $query);
                             while ($data_mk = mysqli_fetch_array($hasil)) {
                                 $kode2 = $data_mk["KDKMKTRNLM"];
