@@ -4,7 +4,8 @@
  include("../config.php");
 
  //query tabel produk
- $sql="SELECT * FROM msmhs WHERE STMHSMSMHS='A' AND TAHUNMSMHS='2023'";
+ //$sql="SELECT * FROM msmhs WHERE STMHSMSMHS='A' AND TAHUNMSMHS='2023'";
+ $sql="SELECT m.NIMHSMSMHS, m.NMMHSMSMHS FROM pendaftaran_wisuda p, msmhs m WHERE p.nim=m.NIMHSMSMHS AND p.tahun='$ta'";
  $query=mysqli_query($mysqli, $sql) or die(mysqli_error());
 
 //data array
