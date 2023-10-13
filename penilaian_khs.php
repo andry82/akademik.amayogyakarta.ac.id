@@ -25,6 +25,7 @@
     session_start();
     include('bar128.php');
     include 'config.php';
+    include 'range_penilaian_khs.php';
 // cek apakah yang mengakses halaman ini sudah login
     if ($_SESSION['level'] == "") {
         header("location:login.php");
@@ -136,37 +137,7 @@
             <!-- /#page-wrapper -->
 
         </div>
-        <script type="text/javascript">
-            function hitungNilai(kode_mk) {
-                nilai = document.getElementById('nilai_' + kode_mk).value;
-                if (nilai < 0 || nilai > 100) {
-                    alert("Nilai Hanya dari 0 - 100");
-                    document.getElementById('nilai_' + kode_mk).value = "";
-                    nilai = '0';
-                }
-                pembulatan = Math.round(nilai);
-                if (pembulatan >= '85') {
-                    huruf = "A";
-                    bobot = "4.00";
-                } else if (pembulatan >= '70') {
-                    huruf = "B";
-                    bobot = "3.00";
-                } else if (pembulatan >= '55') {
-                    huruf = "C";
-                    bobot = "2.00";
-                } else if (pembulatan >= '40') {
-                    huruf = "D";
-                    bobot = "1.00";
-                } else {
-                    huruf = "E";
-                    bobot = "0.00";
-                }
-                document.getElementById('huruf_view_' + kode_mk).value = huruf;
-                document.getElementById('huruf_' + kode_mk).value = huruf;
-                document.getElementById('bobot_view' + kode_mk).value = bobot;
-                document.getElementById('bobot_' + kode_mk).value = bobot;
-            }
-        </script>
+        
         <!-- /#wrapper -->
         <!-- jQuery -->
         <script src="vendor/jquery/jquery.min.js"></script>
