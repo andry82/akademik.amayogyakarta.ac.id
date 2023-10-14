@@ -748,15 +748,13 @@ $status = $_GET['sp'];
                                                                 <td align="right">
                                                                     <em> 
                                                                         3,51 - 4,00  <br>
-                                                                        2,76 - 3,50  <br>
-                                                                        2,00 - 2,75  <br>
-                                                                        &lt; 1,99  </em>
+                                                                        3,01 - 3,50  <br>
+                                                                        2,76 - 3,00  </em>
                                                                 </td>
                                                                 <td>&nbsp;</td>
-                                                                <td><em>Cum Laude</em><em><br>
+                                                                <td><em>Pujian (Cum Laude)<br>
                                                                         Sangat Memuaskan<br>
-                                                                        Memuaskan<br>
-                                                                        Kurang Memuaskan</em></td>
+                                                                        Memuaskan</em></td>
                                                             </tr>
                                                         </tbody></table>
                                                 </td>
@@ -767,7 +765,7 @@ $status = $_GET['sp'];
                                                 </td>
                                                 <td colspan="3" class="ttd" valign="top">
                                                     <br/><br/>
-                                                    Yogyakarta, <? echo "". tgl_indo(date('Y-m-d', strtotime($tglacc))) ."";?>								<br>
+                                                    Yogyakarta, <?php echo "". tgl_indo(date('Y-m-d')) ."";?>								<br>
                                                     AMA YOGYAKARTA<br>
 <!--<img src="source/stemple.png" style="border-width: 0px; z-index: 3; position: absolute; height: 122px; margin-top: -54px; margin-left: -40px;">-->
                                                     <img src="images/ttd.png" style="z-index: 2;
@@ -775,7 +773,7 @@ $status = $_GET['sp'];
                                                          height: 78px;
                                                          margin-left: -71px;
                                                          margin-top: -12px;"><br><br><br>
-                                                    <u><strong>WAHYUDIYONO, SE.MM.</strong></u><br />                                                              
+                                                    <u><strong>WAHYUDIYONO, SE., MM.</strong></u><br />                                                              
                                                     Wakil Direktur I
                                                 </td>
                                             </tr>
