@@ -6,7 +6,7 @@ class Mahasiswa {
 
     public function get_mhss() {
         global $mysqli;
-        $query = "SELECT NIMHSMSMHS,NMMHSMSMHS,NIKEY FROM msmhs WHERE STMHSMSMHS='A'";
+        $query = "SELECT NIMHSMSMHS,NMMHSMSMHS,NIKEY FROM msmhs WHERE STMHSMSMHS='L'";
         $data = array();
         $result = $mysqli->query($query);
         while ($row = mysqli_fetch_object($result)) {
@@ -25,7 +25,7 @@ class Mahasiswa {
         global $mysqli;
         $query = "SELECT NIMHSMSMHS,NMMHSMSMHS,NIKEY FROM msmhs";
         if ($nim != 0) {
-            $query .= " WHERE STMHSMSMHS='A' AND NIMHSMSMHS =" . $nim . " LIMIT 1";
+            $query .= " WHERE STMHSMSMHS='L' AND NIMHSMSMHS =" . $nim . " LIMIT 1";
         }
         $data = array();
         $result = $mysqli->query($query);

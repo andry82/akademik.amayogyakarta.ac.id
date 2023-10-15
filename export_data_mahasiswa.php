@@ -1,7 +1,7 @@
 <?php
 
 // Load file koneksi.php
-include '../config.php';
+include 'config.php';
 // Load plugin PHPExcel nya
 require_once 'PHPExcel/PHPExcel.php';
 // Panggil class PHPExcel nya
@@ -150,7 +150,6 @@ $excel->getActiveSheet()->getStyle('AN3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('AO3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('AP3')->applyFromArray($style_col);
 $excel->getActiveSheet()->getStyle('AQ3')->applyFromArray($style_col);
-$excel->getActiveSheet()->getStyle('AR3')->applyFromArray($style_col);
 // Apply style header yang telah kita buat tadi ke masing-masing kolom header
 $excel->getActiveSheet()->getStyle('A3')->applyFromArray($center_col);
 $excel->getActiveSheet()->getStyle('B3')->applyFromArray($center_col);
@@ -162,7 +161,8 @@ $excel->getActiveSheet()->getRowDimension('2')->setRowHeight(20);
 $excel->getActiveSheet()->getRowDimension('3')->setRowHeight(20);
 
 // Buat query untuk menampilkan semua data siswa
-$sql = $pdo->prepare("SELECT * FROM msmhs m, kelasparalel_mhs km WHERE m.NIMHSMSMHS=km.nimhs AND STATUSDATA='3' ORDER BY NIMHSMSMHS ASC");
+$tahun_masuk = $ta.'1';
+$sql = $pdo->prepare("SELECT * FROM msmhs m, kelasparalel_mhs km WHERE m.NIMHSMSMHS=km.nimhs AND m.SMAWLMSMHS='$tahun_masuk' AND m.STATUSDATA='3' ORDER BY m.NIMHSMSMHS ASC");
 $sql->execute(); // Eksekusi querynya
 
 $no = 1; // Untuk penomoran tabel, di awal set dengan 1
@@ -210,31 +210,30 @@ while ($data = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, $kode_kabupaten);
     $excel->setActiveSheetIndex(0)->setCellValue('R' . $numrow, $data_kab['nama_wilayah']);
     $excel->setActiveSheetIndex(0)->setCellValue('S' . $numrow, $data['KODEPOS']);
-    $excel->setActiveSheetIndex(0)->setCellValue('T' . $numrow, $kode_propinsi);
-    $excel->setActiveSheetIndex(0)->setCellValue('U' . $numrow, $data_prop['nama_wilayah']);
-    $excel->setActiveSheetIndex(0)->setCellValue('V' . $numrow, $data['JENISTINGGAL']);
-    $excel->setActiveSheetIndex(0)->setCellValue('W' . $numrow, $data['TELP']);
-    $excel->setActiveSheetIndex(0)->setCellValue('X' . $numrow, $data['EMAIL']);
-    $excel->setActiveSheetIndex(0)->setCellValue('Y' . $numrow, $kps);
-    $excel->setActiveSheetIndex(0)->setCellValue('Z' . $numrow, $data['NOKPS']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AA' . $numrow, $data['NAMAORTUWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AB' . $numrow, $data['NIKAYAH']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AC' . $numrow, $data['TANGGALLAHIRAYAH']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AD' . $numrow, $data['PENDIDIKANAYAH']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AE' . $numrow, $data['PEKERJAANORTUWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AF' . $numrow, $data['PENGHASILANAYAH']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AG' . $numrow, $data['NAMAIBU']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AH' . $numrow, $data['NIKIBU']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AI' . $numrow, $data['TANGGALLAHIRIBU']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AJ' . $numrow, $data['PENDIDIKANIBU']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AK' . $numrow, $data['PEKERJAANIBU']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AL' . $numrow, $data['PENGHASILANIBU']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AM' . $numrow, $data['NAMAWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AN' . $numrow, $data['TANGGALLAHIRWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AO' . $numrow, $data['PENDIDIKANWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AP' . $numrow, $data['PEKERJAANWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AQ' . $numrow, $data['PENGHASILANWALI']);
-    $excel->setActiveSheetIndex(0)->setCellValue('AR' . $numrow, $kelas_mhs . $semester);
+    $excel->setActiveSheetIndex(0)->setCellValue('T' . $numrow, $data_prop['nama_wilayah']);
+    $excel->setActiveSheetIndex(0)->setCellValue('U' . $numrow, $data['JENISTINGGAL']);
+    $excel->setActiveSheetIndex(0)->setCellValue('V' . $numrow, $data['TELP']);
+    $excel->setActiveSheetIndex(0)->setCellValue('W' . $numrow, $data['EMAIL']);
+    $excel->setActiveSheetIndex(0)->setCellValue('X' . $numrow, $kps);
+    $excel->setActiveSheetIndex(0)->setCellValue('Y' . $numrow, $data['NOKPS']);
+    $excel->setActiveSheetIndex(0)->setCellValue('X' . $numrow, $data['NAMAORTUWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AA' . $numrow, $data['NIKAYAH']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AB' . $numrow, $data['TANGGALLAHIRAYAH']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AC' . $numrow, $data['PENDIDIKANAYAH']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AD' . $numrow, $data['PEKERJAANORTUWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AE' . $numrow, $data['PENGHASILANAYAH']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AF' . $numrow, $data['NAMAIBU']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AG' . $numrow, $data['NIKIBU']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AH' . $numrow, $data['TANGGALLAHIRIBU']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AI' . $numrow, $data['PENDIDIKANIBU']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AJ' . $numrow, $data['PEKERJAANIBU']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AK' . $numrow, $data['PENGHASILANIBU']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AL' . $numrow, $data['NAMAWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AM' . $numrow, $data['TANGGALLAHIRWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AN' . $numrow, $data['PENDIDIKANWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AO' . $numrow, $data['PEKERJAANWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AP' . $numrow, $data['PENGHASILANWALI']);
+    $excel->setActiveSheetIndex(0)->setCellValue('AQ' . $numrow, $kelas_mhs . $semester);
     // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
     $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($center_col);
     $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);
@@ -278,8 +277,7 @@ while ($data = $sql->fetch()) { // Ambil semua data dari hasil eksekusi $sql
     $excel->getActiveSheet()->getStyle('AN' . $numrow)->applyFromArray($style_row);
     $excel->getActiveSheet()->getStyle('AO' . $numrow)->applyFromArray($style_row);
     $excel->getActiveSheet()->getStyle('AP' . $numrow)->applyFromArray($center_col);
-    $excel->getActiveSheet()->getStyle('AR' . $numrow)->applyFromArray($center_col);
-    $excel->getActiveSheet()->getStyle('AS' . $numrow)->applyFromArray($center_col);
+    $excel->getActiveSheet()->getStyle('AQ' . $numrow)->applyFromArray($center_col);
     $excel->getActiveSheet()->getRowDimension($numrow)->setRowHeight(20);
     $no++; // Tambah 1 setiap kali looping
     $numrow++; // Tambah 1 setiap kali looping
@@ -328,6 +326,7 @@ $excel->getActiveSheet()->getColumnDimension('AM')->setWidth(20); // Set width k
 $excel->getActiveSheet()->getColumnDimension('AN')->setWidth(30); // Set width kolom C
 $excel->getActiveSheet()->getColumnDimension('AO')->setWidth(30); // Set width kolom C
 $excel->getActiveSheet()->getColumnDimension('AP')->setWidth(15); // Set width kolom C
+$excel->getActiveSheet()->getColumnDimension('AQ')->setWidth(15); // Set width kolom C
 // Set orientasi kertas jadi LANDSCAPE
 $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
 
@@ -337,7 +336,7 @@ $excel->setActiveSheetIndex(0);
 
 // Proses file excel
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="Data_Niman.xlsx"'); // Set nama file excel nya
+header('Content-Disposition: attachment; filename="Data_Niman_'.$tahun_masuk.'.xlsx"'); // Set nama file excel nya
 header('Cache-Control: max-age=0');
 
 $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
