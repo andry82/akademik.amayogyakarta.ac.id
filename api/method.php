@@ -25,7 +25,7 @@ class Mahasiswa {
         global $mysqli;
         $query = "SELECT NIMHSMSMHS,NMMHSMSMHS,NIKEY FROM msmhs";
         if ($nim != 0) {
-            $query .= " WHERE STMHSMSMHS='A' AND NIMHSMSMHS =" . $nim . " LIMIT 1";
+            $query .= " WHERE STMHSMSMHS='A' AND NIKEY=".$nim." LIMIT 1";
         }
         $data = array();
         $result = $mysqli->query($query);
