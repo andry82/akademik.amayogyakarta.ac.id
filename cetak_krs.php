@@ -396,23 +396,24 @@ $nim=$_GET['nim'];
                                                                         </span>
                                                                     </td>
                                                                     <td style="border-bottom: 2px solid Black;
-                                                                        padding: 0;" align="right" valign="middle" width="40"><div style="font-size: 10px;
-                                                                                                                    width:20mm;
-                                                                                                                    height: 24mm;
-                                                                                                                    border: #000000 solid 1px;
-                                                                                                                    text-align: center;
-                                                                                                                    vertical-align:  baseline;"><!--<div style="margin-top: 26px;text-align: center;">Pas Foto<br />2 x 3</div>-->
-                                                                            <? $filename ="images/foto_mhs/$nim.JPG";
+                                                            padding: 0;" align="right" valign="middle" width="40"><div style="font-size: 10px;
+                                                                                                        width:20mm;
+                                                                                                        height: 24mm;
+                                                                                                        border: #000000 solid 1px;
+                                                                                                        text-align: center;
+                                                                                                        vertical-align:  baseline;"><!--<div style="margin-top: 26px;text-align: center;">Pas Foto<br />2 x 3</div>-->
+                                                                                                        <?php
+                                                                                                        $filename = "foto_mhs/$nim.JPG";
 
-                                                                            if (file_exists($filename)) {
-
-                                                                            ?>		        
-                                                                            <img src="images/foto_mhs/<? print($nim); ?>.JPG" alt="" style="height: 91px; width: 75px; border-width: 0px;"></div>
-                                                                        <?
-                                                                        }else{ ?>
-                                                                        <img src="images/no_photo.jpg" alt="" style="height: 91px; width: 75px; border-width: 0px;" >
-                                                                        <?}?>
-                                                                    </td>
+                                                                                                        if (file_exists($filename)) {
+                                                                                                            ?>		        
+                                                                    <img src="http://simaster.amayogyakarta.ac.id/images/foto_mhs/<? print($nim); ?>.JPG" alt="" style="height: 91px; width: 75px; border-width: 0px;"></div>
+                                                                <?
+                                                                }else{ ?>
+                                                                <img src="http://simaster.amayogyakarta.ac.id/images/foto_mhs/<? print($nim); ?>.JPG" alt="" style="height: 91px; width: 75px; border-width: 0px;"></div>
+                                                                <!--<img src="images/no_photo.jpg" alt="" style="height: 91px; width: 75px; border-width: 0px;" >-->
+                                                                <?}?>
+                                                            </td>
                                                                 </tr>
                                                                 <!-- end : header -->
                                                                 <tr height="40">
@@ -666,46 +667,9 @@ $nim=$_GET['nim'];
                                     <table class="tabelIndek" bgcolor="#000000" border="0" cellpadding="3" cellspacing="0" height="100%" width="100%">
                                         <tbody><tr bgcolor="#ffffff" valign="top">
                                                 <td colspan="3" class="ttd" valign="top"><br/><br/>
-                                                    <? if($status_mhs == "P") { ?>
-                                                      <!--<img src="source/stemple.png" style="border-width: 0px; z-index: 3; height: 110px; position: absolute; margin-top: -29px; margin-left: -88px;">-->
-                                                    <img src="ttd/0511036802.png" style="z-index: 2; position: absolute; height: 94px; margin-left: -33px; margin-top: -22px;">
                                                     Dosen Pembimbing<br>
-                                                    <br /><br />
-                                                    <? } else { ?>
-                                                    <? $ttd ="ttd/$nomdos.png"; 
-                                                    if (file_exists($ttd)) {
-                                                    ?>
-                                                    <!--<img src="source/stemple.png" style="border-width: 0px; z-index: 3; height: 110px; position: absolute; margin-top: -29px; margin-left: -88px;">-->
-                                                    <? if ($nomdos == "0520046801") {?>
-                                                    <img src="ttd/0520046801.png" style="z-index: 2; position: absolute; height: 82px; margin-left: -19px; margin-top: 8px;">
-                                                    <? }elseif ($nomdos == "0510048001"){ ?>
-                                                    <img src="ttd/0510048001.png" style="z-index: 2; position: absolute; height: 50px; margin-left: -75px; margin-top: 10px;">
-                                                    <? }elseif ($nomdos == "0004027801"){ ?>
-                                                    <img src="ttd/0004027801.png" style="z-index: 2; position: absolute; height: 94px; margin-left: 10px; margin-top: -6px;">
-                                                    <? }elseif ($nomdos == "0723087702"){ ?>
-                                                    <img src="ttd/0723087702.png" style="z-index: 2; position: absolute; height: 94px; margin-top: -17px; margin-left: -14px;">
-                                                    <? }elseif ($nomdos == "0511036802"){ ?>
-                                                    <img src="ttd/0511036802.png" style="z-index: 2; position: absolute; height: 94px; margin-left: -33px; margin-top: -22px;">
-                                                    <? }elseif ($nomdos == "0506048201"){ ?>
-                                                    <img src="ttd/0506048201.png" style="z-index: 2; position: absolute; margin-top: -22px; height: 107px; margin-left: -20px;">
-                                                    <? }elseif ($nomdos == "0512038301"){ ?>
-                                                    <img src="ttd/0512038301.png" style="z-index: 2; position: absolute; height: 107px; margin-top: -16px; margin-left: -4px;">
-                                                    <? }elseif ($nomdos == "0525097201"){ ?>
-                                                    <img src="ttd/0525097201.png" style="z-index: 2; position: absolute; height: 71px; margin-left: -24px; margin-top: 5px;">
-                                                    <? }elseif ($nomdos == "0513028802"){ ?>
-                                                    <img src="ttd/0513028802.png" style="z-index: 2; position: absolute; height: 71px; margin-left: -24px; margin-top: 5px;">
-                                                    <? }elseif ($nomdos == "017"){ ?>
-                                                    <img src="ttd/017.png" style="z-index: 2; position: absolute; height: 71px; margin-left: -24px; margin-top: 5px;">
-                                                    <?
-                                                    }
-
-                                                    ?>
-                                                    Dosen Pembimbing<br>
-                                                    <br /><br />
-                                                    <? }else{ ?>
-                                                    Dosen Pembimbing<br>
-                                                    <br /><br />	
-                                                    <?
+                                                    <br /><br /><br />	
+                                                    <?php
                                                     include_once("phpqrcode/qrlib.php");
                                                     $tempdir = "document/qrttd/";
                                                     $dpa = mysql_query("SELECT * FROM  statusmhs s, kelasparalel_mhs km, kelasparalel kp WHERE km.nimhs=s.nim and km.nmkelas=kp.namakelas and s.nim='$nim' and s.tahun='$ta'");
@@ -724,7 +688,7 @@ $nim=$_GET['nim'];
                                                     if($count_verivikasi==0){ 
                                                     mysql_query("INSERT INTO validasi_document(key_code,document_type_id)VALUES('$generate_qrkrs','1')");
                                                     }            
-                                                    }} ?>
+                                                    ?>
                                                     <br  />
                                                     ( <strong><? print($namados); ?>, <? print($gelardos); ?></strong> )
                                                     <br /><br />
@@ -739,12 +703,12 @@ $nim=$_GET['nim'];
                                                 <td>
                                                     <? 
                                                     if($count_status_mhs == 1 && $tglacc != ""){ ?>
-                                                    <br/><br/><img src="document/qrttd/<?php echo $generate_qrkrs; ?>.png" style="height: 71px;">
+                                                    <br/><br/><a href="<?php echo $codeKRS?>"><img src="document/qrttd/<?php echo $generate_qrkrs; ?>.png" style="height: 71px;"></a>
                                                     <? } ?>
                                                 </td>
                                                 <td colspan="3" class="ttd" valign="top"><br/>
                                                     Yogyakarta, <? echo "". tgl_indo(date('Y-m-d', strtotime($tglacc))) ."";?>								<br>
-                                                    Mahasiswa<br /><br /><br /><br />
+                                                    Mahasiswa<br /><br /><br /><br /><br />
                                                     ( <strong><? print($nama); ?></strong> )
                                                 </td>
                                             </tr>

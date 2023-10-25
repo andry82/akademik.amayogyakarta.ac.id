@@ -86,6 +86,8 @@
                                 $no = 1;
                                 while ($data = mysqli_fetch_array($result)) {
                                     $nim = $data['NIMHSMSMHS'];
+                                    $nikey = md5($data['NIMHSMSMHS']);
+                                    mysqli_query($mysqli, "UPDATE msmhs SET NIKEY='$nikey' WHERE NIMHSMSMHS='$nim'");
                                     $kelas = $splite = explode("/", $data['nmkelas']);
                                     $status_data = $data['tgl_update'];
                                     $status_mahasiswa = $data['STMHSMSMHS'];

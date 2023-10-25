@@ -415,13 +415,32 @@ $status = $_GET['sp'];
                                                                         </span>
                                                                         </span>
                                                                     </td>
+                                                                    <td style="border-bottom: 2px solid Black;
+                                                            padding: 0;" align="right" valign="middle" width="40"><div style="font-size: 10px;
+                                                                                                        width:20mm;
+                                                                                                        height: 24mm;
+                                                                                                        border: #000000 solid 1px;
+                                                                                                        text-align: center;
+                                                                                                        vertical-align:  baseline;"><!--<div style="margin-top: 26px;text-align: center;">Pas Foto<br />2 x 3</div>-->
+                                                                                                        <?php
+                                                                                                        $filename = "foto_mhs/$nim.JPG";
+
+                                                                                                        if (file_exists($filename)) {
+                                                                                                            ?>		        
+                                                                    <img src="http://simaster.amayogyakarta.ac.id/images/foto_mhs/<? print($nim); ?>.JPG" alt="" style="height: 91px; width: 75px; border-width: 0px;"></div>
+                                                                <?
+                                                                }else{ ?>
+                                                                <img src="http://simaster.amayogyakarta.ac.id/images/foto_mhs/<? print($nim); ?>.JPG" alt="" style="height: 91px; width: 75px; border-width: 0px;"></div>
+                                                                <!--<img src="images/no_photo.jpg" alt="" style="height: 91px; width: 75px; border-width: 0px;" >-->
+                                                                <?}?>
+                                                            </td>
                                                                 </tr>
                                                                 <!-- end : header -->
                                                                 <tr height="40">
-                                                                    <td colspan="4" class="judulKHS" align="center">KARTU HASIL STUDI (KHS)</td>
+                                                                    <td colspan="5" class="judulKHS" align="center">KARTU HASIL STUDI (KHS)</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td colspan="4">
+                                                                    <td colspan="5">
                                                                     <!-- end  <table border="0" cellpadding="0" cellspacing="0" width="100%"> header -->
                                                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="alamat"> 
                                                                             <tbody><tr valign="top">
@@ -717,6 +736,11 @@ $status = $_GET['sp'];
                                     $dpa = mysql_query("SELECT * FROM  statusmhs s, kelasparalel_mhs km, kelasparalel kp WHERE km.nimhs=s.nim and km.nmkelas=kp.namakelas and s.nim='$nim' and s.tahun='$ta'");
                                     $data_dpa = mysql_fetch_array($dpa);
                                     $tglacc = $data_dpa['tglacc'];
+                                    $nodos_wadir = $data_dpa['nodos_wadir'];
+                                    $wadir = mysql_query("SELECT * FROM msdos WHERE NODOSMSDOS='$nodos_wadir'");
+                                    $data_wadir = mysql_fetch_array($wadir);
+                                    $nama_wadir = $data_wadir['NMDOSMSDOS'];
+                                    $gelar_wadir = $data_wadir['GELARMSDOS'];
                                     $generate_qrkrs = md5('KRS-' . $nim . '-' . $tglacc . '');
                                     $generate_qrkhs = md5('KHS-' . $nim . '-' . $tglacc . '');
                                     $count_status_mhs = mysql_num_rows($dpa);
@@ -760,7 +784,7 @@ $status = $_GET['sp'];
                                                 </td>
                                                 <td>
                                                     <? if($count_status_mhs == 1 && $tglacc != ""){ ?>
-                                                    <br/><br/><img src="document/qrttd/<?php echo $generate_qrkhs; ?>.png" style="height: 71px;">
+                                                    <br/><br/><a href="<?php echo $codeKHS; ?>"><img src="document/qrttd/<?php echo $generate_qrkhs; ?>.png" style="height: 71px;"></a>
                                                     <? } ?>
                                                 </td>
                                                 <td colspan="3" class="ttd" valign="top">
@@ -773,7 +797,7 @@ $status = $_GET['sp'];
                                                          height: 78px;
                                                          margin-left: -71px;
                                                          margin-top: -12px;"><br><br><br>
-                                                    <u><strong>WAHYUDIYONO, SE., MM.</strong></u><br />                                                              
+                                                    <u><strong><?php echo $nama_wadir; ?>, <?php echo $gelar_wadir; ?></strong></u><br />                                                              
                                                     Wakil Direktur I
                                                 </td>
                                             </tr>
