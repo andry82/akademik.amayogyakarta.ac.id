@@ -20,6 +20,7 @@
         <link href="vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
         <!-- DataTables Responsive CSS -->
         <link href="vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+        <link href="stylesheet/cetak_ktm_pdf.css" rel="stylesheet">
     </head>
     <?php
     session_start();
@@ -46,8 +47,26 @@
             //tampilkan jam:menit:detik dengan menambahkan angka 0 jika angkanya cuma satu digit (0-9)
             document.getElementById("clock").innerHTML = (sh.length == 1 ? "0" + sh : sh) + ":" + (sm.length == 1 ? "0" + sm : sm) + ":" + (ss.length == 1 ? "0" + ss : ss);
         }
+        function printOut() {
+            var getDisplay = document.getElementById("printarea").innerHTML;
+            var setPrint = window.open("", "printed", "directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=663,height=211");
+            setPrint.document.open();
+            setPrint.document.write('<html>');
+            setPrint.document.write('<head>');
+            setPrint.document.write('<meta http-equiv="pragma" content="no-cache">');
+            setPrint.document.write("<title>CETAK KARTU MAHASISWA</title>");
+            setPrint.document.write('<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">');
+            setPrint.document.write('<link href="stylesheet/cetak_ktm_pdf.css" rel="stylesheet" type="text/css">');
+            setPrint.document.write('</head>');
+            setPrint.document.write('<body onLoad="self.print()">');
+            setPrint.document.write(getDisplay);
+            setPrint.document.write('</body></html>');
+            setPrint.document.close();
+            window.close("", "printed");
+        }
     </script>
-    <body onload="tampilkanwaktu(); setInterval('tampilkanwaktu()', 1000);">	
+    <body onload="tampilkanwaktu();
+            setInterval('tampilkanwaktu()', 1000);">	
         <div id="wrapper">
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -178,6 +197,34 @@
                                 <td><img src="http://simaster.amayogyakarta.ac.id/images/foto_mhs/<?php echo $nim ?>.JPG" width="200px"></td>
                             </tr>
                             <tr>
+                                <th class="col-lg-3">KTM</th>
+                                <td>
+                                    <table id="printarea" border="0">
+                                        <tr>
+                                            <td>                                       
+                                                <span class="nama"><b><?php echo $nama; ?></b></span>
+                                                <span class="nim"><b><?php echo $nim; ?></b></span>
+                                                <img src="images/depan.jpg" style="border-width: 0px; height: 200px;">
+                                            </td>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                            <td>
+                                                <span class="nama_lengkap" style="color: #FFFFFF"><b>Nama&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<?php echo $nama; ?></b></span>
+                                                <span class="nim_mhs" style="color: #FFFFFF"><b>No Mahasiswa&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<?php echo $nim; ?></b></span>
+                                                <span class="program_studi" style="color: #FFFFFF"><b>Program Studi&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;MANAJEMEN</b></span>
+                                                <span class="jenjang" style="color: #FFFFFF"><b>Jenjang&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;DIPLOMA TIGA</b></span>
+                                                <img class="foto" src="http://simaster.amayogyakarta.ac.id/images/foto_mhs/<?php echo $nim; ?>.JPG">
+                                                <img class="barcode" src="barcode.php?text=<?php echo $nim; ?>">
+                                                <img src="images/belakang.jpg" style="border-width: 0px; height: 200px;">
+                                            </td>                                    
+                                        </tr>
+                                    </table>
+                                    <br/>
+                                    <input class="btn btn-primary btn-xs" id="btncetakkhs" value="Cetak KTM" onclick="printOut();" type="button">
+                                </td>
+                            </tr>
+                            <tr>
                                 <th class="col-lg-3">NOMOR INDUK</th>
                                 <td><?php echo $nim; ?></td>
                             </tr>
@@ -226,11 +273,14 @@
                                     <?php
                                     $kurikulum = mysqli_query($mysqli, "SELECT DISTINCT(KURIKULUM) FROM trakm WHERE NIMHSTRAKM='$nim'");
                                     while ($data_kurikulum = mysqli_fetch_array($kurikulum)) {
-                                        if($data_kurikulum['KURIKULUM'] == $kurikulum_berjalan){ ?>                                    
-                                    <a href="proses_pindah_kurikulum.php?nim=<?php echo $nim; ?>&kurikulum=<?php echo $data_kurikulum['KURIKULUM']; ?>"><span class="label label-success"><?php echo $data_kurikulum['KURIKULUM']; ?></span></a>
-                                        <?php }else{ ?>
-                                    <a href="proses_pindah_kurikulum.php?nim=<?php echo $nim; ?>&kurikulum=<?php echo $data_kurikulum['KURIKULUM']; ?>"><span class="label label-default"><?php echo $data_kurikulum['KURIKULUM']; ?></span></a>
-                                    <?php }} ?>
+                                        if ($data_kurikulum['KURIKULUM'] == $kurikulum_berjalan) {
+                                            ?>                                    
+                                            <a href="proses_pindah_kurikulum.php?nim=<?php echo $nim; ?>&kurikulum=<?php echo $data_kurikulum['KURIKULUM']; ?>"><span class="label label-success"><?php echo $data_kurikulum['KURIKULUM']; ?></span></a>
+                                        <?php } else { ?>
+                                            <a href="proses_pindah_kurikulum.php?nim=<?php echo $nim; ?>&kurikulum=<?php echo $data_kurikulum['KURIKULUM']; ?>"><span class="label label-default"><?php echo $data_kurikulum['KURIKULUM']; ?></span></a>
+                                        <?php }
+                                    }
+                                    ?>
                                 </td>
                             </tr>    
                             <tr>
@@ -549,7 +599,7 @@
                                                 echo $dukm['nama_ukm'];
                                                 ?>
                                             <?php } else { ?>
-        <?php echo $d['nama_organisasi']; ?>
+                                                <?php echo $d['nama_organisasi']; ?>
     <?php } ?>
                                         </td>
                                         <td><?php echo $d['jabatan']; ?></td>
@@ -559,7 +609,7 @@
                                                 <a href="proses_aktivasi_organisasi.php?id=<?php echo $id; ?>" class='btn btn-success btn-xs'>AKTIF</a>                                          
                                             <?php } else { ?>
                                                 <a href="proses_aktivasi_organisasi.php?id=<?php echo $id; ?>" class='btn btn-danger btn-xs'>TIDAK AKTIF</a>
-                                    <?php } ?>
+    <?php } ?>
                                         </td>
                                     </tr>
 <?php } ?>

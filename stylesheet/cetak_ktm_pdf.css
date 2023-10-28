@@ -1,0 +1,77 @@
+.nama {
+    border-width: 0px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 10px;
+    z-index: 3;
+    position: absolute;
+    height: 128px;
+    margin-top: 108px;
+    margin-left: 15px;
+}
+.nim {
+    border-width: 0px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 10px;
+    z-index: 4;
+    position: absolute;
+    height: 128px;
+    margin-top: 97px;
+    margin-left: 15px;
+}
+.barcode {
+    border-width: 0px;
+    z-index: 5;
+    position: absolute;
+    height: 25px;
+    margin-top: 105px;
+    margin-left: 95px;
+}
+.foto{
+    border-width: 0px; 
+    border: 3px solid white; 
+    z-index: 2; 
+    position: absolute; 
+    height: 80px;
+    width: 55px;
+    margin-top: 50px;
+    margin-left: 26px;
+}
+.nama_lengkap{
+    color: #FFFFFF;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 10px;
+    z-index: 3; 
+    position: absolute;
+    margin-top: 49px;
+    margin-left: 95px;
+}
+.nim_mhs{
+    color: #FFFFFF; 
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 10px;
+    z-index: 3; 
+    position: absolute;
+    margin-top: 60px;
+    margin-left: 95px;
+}
+.program_studi{
+    color: #FFFFFF; 
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 10px;
+    z-index: 3; 
+    position: absolute;
+    margin-top: 71px;
+    margin-left: 95px;
+}
+.jenjang{
+    color: #FFFFFF; 
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 10px;
+    z-index: 3; 
+    position: absolute;
+    margin-top: 82px;
+    margin-left: 95px;
+}
+.QRcode{
+    border-width: 0px; border: 1px solid black; border-radius: 5px; z-index: 2; position: absolute; height: 50px; margin-top: 125px; margin-left: 25px;
+}
