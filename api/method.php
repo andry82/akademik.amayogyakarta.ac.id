@@ -24,9 +24,9 @@ class Mahasiswa {
 
     public function get_mhs($nim = 0) {
         global $mysqli;
-        $query = "SELECT m.NIMHSMSMHS,m.NMMHSMSMHS,m.TAHUNMSMHS,kp.nmkelas,c.tahun,k.nmkonsen,m.NIKEY FROM msmhs m,  config c, kelasparalel_mhs kp, konsentrasi k";
+        $query = "SELECT m.NIMHSMSMHS,m.NMMHSMSMHS,m.TAHUNMSMHS,kp.nmkelas,c.tahun,k.nmkonsen,m.NIKEY FROM msmhs m, config c, kelasparalel_mhs kp, konsentrasi k";
         if ($nim != 0) {
-            $query .= " WHERE m.NIMHSMSMHS=kp.nimhs AND m.KDPSTMSMHS=c.prodi AND m.kdkonsen=k.kdkonsen AND m.STMHSMSMHS='A' AND m.NIKEY=".$nim." LIMIT 1";
+            $query .= " WHERE m.NIMHSMSMHS=kp.nimhs AND m.KDPSTMSMHS=c.prodi AND m.kdkonsen=k.kdkonsen AND m.STMHSMSMHS='A' AND m.NIMHSMSMHS=".$nim." LIMIT 1";
         }
         $data = array();
         $result = $mysqli->query($query);
