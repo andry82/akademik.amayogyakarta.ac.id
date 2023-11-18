@@ -24,9 +24,9 @@ class Mahasiswa {
 
     public function get_mhs($nim = 0) {
         global $mysqli;
-        $query = "SELECT m.NIMHSMSMHS,m.NMMHSMSMHS,m.TAHUNMSMHS,kp.nmkelas,c.tahun,k.nmkonsen,m.NIKEY FROM msmhs m, config c, kelasparalel_mhs kp, konsentrasi k";
+        $query = "SELECT m.NIMHSMSMHS,m.NMMHSMSMHS,m.TAHUNMSMHS,c.tahun,kp.nmkelas,k.nmkonsen,m.NIKEY FROM msmhs m, config c, kelasparalel_mhs kp, konsentrasi k";
         if ($nim != 0) {
-            $query .= " WHERE m.NIMHSMSMHS=kp.nimhs AND m.KDPSTMSMHS=c.prodi AND m.kdkonsen=k.kdkonsen AND m.STMHSMSMHS='A' AND m.NIMHSMSMHS=".$nim." LIMIT 1";
+            $query .= " WHERE m.NIMHSMSMHS=kp.nimhs AND m.kdkonsen=k.kdkonsen AND m.STMHSMSMHS='A' AND m.NIMHSMSMHS=".$nim." LIMIT 1";
         }
         $data = array();
         $result = $mysqli->query($query);
@@ -77,19 +77,15 @@ class Mahasiswa {
         echo json_encode($response);
     }
 
-    function update_mhs($id) {
+    function update_mhs($nim) {
         global $mysqli;
-        $arrcheckpost = array('nim' => '', 'nama' => '', 'jk' => '', 'alamat' => '', 'jurusan' => '');
+        $arrcheckpost = array('NMMHSMSMHS' => '');
         $hitung = count(array_intersect_key($_POST, $arrcheckpost));
         if ($hitung == count($arrcheckpost)) {
 
-            $result = mysqli_query($mysqli, "UPDATE tbl_mahasiswa SET
-		        nim = '$_POST[nim]',
-		        nama = '$_POST[nama]',
-		        jk = '$_POST[jk]',
-		        alamat = '$_POST[alamat]',
-		        jurusan = '$_POST[jurusan]'
-		        WHERE id='$id'");
+            $result = mysqli_query($mysqli, "UPDATE msmhs SET
+		        NMMHSMSMHS = '$_POST[nama]'
+		        WHERE NIMHSMSMHS='$nim'");
 
             if ($result) {
                 $response = array(

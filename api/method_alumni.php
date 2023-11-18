@@ -6,7 +6,7 @@ class Mahasiswa {
 
     public function get_mhss() {
         global $mysqli;
-        $query = "SELECT NIMHSMSMHS,NMMHSMSMHS,NIKEY FROM msmhs WHERE STMHSMSMHS='L'";
+        $query = "SELECT m.KDPSTMSMHS,m.NIMHSMSMHS,m.NMMHSMSMHS,m.TPLHRMSMHS,m.KDJEKMSMHS,m.ALAMATLENGKAP,m.ALAMATYOGYA,m.TGLHRMSMHS,m.TELP,m.EMAIL,t.tgl_lulus,m.TAHUNMSMHS,m.kdkonsen,m.NIKEY,ta.judul_lta FROM msmhs m, transkrip t, pendaftaran_ta pta, ta ta WHERE ta.nim=pta.nim AND ta.status='2' AND pta.nim=t.nim AND t.nim=m.NIMHSMSMHS AND m.STMHSMSMHS='L'";
         $data = array();
         $result = $mysqli->query($query);
         while ($row = mysqli_fetch_object($result)) {
@@ -23,9 +23,9 @@ class Mahasiswa {
 
     public function get_mhs($nim = 0) {
         global $mysqli;
-        $query = "SELECT m.NIMHSMSMHS,m.NMMHSMSMHS,m.TPLHRMSMHS,m.KDJEKMSMHS,m.ALAMATLENGKAP,m.ALAMATYOGYA,m.TGLHRMSMHS,m.TELP,m.EMAIL,t.tgl_lulus,m.TAHUNMSMHS,m.NIKEY,ta.judul_lta FROM msmhs m, transkrip t, pendaftaran_ta pta, ta ta";
+        $query = "SELECT m.KDPSTMSMHS,m.NIMHSMSMHS,m.NMMHSMSMHS,m.TPLHRMSMHS,m.KDJEKMSMHS,m.ALAMATLENGKAP,m.ALAMATYOGYA,m.TGLHRMSMHS,m.TELP,m.EMAIL,t.tgl_lulus,m.TAHUNMSMHS,m.kdkonsen,m.NIKEY,ng.nia,ta.judul_lta FROM msmhs m, transkrip t, pendaftaran_ta pta, ta ta, nia_generate ng";
         if ($nim != 0) {
-            $query .= " WHERE ta.nim=pta.nim AND ta.status='2' AND pta.nim=t.nim AND t.nim=m.NIMHSMSMHS AND m.STMHSMSMHS='L' AND m.NIMHSMSMHS =" . $nim . " LIMIT 1";
+            $query .= " WHERE ng.nim=ta.nim AND ta.nim=pta.nim AND ta.status='2' AND pta.nim=t.nim AND t.nim=m.NIMHSMSMHS AND m.STMHSMSMHS='L' AND m.NIMHSMSMHS =" . $nim . " LIMIT 1";
         }
         $data = array();
         $result = $mysqli->query($query);
