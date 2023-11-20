@@ -5,7 +5,7 @@ if ($_SESSION['level'] != "akademik") {
     }
 include 'config.php';
 $nama_kegiatan = $_POST['nama_kegiatan'];
-$tanggal = $_POST['tanggal'];
+$tanggal = date('Y-m-d', strtotime($_POST['tanggal']));
 $waktu= $_POST['waktu'];
 $ruang = $_POST['ruang'];
 $tahun = $_POST['tahun'];

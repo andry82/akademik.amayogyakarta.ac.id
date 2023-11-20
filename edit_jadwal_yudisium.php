@@ -14,6 +14,7 @@
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
         <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+        <link href="dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
         <link href="vendor/morrisjs/morris.css" rel="stylesheet">
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <!-- DataTables CSS -->
@@ -137,7 +138,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="Tanggal">TANGGAL</label>
-                                <input type="text" class="form-control" name="tanggal" value="<?php echo $data['tanggal']; ?>" placeholder="Tanggal">
+                                <input type="text" class="form-control datepicker" name="tanggal" value="<?php echo date('d-m-Y', strtotime($data['tanggal'])); ?>" placeholder="Tanggal">
                             </div>
                             <div class="form-group">
                                 <label for="Waktu">WAKTU</label>
@@ -189,6 +190,7 @@
         <script src="vendor/raphael/raphael.min.js"></script>
         <script src="vendor/morrisjs/morris.min.js"></script>
         <script src="dist/js/sb-admin-2.js"></script>
+        <script src="dist/js/bootstrap-datepicker.min.js"></script>
         <!-- DataTables JavaScript -->
         <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
         <script src="vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
@@ -198,6 +200,13 @@
             $('#dataTables-example').DataTable({
                 responsive: true,
                 ordering: false
+            });
+            $('.datepicker').datepicker({
+                locale: 'id',
+                format: 'dd-mm-yyyy',
+                startDate: '-0d',
+                autoclose: true,
+                todayHighlight: true
             });
         });
         </script>
