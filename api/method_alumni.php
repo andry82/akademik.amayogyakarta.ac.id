@@ -23,9 +23,9 @@ class Mahasiswa {
 
     public function get_mhs($nim = 0) {
         global $mysqli;
-        $query = "SELECT m.KDPSTMSMHS,m.NIMHSMSMHS,m.NMMHSMSMHS,m.TPLHRMSMHS,m.KDJEKMSMHS,m.ALAMATLENGKAP,m.ALAMATYOGYA,m.TGLHRMSMHS,m.TELP,m.EMAIL,t.tgl_lulus,m.TAHUNMSMHS,m.kdkonsen,m.NIKEY,ng.nia,ta.judul_lta FROM msmhs m, transkrip t, pendaftaran_ta pta, ta ta, nia_generate ng";
+        $query = "SELECT m.KDPSTMSMHS,m.NIMHSMSMHS,m.NMMHSMSMHS,m.TPLHRMSMHS,m.KDJEKMSMHS,m.ALAMATLENGKAP,m.ALAMATYOGYA,m.TGLHRMSMHS,m.TELP,m.EMAIL,k.tanggal,m.TAHUNMSMHS,m.kdkonsen,m.NIKEY,ng.nia,ta.judul_lta FROM msmhs m, pendaftaran_ta pta, ta ta, kegiatan k, pendaftaran_yudisium py, nia_generate ng";
         if ($nim != 0) {
-            $query .= " WHERE ng.nim=ta.nim AND ta.nim=pta.nim AND ta.status='2' AND pta.nim=t.nim AND t.nim=m.NIMHSMSMHS AND m.STMHSMSMHS='L' AND m.NIMHSMSMHS =" . $nim . " LIMIT 1";
+            $query .= " WHERE py.nim=ng.nim AND py.kegiatan_id=k.id AND ng.nim=ta.nim AND ta.nim=pta.nim AND ta.status='2' AND pta.nim=m.NIMHSMSMHS AND m.STMHSMSMHS='L' AND m.NIMHSMSMHS =" . $nim . " LIMIT 1";
         }
         $data = array();
         $result = $mysqli->query($query);
