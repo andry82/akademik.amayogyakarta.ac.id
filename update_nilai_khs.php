@@ -9,12 +9,26 @@ for ($i = 0; $i < $jml_cek; $i++) {
     $akhir[$i] = $_POST['huruf'][$i];
     if ($akhir[$i]=="A"){
         $bobot[$i]="4.00";
+    }elseif ($akhir[$i]=="A -") {
+        $bobot[$i]="3.75";
+    }elseif ($akhir[$i]=="B +") {
+        $bobot[$i]="3.50";
     }elseif ($akhir[$i]=="B") {
         $bobot[$i]="3.00";
+    }elseif ($akhir[$i]=="B -") {
+        $bobot[$i]="2.75";
+    }elseif ($akhir[$i]=="C +") {
+        $bobot[$i]="2.50";
     }elseif ($akhir[$i]=="C") {
         $bobot[$i]="2.00";
+    }elseif ($akhir[$i]=="C -") {
+        $bobot[$i]="1.75";
+    }elseif ($akhir[$i]=="D +") {
+        $bobot[$i]="1.50";
     }elseif ($akhir[$i]=="D") {
         $bobot[$i]="1.00";
+    }elseif ($akhir[$i]=="D -") {
+        $bobot[$i]="0.00";
     }elseif ($akhir[$i]=="E") {
         $bobot[$i]="0.00";
     }
